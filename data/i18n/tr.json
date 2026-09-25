@@ -129,7 +129,8 @@
         "max": "Maksimum Süre",
         "points": "Suç Puanı",
         "fine": "Para Cezası",
-        "court": "Zorunlu Mahkeme"
+        "court": "Zorunlu Mahkeme",
+        "note": "Eksiksiz bilgileri görebilmek için hesaplama butonuna tıklamayı unutmayın."
       }
     },
     "results": {

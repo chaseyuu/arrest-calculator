@@ -391,16 +391,6 @@ export function ArrestCalculatorPage() {
       <PageHeader title={tPage('header.title')} />
 
       <div className="space-y-4">
-        <div className="flex items-center gap-4">
-          <Button onClick={() => addCharge()} disabled={loading}>
-            <Plus className="mr-2 h-4 w-4" /> {tPage('buttons.addCharge')}
-          </Button>
-
-          <Button variant="default" disabled={charges.length === 0} onClick={handleCalculate}>
-            {tPage('buttons.calculate')}
-          </Button>
-        </div>
-
         {/* One box split in two equal halves with the same two-line layout:
             prior arrest on the left, parole violation on the right. */}
         <div className="grid grid-cols-1 rounded-lg border md:grid-cols-2">
@@ -806,8 +796,19 @@ export function ArrestCalculatorPage() {
                 </div>
               ))}
             </div>
+            <p className="mt-3 text-xs text-muted-foreground">{tPage('preview.note')}</p>
           </div>
         )}
+
+        <div className="flex items-center gap-4">
+          <Button onClick={() => addCharge()} disabled={loading}>
+            <Plus className="mr-2 h-4 w-4" /> {tPage('buttons.addCharge')}
+          </Button>
+
+          <Button variant="default" disabled={charges.length === 0} onClick={handleCalculate}>
+            {tPage('buttons.calculate')}
+          </Button>
+        </div>
 
         {showStreetsActWarning && <StreetsAlert />}
 
