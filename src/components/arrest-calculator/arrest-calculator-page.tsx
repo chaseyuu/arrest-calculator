@@ -782,18 +782,12 @@ export function ArrestCalculatorPage() {
                 categories={depaData.categories}
                 categoryOf={substanceCategoryOf}
                 t={tPage}
-                gramStepNote={
-                  chargeDetails?.gram_step
-                    ? tPage('substances.gramStepNote', { grams: chargeDetails.gram_step.grams })
-                    : undefined
-                }
+                gramStep={chargeDetails?.gram_step ?? null}
+                grams={chargeRow.grams ?? null}
+                onGramsChange={(g) => updateCharge(chargeRow.uniqueId, { grams: g })}
                 onChange={(next) => {
                   const summary = summarizeSubstances(next, substanceCategoryOf);
-                  updateCharge(chargeRow.uniqueId, {
-                    substances: next,
-                    category: summary.category,
-                    grams: summary.total > 0 ? summary.total : null,
-                  });
+                  updateCharge(chargeRow.uniqueId, { substances: next, category: summary.category });
                 }}
               />
             )}

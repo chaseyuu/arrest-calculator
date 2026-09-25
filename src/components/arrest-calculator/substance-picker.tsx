@@ -12,11 +12,7 @@ export interface DepaCategory {
   substances: string[];
 }
 
-export interface Substance {
-  name: string;
-  grams: number;
-}
-
+/** Most serious first. */
 const CATEGORY_ORDER = ['A', 'B', 'C', 'D', 'T'];
 
 /** Category letter for every DEPA substance name. */
@@ -30,37 +26,44 @@ export function substanceCategoryMap(categories: DepaCategory[]): Record<string,
 }
 
 /**
- * The substance with the most grams decides the category (they are never added
- * together); on a tie the more serious category wins. Grams are summed.
+ * Penal code rule: the most serious category among the substances found sets the
+ * penalty (categories are never added together).
  */
-export function summarizeSubstances(substances: Substance[], categoryOf: Record<string, string>) {
-  const valid = substances.filter((s) => s.name && categoryOf[s.name] && s.grams > 0);
-  if (valid.length === 0) return { category: null as string | null, total: 0, dominant: null as Substance | null };
-  const dominant = [...valid].sort(
-    (a, b) =>
-      b.grams - a.grams ||
-      CATEGORY_ORDER.indexOf(categoryOf[a.name]) - CATEGORY_ORDER.indexOf(categoryOf[b.name]),
+export function summarizeSubstances(substances: string[], categoryOf: Record<string, string>) {
+  const valid = substances.filter((name) => name && categoryOf[name]);
+  if (valid.length === 0) return { category: null as string | null, decisive: null as string | null };
+  const decisive = [...valid].sort(
+    (a, b) => CATEGORY_ORDER.indexOf(categoryOf[a]) - CATEGORY_ORDER.indexOf(categoryOf[b]),
   )[0];
-  const total = Math.round(valid.reduce((sum, s) => sum + s.grams, 0) * 100) / 100;
-  return { category: categoryOf[dominant.name], total, dominant };
+  return { category: categoryOf[decisive], decisive };
 }
 
 interface Props {
   id: number;
-  substances: Substance[];
+  substances: string[];
   categories: DepaCategory[];
   categoryOf: Record<string, string>;
-  onChange: (next: Substance[]) => void;
+  onChange: (next: string[]) => void;
   t: (key: string, values?: Record<string, string | number>) => string;
-  gramStepNote?: string;
+  /** 606 only: total grams found (every N grams adds time). */
+  gramStep?: { grams: number } | null;
+  grams?: number | null;
+  onGramsChange?: (grams: number | null) => void;
 }
 
-export function SubstancePicker({ id, substances, categories, categoryOf, onChange, t, gramStepNote }: Props) {
-  const rows = substances.length > 0 ? substances : [{ name: '', grams: 0 }];
+export function SubstancePicker({
+  id,
+  substances,
+  categories,
+  categoryOf,
+  onChange,
+  t,
+  gramStep,
+  grams,
+  onGramsChange,
+}: Props) {
+  const rows = substances.length > 0 ? substances : [''];
   const summary = summarizeSubstances(rows, categoryOf);
-
-  const update = (index: number, patch: Partial<Substance>) =>
-    onChange(rows.map((r, i) => (i === index ? { ...r, ...patch } : r)));
 
   return (
     <div className="space-y-3 rounded-md border border-dashed p-3">
@@ -69,42 +72,28 @@ export function SubstancePicker({ id, substances, categories, categoryOf, onChan
         <p className="text-xs text-muted-foreground">{t('substances.hint')}</p>
       </div>
 
-      {rows.map((row, index) => (
-        <div key={index} className="flex flex-wrap items-end gap-2">
-          <div className="min-w-[220px] flex-1 space-y-1.5">
-            {index === 0 && <Label htmlFor={`substance-${id}-${index}`}>{t('substances.substance')}</Label>}
-            <Select value={row.name} onValueChange={(value) => update(index, { name: value })}>
-              <SelectTrigger id={`substance-${id}-${index}`} className="h-9">
-                <SelectValue placeholder={t('placeholders.selectOffense')} />
-              </SelectTrigger>
-              <SelectContent>
-                {categories.map((c) => (
-                  <SelectGroup key={c.title}>
-                    <SelectLabel>{c.title}</SelectLabel>
-                    {c.substances.map((s) => (
-                      <SelectItem key={s} value={s}>
-                        {s}
-                      </SelectItem>
-                    ))}
-                  </SelectGroup>
-                ))}
-              </SelectContent>
-            </Select>
-          </div>
-          <div className="w-28 space-y-1.5">
-            {index === 0 && <Label htmlFor={`grams-${id}-${index}`}>{t('substances.grams')}</Label>}
-            <Input
-              id={`grams-${id}-${index}`}
-              type="number"
-              inputMode="decimal"
-              min={0}
-              step="any"
-              placeholder="0"
-              className="h-9"
-              value={row.grams || ''}
-              onChange={(e) => update(index, { grams: Math.max(0, Number(e.target.value) || 0) })}
-            />
-          </div>
+      {rows.map((name, index) => (
+        <div key={index} className="flex items-center gap-2">
+          <Select
+            value={name}
+            onValueChange={(value) => onChange(rows.map((r, i) => (i === index ? value : r)))}
+          >
+            <SelectTrigger id={`substance-${id}-${index}`} className="h-9 flex-1" aria-label={t('substances.substance')}>
+              <SelectValue placeholder={t('placeholders.selectOffense')} />
+            </SelectTrigger>
+            <SelectContent>
+              {categories.map((c) => (
+                <SelectGroup key={c.title}>
+                  <SelectLabel>{c.title}</SelectLabel>
+                  {c.substances.map((s) => (
+                    <SelectItem key={s} value={s}>
+                      {s}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              ))}
+            </SelectContent>
+          </Select>
           <Button
             type="button"
             variant="ghost"
@@ -119,27 +108,46 @@ export function SubstancePicker({ id, substances, categories, categoryOf, onChan
         </div>
       ))}
 
-      <div className="flex flex-wrap items-center justify-between gap-2">
-        <Button type="button" variant="outline" size="sm" onClick={() => onChange([...rows, { name: '', grams: 0 }])}>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <Button type="button" variant="outline" size="sm" onClick={() => onChange([...rows, ''])}>
           <Plus className="mr-1 h-4 w-4" /> {t('substances.add')}
         </Button>
         <p className="text-sm">
           {summary.category ? (
             <>
-              <span className="font-semibold">
-                {t('substances.result', { category: summary.category, total: summary.total })}
-              </span>
-              <span className="text-muted-foreground">
-                {' '}
-                {t('substances.basedOn', { name: summary.dominant!.name, grams: summary.dominant!.grams })}
-              </span>
+              <span className="font-semibold">{t('substances.result', { category: summary.category })}</span>
+              <span className="text-muted-foreground"> {t('substances.basedOn', { name: summary.decisive! })}</span>
             </>
           ) : (
             <span className="text-muted-foreground">{t('substances.empty')}</span>
           )}
         </p>
       </div>
-      {gramStepNote && <p className="text-xs text-muted-foreground">{gramStepNote}</p>}
+
+      {gramStep && onGramsChange && (
+        <div className="flex flex-wrap items-center gap-3 border-t pt-3">
+          <Label htmlFor={`grams-${id}`} className="text-sm font-medium">
+            {t('substances.totalGrams')}
+          </Label>
+          <Input
+            id={`grams-${id}`}
+            type="number"
+            inputMode="decimal"
+            min={0}
+            step="any"
+            placeholder="0"
+            className="h-9 w-28"
+            value={grams ?? ''}
+            onChange={(e) => {
+              const n = Number(e.target.value);
+              onGramsChange(e.target.value === '' || !Number.isFinite(n) || n <= 0 ? null : n);
+            }}
+          />
+          <span className="text-xs text-muted-foreground">
+            {t('substances.gramStepNote', { grams: gramStep.grams })}
+          </span>
+        </div>
+      )}
     </div>
   );
 }

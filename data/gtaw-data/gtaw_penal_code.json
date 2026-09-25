@@ -2248,6 +2248,7 @@
       "3": 0
     },
     "extra": "Bulundurulan en yüksek kategori genel cezayı belirler. Para cezası tutarları azami değerlerdir.",
+    "substance_based": true,
     "drugs": {
       "1": "A",
       "2": "B",
@@ -7705,6 +7706,7 @@
       "3": 0
     },
     "extra": "Taşınan maddeler içinde en yüksek cezası olan kategori genel cezayı belirler. Para cezası tutarları azami değerlerdir.",
+    "substance_based": true,
     "drugs": {
       "1": "A",
       "2": "B",
@@ -7804,6 +7806,7 @@
       "3": 0
     },
     "extra": "15 gramın altındaki miktarlar için. D ve T kategorilerinde hapis yerine yazılı veya sözlü uyarı verilir. CANA: D kategorisinde 5 gram ve altı, reçetesi üzerindeyse yasaldır. Para cezası tutarları azami değerlerdir.",
+    "substance_based": true,
     "drugs": {
       "1": "A",
       "2": "B",
@@ -7902,7 +7905,7 @@
       "2": 0,
       "3": 0
     },
-    "extra": "En çok gramı olan maddenin kategorisi uygulanır. Para cezası tutarları azami değerlerdir.",
+    "extra": "Taşınan maddeler içinde en yüksek cezası olan kategori genel cezayı belirler. Para cezası tutarları azami değerlerdir.",
     "substance_based": true,
     "drugs": {
       "1": "A",
@@ -8003,6 +8006,7 @@
       "3": 0
     },
     "extra": "Taşınan maddeler içinde en yüksek cezası olan kategori genel cezayı belirler. Para cezası tutarları azami değerlerdir.",
+    "substance_based": true,
     "drugs": {
       "1": "A",
       "2": "B",
@@ -8101,7 +8105,7 @@
       "2": 0,
       "3": 0
     },
-    "extra": "En çok gramı olan maddenin kategorisi uygulanır. Para cezası tutarları azami değerlerdir.",
+    "extra": "Taşınan maddeler içinde en yüksek cezası olan kategori genel cezayı belirler. Para cezası tutarları azami değerlerdir.",
     "substance_based": true,
     "drugs": {
       "1": "A",
@@ -8201,7 +8205,7 @@
       "2": 0,
       "3": 0
     },
-    "extra": "En çok gramı olan maddenin kategorisi uygulanır. Bulunan her 75 gram için cezaya 12 saat eklenir (hesaplamaya dahildir). Para cezası tutarları azami değerlerdir.",
+    "extra": "Taşınan maddeler içinde en yüksek cezası olan kategori genel cezayı belirler. Bulunan her 75 gram için cezaya 12 saat eklenir (hesaplamaya dahildir). Para cezası tutarları azami değerlerdir.",
     "substance_based": true,
     "gram_step": {
       "grams": 75,

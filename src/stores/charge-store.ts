@@ -25,7 +25,7 @@ export interface Charge {
   time_by_offence?: boolean;
   /** 001-004: sentence is up to the court. */
   court_only?: boolean;
-  /** 603/605/606: category comes from the substance with the most grams. */
+  /** Drug charges: category comes from the most serious substance selected. */
   substance_based?: boolean;
   /** 606: every `grams` grams found adds `add` to the sentence. */
   gram_step?: { grams: number; add: { days: number; hours: number; min: number } };
@@ -44,9 +44,9 @@ export interface SelectedCharge {
   offense: string | null;
   addition: string | null;
   category: string | null;
-  /** Substances found (603/605/606), used to pick the category and total grams. */
-  substances?: { name: string; grams: number }[];
-  /** Total grams found (sum of substances). */
+  /** Substance types found (drug charges); the most serious one sets the category. */
+  substances?: string[];
+  /** Total grams found (606: every 75 g adds 12 hours). */
   grams?: number | null;
 }
 

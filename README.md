@@ -55,9 +55,9 @@ python3 scripts/build-penal-code.py
 - Where the law gives only a lower or only an upper limit, min and max are both set to that value.
 - Drug tables (131, 601–606) use the category's amount; fines there are the legal maximum.
 - 001–004 (sentence up to the court) and *Şartlı Tahliye İhlali* show *Zorunlu Mahkeme* instead of times and bail.
-- 603, 605, 606: the officer enters each substance and its grams (DEPA list in `data/gtaw-data/gtaw_depa_categories.json`).
-  The category of the substance with the most grams applies (ties: the more serious category); grams are summed.
-  606 adds 12 hours per 75 g found.
+- Drug charges (131, 601–606): the officer selects the substance types found (DEPA list in
+  `data/gtaw-data/gtaw_depa_categories.json`); the most serious category among them applies, as the penal code says.
+  606 also takes the total grams and adds 12 hours per 75 g.
 - 430/431: jail time, points and fines depend on the offence count (3rd count = C (2) felony).
 - *Suçun Tarafı* multipliers follow Başlık VIII (`data/additions.json`), applied to each charge on its own:
 

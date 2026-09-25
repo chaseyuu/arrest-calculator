@@ -42,7 +42,7 @@
       "noChargeFound": "Suçlama bulunamadı.",
       "depaWarning": {
         "title": "Dikkat!",
-        "description": "Uyuşturucu suçlamalarında doğru kategoriyi seçtiğinden emin ol. Varsa arama emrini kontrol et.",
+        "description": "Bulunan tüm madde türlerini seçtiğinizden emin olun; kategori otomatik belirlenir. Varsa arama emrini kontrol edin.",
         "link": "Drug Enforcement & Prevention Act of 2020 (DEPA)"
       },
       "depaCategories": {
@@ -65,7 +65,7 @@
           "selectOffense": "\"{charge}\" için suçun tekrarlanma durumunu seç.",
           "selectAddition": "\"{charge}\" için suçun tarafını seç.",
           "selectCategory": "\"{charge}\" uyuşturucu suçlaması için kategori seç.",
-          "selectSubstances": "\"{charge}\" için bulunan maddeyi ve gramını girin."
+          "selectSubstances": "\"{charge}\" için bulunan madde türünü seçin."
         },
         "currentPoints": {
           "title": "Eksik Bilgi",
@@ -112,15 +112,16 @@
       },
       "substances": {
         "title": "Bulunan Maddeler",
-        "hint": "En çok gramı olan maddenin kategorisi uygulanır; gramlar toplanır.",
+        "hint": "Seçilen maddeler arasında cezası en ağır olan kategori uygulanır.",
         "substance": "Madde",
         "grams": "Gram",
         "add": "Madde Ekle",
         "remove": "Maddeyi Kaldır",
-        "result": "Kategori {category} · Toplam {total} g",
-        "basedOn": "({name}, {grams} g)",
-        "empty": "Madde ve gram girin.",
-        "gramStepNote": "Bulunan her {grams} gram için cezaya 12 saat eklenir."
+        "result": "Kategori {category}",
+        "basedOn": "({name})",
+        "empty": "Bulunan madde türlerini seçin.",
+        "gramStepNote": "Bulunan her {grams} gram için cezaya 12 saat eklenir.",
+        "totalGrams": "Toplam Gram"
       },
       "preview": {
         "title": "Önizleme",
