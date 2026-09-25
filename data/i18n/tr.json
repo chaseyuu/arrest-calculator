@@ -96,22 +96,22 @@
         "paroleViolation": "Şartlı Tahliye İhlali"
       },
       "types": {
-        "felony": "Ağır Suç",
-        "misdemeanor": "Kabahat",
-        "infraction": "İhlal",
+        "felony": "Felony",
+        "misdemeanor": "Misdemeanor",
+        "infraction": "Infraction",
         "unknown": "Bilinmiyor"
       },
       "autoBail": {
-        "na": "YOK",
-        "noBail": "OTOMATİK KEFALET YOK",
-        "auto": "OTOMATİK KEFALET",
-        "discretionary": "TAKDİRE BAĞLI"
+        "na": "Yok",
+        "noBail": "Otomatik Kefalet Yok",
+        "auto": "Otomatik Kefalet",
+        "discretionary": "Takdire Bağlı"
       },
       "bailStatus": {
-        "na": "YOK",
-        "notEligible": "KEFALETE UYGUN DEĞİL",
-        "discretionary": "TAKDİRE BAĞLI",
-        "eligible": "KEFALETE UYGUN"
+        "na": "Yok",
+        "notEligible": "Kefalete Uygun Değil",
+        "discretionary": "Takdire Bağlı",
+        "eligible": "Kefalete Uygun"
       },
       "labels": {
         "yes": "Evet",
@@ -156,7 +156,7 @@
           "points": "Puan",
           "fine": "Para Cezası",
           "impound": "Araç Bağlama",
-          "suspension": "Ehliyet Askısı",
+          "suspension": "Ehliyete El Koyma",
           "autoBail": "Otomatik Kefalet",
           "bail": "Tam Kefalet Tutarı"
         },
@@ -191,8 +191,8 @@
             "description": "Toplam araç bağlama süresi azami {maxDays} günü aşıyor. Gösterilen değer: {value}."
           },
           "suspension": {
-            "title": "Ehliyet askısı sınırlandı",
-            "description": "Toplam ehliyet askısı süresi azami {maxDays} günü aşıyor. Gösterilen değer: {value}."
+            "title": "Ehliyete el koyma sınırlandı",
+            "description": "Toplam ehliyete el koyma süresi azami {maxDays} günü aşıyor. Gösterilen değer: {value}."
           }
         },
         "mobile": {
@@ -201,7 +201,7 @@
           "points": "Puan",
           "fine": "Para Cezası",
           "impound": "Araç Bağlama",
-          "suspension": "Ehliyet Askısı",
+          "suspension": "Ehliyete El Koyma",
           "bailStatus": "Kefalet Durumu",
           "highestBail": "Kefalet Tutarı"
         },
@@ -211,7 +211,7 @@
           "points": "Puan",
           "fine": "Para Cezası",
           "impound": "Araç Bağlama",
-          "suspension": "Ehliyet Askısı",
+          "suspension": "Ehliyete El Koyma",
           "bailStatus": "Kefalet Durumu",
           "highestBail": "Kefalet Tutarı"
         }
@@ -220,7 +220,7 @@
         "minMinutes": "Asgari Dakika",
         "maxMinutes": "Azami Dakika",
         "totalImpound": "Toplam Araç Bağlama (gün)",
-        "totalSuspension": "Toplam Ehliyet Askısı (gün)",
+        "totalSuspension": "Toplam Ehliyete El Koyma (gün)",
         "bailCost": "Kefalet Tutarı",
         "toastTitle": "Kopyalandı",
         "toastDescription": "{label} panoya kopyalandı.",
@@ -237,8 +237,8 @@
         "yes": "Evet",
         "no": "Hayır",
         "label": "Daha önce tutuklandı mı?",
-        "notEligibleReason": "Şüpheli daha önce tutuklandığı için kefalete uygun değil.",
-        "noAutoBailReason": "Suçlamalardan en az birinde otomatik kefalet yok."
+        "notEligibleReason": "Şüpheli daha önce tutuklandığı için kefaletten faydalanamaz.",
+        "noAutoBailReason": "Suçlamalardan en az birinde kefalet imkanı yok. Bu yüzden kefaletten faydalanamaz."
       },
       "criminalPoints": {
         "current": "Mevcut Suç Puanı",
@@ -290,22 +290,22 @@
         "paroleViolation": "Şartlı Tahliye İhlali"
       },
       "types": {
-        "felony": "Ağır Suç",
-        "misdemeanor": "Kabahat",
-        "infraction": "İhlal",
+        "felony": "Felony",
+        "misdemeanor": "Misdemeanor",
+        "infraction": "Infraction",
         "unknown": "Bilinmiyor"
       },
       "autoBail": {
-        "na": "YOK",
-        "noBail": "OTOMATİK KEFALET YOK",
-        "auto": "OTOMATİK KEFALET",
-        "discretionary": "TAKDİRE BAĞLI"
+        "na": "Yok",
+        "noBail": "Otomatik Kefalet Yok",
+        "auto": "Otomatik Kefalet",
+        "discretionary": "Takdire Bağlı"
       },
       "bailStatus": {
-        "na": "YOK",
-        "notEligible": "KEFALETE UYGUN DEĞİL",
-        "discretionary": "TAKDİRE BAĞLI",
-        "eligible": "KEFALETE UYGUN"
+        "na": "Yok",
+        "notEligible": "Kefalete Uygun Değil",
+        "discretionary": "Takdire Bağlı",
+        "eligible": "Kefalete Uygun"
       },
       "labels": {
         "yes": "Evet",
@@ -350,7 +350,7 @@
           "points": "Puan",
           "fine": "Para Cezası",
           "impound": "Araç Bağlama",
-          "suspension": "Ehliyet Askısı",
+          "suspension": "Ehliyete El Koyma",
           "autoBail": "Otomatik Kefalet",
           "bail": "Tam Kefalet Tutarı"
         },
@@ -385,8 +385,8 @@
             "description": "Toplam araç bağlama süresi azami {maxDays} günü aşıyor. Gösterilen değer: {value}."
           },
           "suspension": {
-            "title": "Ehliyet askısı sınırlandı",
-            "description": "Toplam ehliyet askısı süresi azami {maxDays} günü aşıyor. Gösterilen değer: {value}."
+            "title": "Ehliyete el koyma sınırlandı",
+            "description": "Toplam ehliyete el koyma süresi azami {maxDays} günü aşıyor. Gösterilen değer: {value}."
           }
         },
         "mobile": {
@@ -395,7 +395,7 @@
           "points": "Puan",
           "fine": "Para Cezası",
           "impound": "Araç Bağlama",
-          "suspension": "Ehliyet Askısı",
+          "suspension": "Ehliyete El Koyma",
           "bailStatus": "Kefalet Durumu",
           "highestBail": "Kefalet Tutarı"
         },
@@ -405,7 +405,7 @@
           "points": "Puan",
           "fine": "Para Cezası",
           "impound": "Araç Bağlama",
-          "suspension": "Ehliyet Askısı",
+          "suspension": "Ehliyete El Koyma",
           "bailStatus": "Kefalet Durumu",
           "highestBail": "Kefalet Tutarı"
         }
@@ -414,7 +414,7 @@
         "minMinutes": "Asgari Dakika",
         "maxMinutes": "Azami Dakika",
         "totalImpound": "Toplam Araç Bağlama (gün)",
-        "totalSuspension": "Toplam Ehliyet Askısı (gün)",
+        "totalSuspension": "Toplam Ehliyete El Koyma (gün)",
         "bailCost": "Kefalet Tutarı",
         "toastTitle": "Kopyalandı",
         "toastDescription": "{label} panoya kopyalandı.",
@@ -431,8 +431,8 @@
         "yes": "Evet",
         "no": "Hayır",
         "label": "Daha önce tutuklandı mı?",
-        "notEligibleReason": "Şüpheli daha önce tutuklandığı için kefalete uygun değil.",
-        "noAutoBailReason": "Suçlamalardan en az birinde otomatik kefalet yok."
+        "notEligibleReason": "Şüpheli daha önce tutuklandığı için kefaletten faydalanamaz.",
+        "noAutoBailReason": "Suçlamalardan en az birinde kefalet imkanı yok. Bu yüzden kefaletten faydalanamaz."
       },
       "criminalPoints": {
         "current": "Mevcut Suç Puanı",
@@ -452,7 +452,7 @@
   "shared": {
     "streetsAct": {
       "title": "Dikkat!",
-      "description": "Suçlamalardan en az biri STREETS Act'in <strong>IV. Bölümü</strong> kapsamında.<br/>Şüpheliye tekerrür hükmü uygulanabilir; araç bağlama ve ehliyet askısı süreleri artabilir (7 günden 28 güne).<br/> Kaynak: {link}",
+      "description": "Suçlamalardan en az biri STREETS Act'in <strong>IV. Bölümü</strong> kapsamında.<br/>Şüpheliye tekerrür hükmü uygulanabilir; araç bağlama ve ehliyete el koyma süreleri artabilir (7 günden 28 güne).<br/> Kaynak: {link}",
       "linkLabel": "STREETS Act (2024)"
     }
   }

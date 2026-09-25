@@ -675,7 +675,7 @@ export function ArrestCalculatorResults({
                       {charge.offenseLabel && <span>{charge.offenseLabel}</span>}
                     </div>
                     <div className="mt-3 text-sm text-center sm:text-left">
-                      <p className="text-xs font-semibold uppercase text-muted-foreground">
+                      <p className="text-xs font-semibold text-muted-foreground">
                         {t('charges.table.addition')}
                       </p>
                       {charge.isModified && charge.additions.length > 0 ? (
@@ -701,7 +701,7 @@ export function ArrestCalculatorResults({
                     </div>
                     <dl className="mt-3 space-y-3 text-sm">
                       <div>
-                        <dt className="text-xs font-semibold uppercase text-muted-foreground">
+                        <dt className="text-xs font-semibold text-muted-foreground">
                           {t('charges.table.minTime')}
                         </dt>
                         <dd className="mt-1 flex items-center justify-center gap-1 sm:justify-start">
@@ -720,7 +720,7 @@ export function ArrestCalculatorResults({
                         </dd>
                       </div>
                       <div>
-                        <dt className="text-xs font-semibold uppercase text-muted-foreground">
+                        <dt className="text-xs font-semibold text-muted-foreground">
                           {t('charges.table.maxTime')}
                         </dt>
                         <dd className="mt-1 flex items-center justify-center gap-1 sm:justify-start">
@@ -739,7 +739,7 @@ export function ArrestCalculatorResults({
                         </dd>
                       </div>
                       <div>
-                        <dt className="text-xs font-semibold uppercase text-muted-foreground">
+                        <dt className="text-xs font-semibold text-muted-foreground">
                           {t('charges.table.points')}
                         </dt>
                         <dd className="mt-1 flex items-center justify-center gap-1 sm:justify-start">
@@ -758,7 +758,7 @@ export function ArrestCalculatorResults({
                         </dd>
                       </div>
                       <div>
-                        <dt className="text-xs font-semibold uppercase text-muted-foreground">
+                        <dt className="text-xs font-semibold text-muted-foreground">
                           {t('charges.table.fine')}
                         </dt>
                         <dd
@@ -775,19 +775,19 @@ export function ArrestCalculatorResults({
                         </dd>
                       </div>
                       <div>
-                        <dt className="text-xs font-semibold uppercase text-muted-foreground">
+                        <dt className="text-xs font-semibold text-muted-foreground">
                           {t('charges.table.impound')}
                         </dt>
                         <dd className="mt-1">{charge.impoundDisplay}</dd>
                       </div>
                       <div>
-                        <dt className="text-xs font-semibold uppercase text-muted-foreground">
+                        <dt className="text-xs font-semibold text-muted-foreground">
                           {t('charges.table.suspension')}
                         </dt>
                         <dd className="mt-1">{charge.suspensionDisplay}</dd>
                       </div>
                       <div>
-                        <dt className="text-xs font-semibold uppercase text-muted-foreground">
+                        <dt className="text-xs font-semibold text-muted-foreground">
                           {t('charges.table.autoBail')}
                         </dt>
                         <dd className="mt-1">
@@ -795,7 +795,7 @@ export function ArrestCalculatorResults({
                         </dd>
                       </div>
                       <div>
-                        <dt className="text-xs font-semibold uppercase text-muted-foreground">
+                        <dt className="text-xs font-semibold text-muted-foreground">
                           {t('charges.table.bail')}
                         </dt>
                         <dd className="mt-1">{charge.bailCostDisplay}</dd>
@@ -888,7 +888,7 @@ export function ArrestCalculatorResults({
               {/* Mobile summary */}
               <div className="grid gap-3 sm:hidden">
                 <div className="rounded-lg border bg-card p-4 text-center shadow-sm">
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">{t('summary.mobile.minTime')}</p>
+                  <p className="text-xs font-semibold text-muted-foreground">{t('summary.mobile.minTime')}</p>
                   <div className="mt-1 flex items-center justify-center gap-1 text-sm font-medium">
                     {minTimeCappedDisplay.label}
                     {hasAnyModifiers && (
@@ -905,7 +905,7 @@ export function ArrestCalculatorResults({
                   </div>
                 </div>
                 <div className="rounded-lg border bg-card p-4 text-center shadow-sm">
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">{t('summary.mobile.maxTime')}</p>
+                  <p className="text-xs font-semibold text-muted-foreground">{t('summary.mobile.maxTime')}</p>
                   <div className="mt-1 flex items-center justify-center gap-1 text-sm font-medium">
                     {maxTimeCappedDisplay.label}
                     {hasAnyModifiers && (
@@ -922,7 +922,7 @@ export function ArrestCalculatorResults({
                   </div>
                 </div>
                 <div className="rounded-lg border bg-card p-4 text-center shadow-sm">
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">{t('summary.mobile.points')}</p>
+                  <p className="text-xs font-semibold text-muted-foreground">{t('summary.mobile.points')}</p>
                   <div className="mt-1 flex items-center justify-center gap-1 text-sm font-medium">
                     {Math.round(totals.modified.points)}
                     {hasAnyModifiers && (
@@ -939,23 +939,23 @@ export function ArrestCalculatorResults({
                   </div>
                 </div>
                 <div className="rounded-lg border bg-card p-4 text-center shadow-sm">
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">{t('summary.mobile.fine')}</p>
+                  <p className="text-xs font-semibold text-muted-foreground">{t('summary.mobile.fine')}</p>
                   <p className="mt-1 text-sm font-medium">{totalFineDisplay}</p>
                 </div>
                 <div className="rounded-lg border bg-card p-4 text-center shadow-sm">
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">{t('summary.mobile.impound')}</p>
+                  <p className="text-xs font-semibold text-muted-foreground">{t('summary.mobile.impound')}</p>
                   <p className="mt-1 text-sm font-medium">{formatDaysOrNone(impoundCapped)}</p>
                 </div>
                 <div className="rounded-lg border bg-card p-4 text-center shadow-sm">
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">{t('summary.mobile.suspension')}</p>
+                  <p className="text-xs font-semibold text-muted-foreground">{t('summary.mobile.suspension')}</p>
                   <p className="mt-1 text-sm font-medium">{formatDaysOrNone(suspensionCapped)}</p>
                 </div>
                 <div className="rounded-lg border bg-card p-4 text-center shadow-sm">
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">{t('summary.mobile.bailStatus')}</p>
+                  <p className="text-xs font-semibold text-muted-foreground">{t('summary.mobile.bailStatus')}</p>
                   <div className="mt-2 flex justify-center">{renderOverallBailStatus()}</div>
                 </div>
                 <div className="rounded-lg border bg-card p-4 text-center shadow-sm">
-                  <p className="text-xs font-semibold uppercase text-muted-foreground">{t('summary.mobile.highestBail')}</p>
+                  <p className="text-xs font-semibold text-muted-foreground">{t('summary.mobile.highestBail')}</p>
                   <div className="mt-1 flex items-center justify-center gap-1 text-sm font-medium">
                     <Tooltip>
                         <TooltipTrigger asChild>
@@ -1067,12 +1067,15 @@ export function ArrestCalculatorResults({
         {showSummary && (
           <Alert variant={isNoBail ? 'destructive' : 'default'}>
             <AlertTriangle className="h-4 w-4" />
-            <AlertTitle>
-              {t('priorArrest.label')} {effectivePriorArrest ? t('priorArrest.yes') : t('priorArrest.no')}
-              {' · '}
-              {getBailStatusLabel(bailStatus)}
-            </AlertTitle>
-            {isNoBail && <AlertDescription>{bailTooltip}</AlertDescription>}
+            {isNoBail ? (
+              <AlertTitle className="mb-0">{bailTooltip}</AlertTitle>
+            ) : (
+              <AlertTitle className="mb-0">
+                {t('priorArrest.label')} {effectivePriorArrest ? t('priorArrest.yes') : t('priorArrest.no')}
+                {' · '}
+                {getBailStatusLabel(bailStatus)}
+              </AlertTitle>
+            )}
           </Alert>
         )}
 
@@ -1080,15 +1083,15 @@ export function ArrestCalculatorResults({
           <Card>
             <CardContent className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-3">
               <div>
-                <p className="text-xs font-semibold uppercase text-muted-foreground">{t('criminalPoints.current')}</p>
+                <p className="text-xs font-semibold text-muted-foreground">{t('criminalPoints.current')}</p>
                 <p className="mt-1 text-2xl font-bold">{effectiveCurrentPoints}</p>
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase text-muted-foreground">{t('criminalPoints.fromCharges')}</p>
+                <p className="text-xs font-semibold text-muted-foreground">{t('criminalPoints.fromCharges')}</p>
                 <p className="mt-1 text-2xl font-bold">+{chargePoints}</p>
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase text-muted-foreground">{t('criminalPoints.new')}</p>
+                <p className="text-xs font-semibold text-muted-foreground">{t('criminalPoints.new')}</p>
                 <p className={cn('mt-1 text-2xl font-bold', isOverPointLimit && 'text-red-600 dark:text-red-400')}>
                   {newCriminalPoints}
                 </p>
