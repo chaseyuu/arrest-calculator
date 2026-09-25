@@ -1,10 +1,11 @@
 'use client';
 
-import Link from 'next/link';
 import { useTheme } from 'next-themes';
 import { Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { basePath } from '@/lib/gtaw-data';
+
+const DASHBOARD_URL = 'https://chaseyuu.github.io/lspd-tools/';
 
 export function AppHeader() {
   const { resolvedTheme, setTheme } = useTheme();
@@ -12,11 +13,12 @@ export function AppHeader() {
   return (
     <header className="sticky top-0 z-40 border-b-4 border-primary bg-header text-header-foreground shadow-md">
       <div className="container mx-auto flex h-16 items-center justify-between gap-2 px-4 md:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-3">
+        {/* "LSPD Tools" opens the main dashboard. */}
+        <a href={DASHBOARD_URL} className="flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={`${basePath}/img/lspd.webp`} alt="LSPD" width={44} height={42} className="h-11 w-auto drop-shadow" />
           <span className="text-lg font-semibold">LSPD Tools</span>
-        </Link>
+        </a>
         <Button
           variant="ghost"
           size="icon"
