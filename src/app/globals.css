@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: 'Segoe UI', 'Open Sans', system-ui, -apple-system, sans-serif;
 }
 
 @layer base {

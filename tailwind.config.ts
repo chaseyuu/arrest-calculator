@@ -17,8 +17,8 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['Inter', 'system-ui', 'sans-serif'],
-        headline: ['Inter', 'system-ui', 'sans-serif'],
+        body: ['\'Segoe UI\'', '\'Open Sans\'', 'system-ui', 'sans-serif'],
+        headline: ['\'Segoe UI\'', '\'Open Sans\'', 'system-ui', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
