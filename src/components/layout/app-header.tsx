@@ -26,7 +26,7 @@ export function AppHeader() {
 
   return (
     <header className="sticky top-0 z-40 border-b-4 border-primary bg-header text-white shadow-[0_0.25rem_0.75rem_rgba(0,0,0,0.35)]">
-      <div className="mx-auto flex h-16 max-w-[87.5rem] items-center justify-between gap-3 px-8 max-[720px]:px-4">
+      <div className="flex h-16 items-center justify-between gap-3 px-8 max-[720px]:px-4">
         {/* "LSPD Tools" opens the main dashboard. */}
         <a href={DASHBOARD_URL} className="flex items-center gap-3 text-white no-underline">
           {/* eslint-disable-next-line @next/next/no-img-element */}

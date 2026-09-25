@@ -2,11 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Always reserve the scrollbar space so the header sits in the same place on every page. */
-html {
-  scrollbar-gutter: stable;
-}
-
 body {
   font-family: 'Segoe UI', 'Open Sans', system-ui, -apple-system, sans-serif;
 }
