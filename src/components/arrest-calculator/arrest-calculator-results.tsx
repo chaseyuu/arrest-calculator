@@ -975,7 +975,7 @@ export function ArrestCalculatorResults({
               {!isMandatoryCourt && (
               <div
                 className={cn(
-                  'flex items-center gap-2 rounded-lg border px-4 py-3 font-medium',
+                  'flex items-center gap-2 rounded-lg border px-4 py-3 text-sm font-medium',
                   isNoBail
                     ? 'border-red-300 bg-red-50 text-red-800 dark:border-red-900 dark:bg-red-950/60 dark:text-red-300'
                     : bailStatus === 'ELIGIBLE'
