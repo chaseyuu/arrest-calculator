@@ -54,6 +54,10 @@ python3 scripts/build-penal-code.py
   separate charges (e.g. `112a`, `112b`, `112c`; value tiers such as `123a`–`123e`).
 - Where the law gives only a lower or only an upper limit, min and max are both set to that value.
 - Drug tables (131, 601–606) use the category's amount; fines there are the legal maximum.
+- 001–004 (sentence up to the court) and *Şartlı Tahliye İhlali* show *Zorunlu Mahkeme* instead of times and bail.
+- 603, 605, 606: the officer enters each substance and its grams (DEPA list in `data/gtaw-data/gtaw_depa_categories.json`).
+  The category of the substance with the most grams applies (ties: the more serious category); grams are summed.
+  606 adds 12 hours per 75 g found.
 - 430/431: jail time, points and fines depend on the offence count (3rd count = C (2) felony).
 - *Suçun Tarafı* multipliers follow Başlık VIII (`data/additions.json`), applied to each charge on its own:
 

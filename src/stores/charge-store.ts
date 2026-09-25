@@ -23,6 +23,12 @@ export interface Charge {
   code_enhancement?: string;
   /** time/maxtime are keyed by offence number ("1", "2", ...) instead of a single value. */
   time_by_offence?: boolean;
+  /** 001-004: sentence is up to the court. */
+  court_only?: boolean;
+  /** 603/605/606: category comes from the substance with the most grams. */
+  substance_based?: boolean;
+  /** 606: every `grams` grams found adds `add` to the sentence. */
+  gram_step?: { grams: number; add: { days: number; hours: number; min: number } };
   points_by_offence?: Record<string, number>;
   code_enhancement_count?: number;
 }
@@ -38,6 +44,10 @@ export interface SelectedCharge {
   offense: string | null;
   addition: string | null;
   category: string | null;
+  /** Substances found (603/605/606), used to pick the category and total grams. */
+  substances?: { name: string; grams: number }[];
+  /** Total grams found (sum of substances). */
+  grams?: number | null;
 }
 
 export interface Addition {

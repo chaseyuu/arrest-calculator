@@ -43,6 +43,9 @@ import additionsJson from '../../../data/additions.json';
 import { fetchGtawData } from '@/lib/gtaw-data';
 import { buildCalculationQuery } from '@/lib/calculation-link';
 import { assignCell, isOrigin, ORIGINS } from '@/lib/cell';
+import { normalizeTr } from '@/lib/turkish-search';
+import { calculateArrest } from '@/lib/arrest-calculator';
+import { SubstancePicker, substanceCategoryMap, summarizeSubstances } from './substance-picker';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Separator } from '../ui/separator';
 import { Checkbox } from '../ui/checkbox';
@@ -263,7 +266,9 @@ export function ArrestCalculatorPage() {
         if (chargeDetails?.drugs && !charge.category) {
           toast({
             title: tPage('toasts.incomplete.title'),
-            description: tPage('toasts.incomplete.selectCategory', { charge: chargeName }),
+            description: chargeDetails.substance_based
+              ? tPage('toasts.incomplete.selectSubstances', { charge: chargeName })
+              : tPage('toasts.incomplete.selectCategory', { charge: chargeName }),
             variant: 'destructive',
           });
           return;
@@ -284,6 +289,41 @@ export function ArrestCalculatorPage() {
   };
 
   // Numeric order by article number (001 → 714); object key order can't be relied on.
+  const substanceCategoryOf = useMemo(
+    () => (depaData ? substanceCategoryMap(depaData.categories) : {}),
+    [depaData],
+  );
+
+  // Live preview of the totals for the rows that are already complete.
+  const preview = useMemo(() => {
+    if (!penalCode) return null;
+    const complete = charges.filter((c) => {
+      const d = c.chargeId ? penalCode[c.chargeId] : null;
+      return d && c.class && c.offense && c.addition && (!d.drugs || c.category);
+    });
+    if (complete.length === 0) return null;
+    const r = calculateArrest(complete, isParoleViolator, penalCode, hasPriorArrest === true);
+    const court = isParoleViolator || r.mandatoryCourt;
+    const fmt = (m: number) => {
+      const min = Math.round(m);
+      const d = Math.floor(min / 1440);
+      const h = Math.floor((min % 1440) / 60);
+      const mm = min % 60;
+      const parts = [d && `${d} Gün`, h && `${h} Saat`, mm && `${mm} Dakika`].filter(Boolean).join(' ');
+      return min < 60 ? `${min} Dakika` : `${min} Dakika (${parts})`;
+    };
+    const points = r.calculationResults.reduce((s, x) => s + x.modified.points, 0);
+    return [
+      { label: tPage('preview.min'), value: court ? tPage('preview.court') : fmt(r.minTimeCapped) },
+      { label: tPage('preview.max'), value: court ? tPage('preview.court') : fmt(r.maxTimeCapped) },
+      {
+        label: tPage('preview.points'),
+        value: currentPoints !== null ? `${currentPoints} + ${points} = ${currentPoints + points}` : `${points}`,
+      },
+      { label: tPage('preview.fine'), value: `$${r.totals.fine.toLocaleString()}` },
+    ];
+  }, [charges, penalCode, isParoleViolator, hasPriorArrest, currentPoints, tPage]);
+
   const penalCodeArray = useMemo(
     () =>
       penalCode
@@ -321,6 +361,8 @@ export function ArrestCalculatorPage() {
         offense: null,
         addition: null,
         category: null,
+        substances: [],
+        grams: null,
       });
       return;
     }
@@ -339,6 +381,8 @@ export function ArrestCalculatorPage() {
       offense: defaultOffense,
       addition: 'Offender',
       category: null, // Reset category on new charge selection
+      substances: [],
+      grams: null,
     });
   };
 
@@ -503,13 +547,16 @@ export function ArrestCalculatorPage() {
         {charges.map((chargeRow) => {
           const chargeDetails = getChargeDetails(chargeRow.chargeId);
           const isDrugCharge = !!chargeDetails?.drugs;
+          const isSubstanceBased = !!chargeDetails?.substance_based;
+          const showCategorySelect = isDrugCharge && !isSubstanceBased;
 
           return (
-            <div key={chargeRow.uniqueId} className="flex items-end gap-2 p-4 border rounded-lg">
+            <div key={chargeRow.uniqueId} className="space-y-3 rounded-lg border p-4">
+            <div className="flex items-end gap-2">
               <div
                 className={cn(
                   'flex-1 grid grid-cols-1 md:grid-cols-5 gap-2 items-end',
-                  isDrugCharge && 'md:grid-cols-6',
+                  showCategorySelect && 'md:grid-cols-6',
                 )}
               >
                 {/* Charge Dropdown */}
@@ -552,9 +599,10 @@ export function ArrestCalculatorPage() {
                           const charge = penalCodeArray.find((c) => c.id === value);
                           if (!charge) return 0;
 
-                          const term = search.toLowerCase();
-                          const chargeName = charge.charge.toLowerCase();
-                          const chargeId = charge.id;
+                          // Turkish-insensitive: "ihanet" → "İhanet", "kacmak" → "Kaçmak".
+                          const term = normalizeTr(search);
+                          const chargeName = normalizeTr(charge.charge);
+                          const chargeId = charge.id.toLowerCase();
 
                           if (chargeName.includes(term) || chargeId.includes(term)) {
                             return 1;
@@ -682,7 +730,7 @@ export function ArrestCalculatorPage() {
                 </div>
 
                 {/* Category Dropdown (for drug charges) */}
-                {isDrugCharge && (
+                {showCategorySelect && (
                   <div className="space-y-1.5">
                     <Label htmlFor={`category-${chargeRow.uniqueId}`}>{tPage('fields.category')}</Label>
                     <Select
@@ -726,8 +774,46 @@ export function ArrestCalculatorPage() {
                 </Tooltip>
               </TooltipProvider>
             </div>
+
+            {isSubstanceBased && depaData && (
+              <SubstancePicker
+                id={chargeRow.uniqueId}
+                substances={chargeRow.substances ?? []}
+                categories={depaData.categories}
+                categoryOf={substanceCategoryOf}
+                t={tPage}
+                gramStepNote={
+                  chargeDetails?.gram_step
+                    ? tPage('substances.gramStepNote', { grams: chargeDetails.gram_step.grams })
+                    : undefined
+                }
+                onChange={(next) => {
+                  const summary = summarizeSubstances(next, substanceCategoryOf);
+                  updateCharge(chargeRow.uniqueId, {
+                    substances: next,
+                    category: summary.category,
+                    grams: summary.total > 0 ? summary.total : null,
+                  });
+                }}
+              />
+            )}
+            </div>
           );
         })}
+
+        {preview && (
+          <div className="rounded-lg border bg-muted/30 p-4">
+            <p className="mb-3 text-sm font-medium text-muted-foreground">{tPage('preview.title')}</p>
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
+              {preview.map((item) => (
+                <div key={item.label}>
+                  <p className="text-xs text-muted-foreground">{item.label}</p>
+                  <p className="text-base font-semibold">{item.value}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {showStreetsActWarning && <StreetsAlert />}
 

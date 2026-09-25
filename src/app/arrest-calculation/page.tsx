@@ -68,6 +68,7 @@ function ArrestCalculationContent() {
         const offense = parts[1];
         const additionIndex = parts[2];
         const categoryIndex = parts.length > 3 ? parts[3] : undefined;
+        const gramsPart = parts.length > 4 ? Number(parts[4]) : NaN;
 
         const classChar = chargeIdWithClass.charAt(0).toLowerCase();
         const chargeId = chargeIdWithClass.substring(1);
@@ -93,6 +94,7 @@ function ArrestCalculationContent() {
             offense: offense,
             addition: additionName,
             category: null,
+            grams: Number.isFinite(gramsPart) && gramsPart > 0 ? gramsPart : null,
         };
 
         if (categoryIndex && chargeDetails.drugs) {

@@ -29,10 +29,10 @@ def C(**kw):  # charge helper
 
 CHARGES = [
     # ---------------- BAŞLIK 0 - DEVLETİN EGEMENLİĞİNE KARŞI SUÇLAR
-    C(id="001", name="İhanet", type="F", cls={"A": 0, "B": 0, "C": 0}, extra="Cezası mahkemenin takdirindedir. " + COURT),
-    C(id="002", name="Casusluk", type="F", cls={"A": 0, "B": 0, "C": 0}, extra="Cezası mahkemenin takdirindedir. " + COURT),
-    C(id="003", name="İç Terörizm", type="F", cls={"A": 0, "B": 0, "C": 0}, extra="Cezası mahkemenin takdirindedir. " + COURT),
-    C(id="004", name="İç Terörizm Tehdidi", type="F", cls={"A": 0, "B": 0, "C": 0}, extra="Cezası mahkemenin takdirindedir. " + COURT),
+    C(id="001", court_only=True, name="İhanet", type="F", cls={"A": 0, "B": 0, "C": 0}, extra="Cezası mahkemenin takdirindedir. " + COURT),
+    C(id="002", court_only=True, name="Casusluk", type="F", cls={"A": 0, "B": 0, "C": 0}, extra="Cezası mahkemenin takdirindedir. " + COURT),
+    C(id="003", court_only=True, name="İç Terörizm", type="F", cls={"A": 0, "B": 0, "C": 0}, extra="Cezası mahkemenin takdirindedir. " + COURT),
+    C(id="004", court_only=True, name="İç Terörizm Tehdidi", type="F", cls={"A": 0, "B": 0, "C": 0}, extra="Cezası mahkemenin takdirindedir. " + COURT),
     # ---------------- BAŞLIK I - KAMU BARIŞINA KARŞI SUÇLAR
     C(id="101", name="Vergi Kaçakçılığı", type="F", cls={"C": 2}, min="2g", max="5g", fine=[5000, 10000, 15000], extra=REPEAT),
     C(id="102", name="Seçimde Sahtekarlık", type="F", cls={"C": 2}, min="2g", max="5g"),
@@ -231,18 +231,18 @@ CHARGES = [
       drugs={"A": (4500, "20s"), "B": (3750, "15s"), "C": (3000, "10s"), "D": (2250, None), "T": (500, None)},
       extra="15 gramın altındaki miktarlar için. D ve T kategorilerinde hapis yerine yazılı veya sözlü uyarı verilir. "
             "CANA: D kategorisinde 5 gram ve altı, reçetesi üzerindeyse yasaldır. Para cezası tutarları azami değerlerdir."),
-    C(id="603", name="Kontrollü Maddeyi Dağıtım Amacıyla Bulundurmak", type="M", cls={"C": 0},
+    C(id="603", substance_based=True, name="Kontrollü Maddeyi Dağıtım Amacıyla Bulundurmak", type="M", cls={"C": 0},
       drugs={"A": (15000, "2g"), "B": (10500, "1g"), "C": (7000, "14s"), "D": (5250, "12s"), "T": (1000, "6s")},
-      extra="Taşınan maddeler içinde en yüksek cezası olan kategori genel cezayı belirler. Para cezası tutarları azami değerlerdir."),
+      extra="En çok gramı olan maddenin kategorisi uygulanır. Para cezası tutarları azami değerlerdir."),
     C(id="604", name="Kontrollü Madde Satmak", type="F", cls={"C": 4},
       drugs={"A": (15000, "2g"), "B": (10500, "1g"), "C": (7000, "14s"), "D": (5250, "12s"), "T": (1000, "6s")},
       extra="Taşınan maddeler içinde en yüksek cezası olan kategori genel cezayı belirler. Para cezası tutarları azami değerlerdir."),
-    C(id="605", name="Uyuşturucu Kaçakçılığı", type="F", cls={"C": 3},
+    C(id="605", substance_based=True, name="Uyuşturucu Kaçakçılığı", type="F", cls={"C": 3},
       drugs={"A": (22500, "4g"), "B": (18750, "3g"), "C": (15000, "2g"), "D": (11500, "1g"), "T": (4000, "10s")},
-      extra="Taşınan maddeler içinde en yüksek cezası olan kategori genel cezayı belirler. Para cezası tutarları azami değerlerdir."),
-    C(id="606", name="Uyuşturucu Ticareti", type="F", cls={"C": 5},
+      extra="En çok gramı olan maddenin kategorisi uygulanır. Para cezası tutarları azami değerlerdir."),
+    C(id="606", substance_based=True, gram_step=(75, "12s"), name="Uyuşturucu Ticareti", type="F", cls={"C": 5},
       drugs={"A": (45000, "7g"), "B": (37500, "6g"), "C": (30000, "5g"), "D": (22500, "4g"), "T": (8000, "1g")},
-      extra="Bulunan her 75 gram için cezaya 12 saat eklenir. Para cezası tutarları azami değerlerdir."),
+      extra="En çok gramı olan maddenin kategorisi uygulanır. Bulunan her 75 gram için cezaya 12 saat eklenir (hesaplamaya dahildir). Para cezası tutarları azami değerlerdir."),
     C(id="607a", name="Uyuşturucu Aletlerini Bulundurma", type="M", cls={"C": 0}, fine=[4500]),
     C(id="607b", name="Uyuşturucu Aletlerini Bulundurma (605/606 sırasında kullanıldıysa)", type="M", cls={"C": 0},
       min="1g", max="3g", fine=[4500]),
@@ -299,6 +299,14 @@ def build(c):
         "suspension": per_off("susp"),
         "extra": c.get("extra", "N/A"),
     }
+    if c.get("court_only"):
+        entry["court_only"] = True
+    if c.get("substance_based"):
+        # Category comes from the substance with the most grams (entered per charge).
+        entry["substance_based"] = True
+    if "gram_step" in c:
+        grams, add = c["gram_step"]
+        entry["gram_step"] = {"grams": grams, "add": t(add)}
     if "drugs" in c:
         cats = list(c["drugs"].keys())
         entry["drugs"] = {str(i + 1): k for i, k in enumerate(cats)}

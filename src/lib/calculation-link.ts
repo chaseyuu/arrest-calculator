@@ -30,6 +30,7 @@ export function buildCalculationQuery(
     if (details.drugs && row.category) {
       const categoryIndex = Object.keys(details.drugs).find((key) => details.drugs![key] === row.category);
       if (categoryIndex) chargeStr += `-${categoryIndex}`;
+      if (categoryIndex && row.grams) chargeStr += `-${row.grams}`;
     }
     parts.push(`c=${encodeURIComponent(chargeStr)}`);
   }

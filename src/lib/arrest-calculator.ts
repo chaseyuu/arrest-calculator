@@ -49,6 +49,8 @@ export interface ArrestCalculation {
   suspensionCapped: number;
   isSuspensionCapped: boolean;
   isStreetsEligible: boolean;
+  /** At least one charge must go to court (001-004). */
+  mandatoryCourt: boolean;
   /** Why bail was refused: a prior arrest, or a charge with no automatic bail. */
   bailReason: 'PRIOR_ARREST' | 'NO_AUTO_BAIL' | null;
 }
@@ -81,6 +83,9 @@ export function calculateArrest(
         }
         if (chargeDetails.drugs && row.category) {
           title += ` (Kategori ${row.category})`;
+        }
+        if (row.grams) {
+          title += ` (${row.grams} g)`;
         }
         return { title, extra: chargeDetails.extra };
       }
@@ -135,8 +140,13 @@ export function calculateArrest(
       return fineObj[row.offense!] || 0;
     };
 
-    const originalMinTime = formatTimeInMinutes(getTime(chargeDetails.time));
-    let originalMaxTime = formatTimeInMinutes(getTime(chargeDetails.maxtime));
+    // 606: every N grams found adds extra time (e.g. +12 hours per 75 g).
+    const gramExtra =
+      chargeDetails.gram_step && row.grams
+        ? Math.floor(row.grams / chargeDetails.gram_step.grams) * formatTimeInMinutes(chargeDetails.gram_step.add)
+        : 0;
+    const originalMinTime = formatTimeInMinutes(getTime(chargeDetails.time)) + gramExtra;
+    let originalMaxTime = formatTimeInMinutes(getTime(chargeDetails.maxtime)) + gramExtra;
     if (originalMaxTime < originalMinTime) {
       originalMaxTime = originalMinTime;
     }
@@ -278,5 +288,6 @@ export function calculateArrest(
     suspensionCapped,
     isSuspensionCapped,
     isStreetsEligible,
+    mandatoryCourt: calculationResults.some((r) => r.chargeDetails.court_only === true),
   };
 }

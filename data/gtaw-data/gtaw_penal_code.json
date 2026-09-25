@@ -34,6 +34,7 @@
       "3": 0
     },
     "extra": "Cezası mahkemenin takdirindedir. (( Bu suç zorunlu olarak mahkemeye gidecektir. ))",
+    "court_only": true,
     "time": {
       "days": 0,
       "hours": 0,
@@ -80,6 +81,7 @@
       "3": 0
     },
     "extra": "Cezası mahkemenin takdirindedir. (( Bu suç zorunlu olarak mahkemeye gidecektir. ))",
+    "court_only": true,
     "time": {
       "days": 0,
       "hours": 0,
@@ -126,6 +128,7 @@
       "3": 0
     },
     "extra": "Cezası mahkemenin takdirindedir. (( Bu suç zorunlu olarak mahkemeye gidecektir. ))",
+    "court_only": true,
     "time": {
       "days": 0,
       "hours": 0,
@@ -172,6 +175,7 @@
       "3": 0
     },
     "extra": "Cezası mahkemenin takdirindedir. (( Bu suç zorunlu olarak mahkemeye gidecektir. ))",
+    "court_only": true,
     "time": {
       "days": 0,
       "hours": 0,
@@ -7898,7 +7902,8 @@
       "2": 0,
       "3": 0
     },
-    "extra": "Taşınan maddeler içinde en yüksek cezası olan kategori genel cezayı belirler. Para cezası tutarları azami değerlerdir.",
+    "extra": "En çok gramı olan maddenin kategorisi uygulanır. Para cezası tutarları azami değerlerdir.",
+    "substance_based": true,
     "drugs": {
       "1": "A",
       "2": "B",
@@ -8096,7 +8101,8 @@
       "2": 0,
       "3": 0
     },
-    "extra": "Taşınan maddeler içinde en yüksek cezası olan kategori genel cezayı belirler. Para cezası tutarları azami değerlerdir.",
+    "extra": "En çok gramı olan maddenin kategorisi uygulanır. Para cezası tutarları azami değerlerdir.",
+    "substance_based": true,
     "drugs": {
       "1": "A",
       "2": "B",
@@ -8195,7 +8201,16 @@
       "2": 0,
       "3": 0
     },
-    "extra": "Bulunan her 75 gram için cezaya 12 saat eklenir. Para cezası tutarları azami değerlerdir.",
+    "extra": "En çok gramı olan maddenin kategorisi uygulanır. Bulunan her 75 gram için cezaya 12 saat eklenir (hesaplamaya dahildir). Para cezası tutarları azami değerlerdir.",
+    "substance_based": true,
+    "gram_step": {
+      "grams": 75,
+      "add": {
+        "days": 0,
+        "hours": 12,
+        "min": 0
+      }
+    },
     "drugs": {
       "1": "A",
       "2": "B",

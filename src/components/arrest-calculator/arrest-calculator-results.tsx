@@ -415,6 +415,7 @@ export function ArrestCalculatorResults({
 
     if (chargeDetails.drugs && row.category) {
       title += ` ${t('charges.categorySuffix', { category: row.category })}`;
+      if (row.grams) title += ` (${row.grams} g)`;
     } else if (row.offense && row.offense !== '1') {
       title += ` ${t('charges.offenseSuffix', { label: t(`offenseOrdinals.${row.offense}`, undefined, row.offense) })}`;
     }
@@ -447,6 +448,7 @@ export function ArrestCalculatorResults({
       additions,
       isModified,
       offense: row.offense,
+      courtOnly: chargeDetails.court_only === true,
       offenseLabel: row.offense ? t(`offenseOrdinals.${row.offense}`, undefined, row.offense) : null,
       typeDisplay,
       typeColorClass,
@@ -508,8 +510,9 @@ export function ArrestCalculatorResults({
     return <Badge variant="secondary">{getBailStatusLabel('N/A')}</Badge>;
   };
 
-  // Parole violation: the case goes to court, so no sentence is shown.
-  const isMandatoryCourt = effectiveParoleStatus === true;
+  // Parole violation or a court-only charge (001-004): the case goes to court, so no sentence is shown.
+  const isParoleCourt = effectiveParoleStatus === true;
+  const isMandatoryCourt = isParoleCourt || data.mandatoryCourt === true;
   const mandatoryCourtLabel = t('mandatoryCourt.label');
 
   // Summary tiles: each one copies its raw value when clicked.
@@ -658,7 +661,7 @@ export function ArrestCalculatorResults({
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center gap-1">
-                            {isMandatoryCourt ? mandatoryCourtLabel : charge.minTime.label}
+                            {isParoleCourt || charge.courtOnly ? mandatoryCourtLabel : charge.minTime.label}
                             {charge.isModified && (
                               <Tooltip>
                                 <TooltipTrigger>
@@ -674,7 +677,7 @@ export function ArrestCalculatorResults({
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center gap-1">
-                            {isMandatoryCourt ? mandatoryCourtLabel : charge.maxTime.label}
+                            {isParoleCourt || charge.courtOnly ? mandatoryCourtLabel : charge.maxTime.label}
                             {charge.isModified && (
                               <Tooltip>
                                 <TooltipTrigger>
@@ -719,9 +722,9 @@ export function ArrestCalculatorResults({
                         <TableCell>{charge.impoundDisplay}</TableCell>
                         <TableCell>{charge.suspensionDisplay}</TableCell>
                         <TableCell>
-                          {isMandatoryCourt ? mandatoryCourtLabel : <BailStatusBadge bailInfo={{ auto: charge.bailAuto }} />}
+                          {isParoleCourt ? mandatoryCourtLabel : <BailStatusBadge bailInfo={{ auto: charge.bailAuto }} />}
                         </TableCell>
-                        <TableCell>{isMandatoryCourt ? mandatoryCourtLabel : charge.bailCostDisplay}</TableCell>
+                        <TableCell>{isParoleCourt ? mandatoryCourtLabel : charge.bailCostDisplay}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -778,7 +781,7 @@ export function ArrestCalculatorResults({
                           {t('charges.table.minTime')}
                         </dt>
                         <dd className="mt-1 flex items-center justify-center gap-1 sm:justify-start">
-                          {isMandatoryCourt ? mandatoryCourtLabel : charge.minTime.label}
+                          {isParoleCourt || charge.courtOnly ? mandatoryCourtLabel : charge.minTime.label}
                           {charge.isModified && (
                             <Tooltip>
                               <TooltipTrigger>
@@ -797,7 +800,7 @@ export function ArrestCalculatorResults({
                           {t('charges.table.maxTime')}
                         </dt>
                         <dd className="mt-1 flex items-center justify-center gap-1 sm:justify-start">
-                          {isMandatoryCourt ? mandatoryCourtLabel : charge.maxTime.label}
+                          {isParoleCourt || charge.courtOnly ? mandatoryCourtLabel : charge.maxTime.label}
                           {charge.isModified && (
                             <Tooltip>
                               <TooltipTrigger>
@@ -864,14 +867,14 @@ export function ArrestCalculatorResults({
                           {t('charges.table.autoBail')}
                         </dt>
                         <dd className="mt-1">
-                          {isMandatoryCourt ? mandatoryCourtLabel : <BailStatusBadge bailInfo={{ auto: charge.bailAuto }} />}
+                          {isParoleCourt ? mandatoryCourtLabel : <BailStatusBadge bailInfo={{ auto: charge.bailAuto }} />}
                         </dd>
                       </div>
                       <div>
                         <dt className="text-xs font-semibold text-muted-foreground">
                           {t('charges.table.bail')}
                         </dt>
-                        <dd className="mt-1">{isMandatoryCourt ? mandatoryCourtLabel : charge.bailCostDisplay}</dd>
+                        <dd className="mt-1">{isParoleCourt ? mandatoryCourtLabel : charge.bailCostDisplay}</dd>
                       </div>
                     </dl>
                   </div>
@@ -906,7 +909,7 @@ export function ArrestCalculatorResults({
               {isMandatoryCourt && (
                 <div className="flex items-start gap-3 rounded-lg border border-red-300 bg-red-50 p-4 font-medium text-red-800 dark:border-red-900 dark:bg-red-950/60 dark:text-red-300">
                   <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
-                  <p>{t('mandatoryCourt.notice')}</p>
+                  <p>{isParoleCourt ? t('mandatoryCourt.notice') : t('mandatoryCourt.chargeNotice')}</p>
                 </div>
               )}
               {isCapped && !isMandatoryCourt && (

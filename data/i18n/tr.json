@@ -64,7 +64,8 @@
           "selectClass": "\"{charge}\" için sınıf seç.",
           "selectOffense": "\"{charge}\" için suçun tekrarlanma durumunu seç.",
           "selectAddition": "\"{charge}\" için suçun tarafını seç.",
-          "selectCategory": "\"{charge}\" uyuşturucu suçlaması için kategori seç."
+          "selectCategory": "\"{charge}\" uyuşturucu suçlaması için kategori seç.",
+          "selectSubstances": "\"{charge}\" için bulunan maddeyi ve gramını girin."
         },
         "currentPoints": {
           "title": "Eksik Bilgi",
@@ -108,6 +109,26 @@
           "filipino": "Filipinli",
           "middleEastern": "Orta Doğulu"
         }
+      },
+      "substances": {
+        "title": "Bulunan Maddeler",
+        "hint": "En çok gramı olan maddenin kategorisi uygulanır; gramlar toplanır.",
+        "substance": "Madde",
+        "grams": "Gram",
+        "add": "Madde Ekle",
+        "remove": "Maddeyi Kaldır",
+        "result": "Kategori {category} · Toplam {total} g",
+        "basedOn": "({name}, {grams} g)",
+        "empty": "Madde ve gram girin.",
+        "gramStepNote": "Bulunan her {grams} gram için cezaya 12 saat eklenir."
+      },
+      "preview": {
+        "title": "Önizleme",
+        "min": "Minimum Süre",
+        "max": "Maksimum Süre",
+        "points": "Suç Puanı",
+        "fine": "Para Cezası",
+        "court": "Zorunlu Mahkeme"
       }
     },
     "results": {
@@ -285,7 +306,8 @@
       },
       "mandatoryCourt": {
         "label": "Zorunlu Mahkeme",
-        "notice": "Şüpheli şartlı tahliye ihlalcisi olduğu için dava zorunlu olarak mahkemeye gider. Hapis süresi ve kefalet mahkeme tarafından belirlenir."
+        "notice": "Şüpheli şartlı tahliye ihlalcisi olduğu için dava zorunlu olarak mahkemeye gider. Hapis süresi ve kefalet mahkeme tarafından belirlenir.",
+        "chargeNotice": "Suçlamalardan en az birinin cezası mahkemenin takdirindedir; dava zorunlu olarak mahkemeye gider. Hapis süresi ve kefalet mahkeme tarafından belirlenir."
       }
     }
   },
@@ -487,7 +509,8 @@
       },
       "mandatoryCourt": {
         "label": "Zorunlu Mahkeme",
-        "notice": "Şüpheli şartlı tahliye ihlalcisi olduğu için dava zorunlu olarak mahkemeye gider. Hapis süresi ve kefalet mahkeme tarafından belirlenir."
+        "notice": "Şüpheli şartlı tahliye ihlalcisi olduğu için dava zorunlu olarak mahkemeye gider. Hapis süresi ve kefalet mahkeme tarafından belirlenir.",
+        "chargeNotice": "Suçlamalardan en az birinin cezası mahkemenin takdirindedir; dava zorunlu olarak mahkemeye gider. Hapis süresi ve kefalet mahkeme tarafından belirlenir."
       }
     }
   },
