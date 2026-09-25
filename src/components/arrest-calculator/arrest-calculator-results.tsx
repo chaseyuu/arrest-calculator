@@ -602,7 +602,7 @@ export function ArrestCalculatorResults({
             </CardHeader>
             <CardContent>
               <div className="hidden w-full overflow-x-auto sm:block">
-                <Table className="w-full sm:min-w-[960px]">
+                <Table className="w-full sm:min-w-[60rem]">
                   <TableHeader>
                     <TableRow>
                       <TableHead>{t('charges.table.title')}</TableHead>
@@ -1010,7 +1010,7 @@ export function ArrestCalculatorResults({
             </CardHeader>
             <CardContent>
               <div className="w-full overflow-x-auto">
-                <Table className="w-full sm:min-w-[480px]">
+                <Table className="w-full sm:min-w-[30rem]">
                   <TableHeader>
                     <TableRow>
                       <TableHead>{t('stipulations.charge')}</TableHead>

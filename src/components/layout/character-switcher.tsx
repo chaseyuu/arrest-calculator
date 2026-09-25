@@ -34,7 +34,7 @@ export function CharacterSwitcher({ settingsUrl }: { settingsUrl: string }) {
 
   const filled = data.list.map((c, i) => ({ c, i: i as 0 | 1 })).filter((x) => isFilled(x.c));
   const triggerClass =
-    'inline-flex h-9 max-w-[220px] items-center gap-1.5 rounded-md px-3 text-sm font-semibold text-white/90 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary';
+    'inline-flex h-9 max-w-[13.75rem] items-center gap-1.5 rounded-md px-3 text-sm font-semibold text-white/90 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary';
 
   if (!filled.length) {
     return (

@@ -11,7 +11,7 @@ export function AppProviders({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
       <I18nProvider locale={defaultLocale} messages={dictionary}>
-        <div className="min-h-screen flex flex-col bg-background">
+        <div className="flex min-h-screen flex-col bg-background">
           <AppHeader />
           <main className="flex-1">{children}</main>
         </div>
