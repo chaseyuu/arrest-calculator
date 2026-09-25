@@ -33,8 +33,9 @@ export function CharacterSwitcher({ settingsUrl }: { settingsUrl: string }) {
   if (!data) return null;
 
   const filled = data.list.map((c, i) => ({ c, i: i as 0 | 1 })).filter((x) => isFilled(x.c));
+  // Mirrors .char-trigger in lspd-tools/assets/theme.css (sizes in rem so page scaling applies).
   const triggerClass =
-    'inline-flex h-9 max-w-[13.75rem] items-center gap-1.5 rounded-md px-3 text-sm font-semibold text-white/90 transition-colors hover:bg-white/10 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary';
+    'inline-flex h-[2.375rem] max-w-[13.75rem] items-center gap-1.5 rounded-md border border-transparent px-3 text-[0.9375rem] font-semibold text-white no-underline transition-colors hover:border-white/[.12] hover:bg-white/[.08] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary data-[state=open]:border-white/[.12] data-[state=open]:bg-white/[.08]';
 
   if (!filled.length) {
     return (
@@ -51,43 +52,43 @@ export function CharacterSwitcher({ settingsUrl }: { settingsUrl: string }) {
       <PopoverTrigger asChild>
         <button type="button" className={triggerClass} aria-label="Karakter seç">
           <span className="truncate">{label(data.active)}</span>
-          <ChevronDown className={cn('h-4 w-4 shrink-0 opacity-70 transition-transform', open && 'rotate-180')} />
+          <ChevronDown className={cn('h-4 w-4 shrink-0 opacity-70 transition-transform duration-150', open && 'rotate-180')} />
         </button>
       </PopoverTrigger>
-      <PopoverContent align="end" className="w-64 p-1.5">
-        <ul role="listbox" aria-label="Karakter seç">
+      <PopoverContent
+        align="end"
+        sideOffset={8}
+        className="w-auto min-w-[15rem] rounded-lg bg-white p-1 text-foreground shadow-[0_0.625rem_1.5rem_rgba(15,23,42,0.15)] dark:bg-[hsl(215_22%_15%)] dark:shadow-[0_0.625rem_1.5rem_rgba(0,0,0,0.35)]"
+      >
+        <ul role="listbox" aria-label="Karakter seç" className="m-0 list-none p-0">
           {filled.map(({ c, i }) => {
             const selected = i === data.active;
             const sub = [c.rank, c.badge && `#${c.badge}`, c.division].filter(Boolean).join(' · ');
             return (
-              <li key={i} role="option" aria-selected={selected}>
-                <button
-                  type="button"
-                  className={cn(
-                    'flex w-full items-start gap-2 rounded-md px-2.5 py-2 text-left hover:bg-accent',
-                    selected && 'text-primary'
-                  )}
-                  onClick={() => {
-                    setActiveCharacter(i);
-                    setOpen(false);
-                  }}
-                >
-                  <Check className={cn('mt-0.5 h-4 w-4 shrink-0', !selected && 'invisible')} />
-                  <span className="min-w-0">
-                    <span className="block truncate text-sm font-semibold">{label(i)}</span>
-                    {sub && <span className="block truncate text-xs text-muted-foreground">{sub}</span>}
-                  </span>
-                </button>
+              <li
+                key={i}
+                role="option"
+                aria-selected={selected}
+                className="flex cursor-pointer items-center gap-2 rounded-md px-2.5 py-2 hover:bg-primary/[.18]"
+                onClick={() => {
+                  setActiveCharacter(i);
+                  setOpen(false);
+                }}
+              >
+                <Check className={cn('h-4 w-4 shrink-0 text-primary', !selected && 'invisible')} strokeWidth={2.5} />
+                <span className="flex min-w-0 flex-col">
+                  <span className="truncate text-sm font-semibold leading-[normal]">{label(i)}</span>
+                  {sub && <span className="truncate text-xs leading-[normal] text-muted-foreground">{sub}</span>}
+                </span>
               </li>
             );
           })}
         </ul>
-        <div className="my-1 h-px bg-border" />
         <a
           href={settingsUrl}
-          className="flex items-center gap-2 rounded-md px-2.5 py-2 text-sm text-muted-foreground hover:bg-accent hover:text-foreground"
+          className="mt-1 flex items-center gap-2 rounded-b-md border-t px-2.5 py-2 text-[0.8125rem] leading-[normal] text-muted-foreground no-underline hover:text-foreground"
         >
-          <PenLine className="h-4 w-4" />
+          <PenLine className="h-3.5 w-3.5" />
           Karakterleri Düzenle
         </a>
       </PopoverContent>
