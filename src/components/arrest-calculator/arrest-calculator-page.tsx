@@ -319,7 +319,7 @@ export function ArrestCalculatorPage() {
 
   return (
     <div className="container mx-auto p-4 md:p-6 lg:p-8">
-      <PageHeader title={tPage('header.title')} description={tPage('header.description')} />
+      <PageHeader title={tPage('header.title')} />
 
       <div className="space-y-4">
         <div className="flex items-center gap-4">
@@ -356,15 +356,19 @@ export function ArrestCalculatorPage() {
               <span className="text-sm text-muted-foreground">{tPage('priorArrest.required')}</span>
             )}
           </div>
-          <div className="flex items-center space-x-2 border-t p-3 md:border-l md:border-t-0">
+          <div className="flex items-start space-x-2 border-t p-3 md:border-l md:border-t-0">
             <Checkbox
               id="parole-violator"
+              className="mt-1"
               checked={isParoleViolator}
               onCheckedChange={(value) => setParoleViolator(value === true)}
             />
-            <Label htmlFor="parole-violator" className="text-base font-medium">
-              {tPage('paroleViolatorLabel')}
-            </Label>
+            <div>
+              <Label htmlFor="parole-violator" className="text-base font-medium">
+                {tPage('paroleViolatorLabel')}
+              </Label>
+              <p className="text-xs text-muted-foreground">{tPage('paroleViolatorHint')}</p>
+            </div>
           </div>
         </div>
 

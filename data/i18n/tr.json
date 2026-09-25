@@ -4,7 +4,7 @@
       "documentTitle": "MDC Panel – Tutuklama Hesaplayıcı",
       "header": {
         "title": "Tutuklama Hesaplayıcı",
-        "description": "Suçlamalara göre ceza süresini, para cezasını ve kefaleti hesapla."
+        "description": ""
       },
       "buttons": {
         "addCharge": "Suçlama Ekle",
@@ -16,7 +16,7 @@
         "label": "Daha Önce Tutuklandı Mı?",
         "yes": "Evet",
         "no": "Hayır",
-        "required": "Kefalet hesaplaması için bu soruyu cevapla."
+        "required": "Kefalete uygunluk için bu alanı işaretlemelisiniz."
       },
       "fields": {
         "charge": "Suçlama",
@@ -26,11 +26,11 @@
         "category": "Kategori"
       },
       "placeholders": {
-        "selectCharge": "Suçlama seç...",
+        "selectCharge": "Suçlama Seçin",
         "searchCharge": "Ad veya madde numarasıyla ara...",
-        "selectClass": "Sınıf seç",
-        "selectOffense": "Tekrarlanma durumunu seç",
-        "selectAddition": "Suçun tarafını seç",
+        "selectClass": "Sınıf Seçin",
+        "selectOffense": "Seçim Yapın",
+        "selectAddition": "Seçim Yapın",
         "selectCategory": "Kategori seç"
       },
       "options": {
@@ -55,8 +55,8 @@
           "description": "En az bir suçlama ekle."
         },
         "priorArrest": {
-          "title": "Eksik bilgi",
-          "description": "Kişinin daha önce tutuklanıp tutuklanmadığını seç."
+          "title": "Eksik Bilgi",
+          "description": "Kişinin daha önce tutuklanıp tutuklanmadığını seçin."
         },
         "incomplete": {
           "title": "Eksik suçlama",
@@ -67,7 +67,7 @@
           "selectCategory": "\"{charge}\" uyuşturucu suçlaması için kategori seç."
         },
         "currentPoints": {
-          "title": "Eksik bilgi",
+          "title": "Eksik Bilgi",
           "description": "Mevcut suç puanı için 0 ile 30 arasında bir tam sayı gir."
         }
       },
@@ -82,7 +82,8 @@
         "3": "Üçüncü Kez",
         "4": "Dördüncü Kez",
         "5": "Beşinci Kez"
-      }
+      },
+      "paroleViolatorHint": "Zorunlu Mahkeme durumunu etkiler."
     },
     "results": {
       "additionNames": {
