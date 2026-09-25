@@ -162,7 +162,7 @@ function ArrestCalculationContent() {
   if (loading) {
     return (
         <div className="container mx-auto p-4 md:p-6 lg:p-8 space-y-6">
-            <PageHeader title={t('title')} description={t('loadingDescription')} />
+            <PageHeader title={t('title')} />
             <Skeleton className="h-64 w-full" />
         </div>
     );
@@ -183,7 +183,7 @@ function ArrestCalculationContent() {
 
   return (
     <div className="container mx-auto p-4 md:p-6 lg:p-8 space-y-6">
-        <PageHeader title={t('title')} description={t('description')} />
+        <PageHeader title={t('title')} />
         {penalCode && parsedCharges.length > 0 ? (
             <ArrestCalculatorResults
                 report={parsedCharges}

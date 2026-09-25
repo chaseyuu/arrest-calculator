@@ -121,7 +121,7 @@
       },
       "currency": "${value}",
       "time": {
-        "zero": "0 dakika",
+        "zero": "0 Dakika",
         "days": {
           "one": "{count} Gün",
           "other": "{count} Gün"
@@ -134,12 +134,12 @@
           "one": "{count} Dakika",
           "other": "{count} Dakika"
         },
-        "summary": "{parts} (toplam {minutes} dk)"
+        "summary": "{minutes} Dakika ({parts})"
       },
       "charges": {
         "cardTitle": "Suçlamalar",
-        "copyLink": "Hesaplama linkini kopyala",
-        "modify": "Suçlamaları düzenle",
+        "copyLink": "Hesaplamayı Paylaş",
+        "modify": "Suçlamaları Düzenle",
         "title": "{prefix} {id}. {charge}",
         "categorySuffix": "(Kategori: {category})",
         "offenseSuffix": "({label})",
@@ -151,8 +151,8 @@
           "addition": "Suçun Tarafı",
           "offense": "Suçun Tekrarlanma Durumu",
           "type": "Tür",
-          "minTime": "Asgari Süre",
-          "maxTime": "Azami Süre",
+          "minTime": "Minimum Süre",
+          "maxTime": "Maksimum Süre",
           "points": "Puan",
           "fine": "Para Cezası",
           "impound": "Araç Bağlama",
@@ -182,22 +182,22 @@
         "alerts": {
           "sentence": {
             "title": "Süre sınırlandı",
-            "description": "Toplam ceza azami {maxMinutes} dakikayı ({maxLabel}) aşıyor. Gösterilen süre bu sınıra çekildi.",
-            "originalMinLabel": "Asıl asgari:",
-            "originalMaxLabel": "Asıl azami:"
+            "description": "Toplam ceza {maxLabel} sınırını aşıyor. Gösterilen süre bu sınıra çekildi.",
+            "originalMinLabel": "Asıl minimum:",
+            "originalMaxLabel": "Asıl maksimum:"
           },
           "impound": {
             "title": "Araç bağlama sınırlandı",
-            "description": "Toplam araç bağlama süresi azami {maxDays} günü aşıyor. Gösterilen değer: {value}."
+            "description": "Toplam araç bağlama süresi maksimum {maxDays} günü aşıyor. Gösterilen değer: {value}."
           },
           "suspension": {
             "title": "Ehliyete el koyma sınırlandı",
-            "description": "Toplam ehliyete el koyma süresi azami {maxDays} günü aşıyor. Gösterilen değer: {value}."
+            "description": "Toplam ehliyete el koyma süresi maksimum {maxDays} günü aşıyor. Gösterilen değer: {value}."
           }
         },
         "mobile": {
-          "minTime": "Asgari Süre",
-          "maxTime": "Azami Süre",
+          "minTime": "Minimum Süre",
+          "maxTime": "Maksimum Süre",
           "points": "Puan",
           "fine": "Para Cezası",
           "impound": "Araç Bağlama",
@@ -206,8 +206,8 @@
           "highestBail": "Kefalet Tutarı"
         },
         "table": {
-          "minTime": "Asgari Süre",
-          "maxTime": "Azami Süre",
+          "minTime": "Minimum Süre",
+          "maxTime": "Maksimum Süre",
           "points": "Puan",
           "fine": "Para Cezası",
           "impound": "Araç Bağlama",
@@ -217,8 +217,8 @@
         }
       },
       "copyables": {
-        "minMinutes": "Asgari Dakika",
-        "maxMinutes": "Azami Dakika",
+        "minMinutes": "Minimum Dakika",
+        "maxMinutes": "Maksimum Dakika",
         "totalImpound": "Toplam Araç Bağlama (gün)",
         "totalSuspension": "Toplam Ehliyete El Koyma (gün)",
         "bailCost": "Kefalet Tutarı",
@@ -257,13 +257,13 @@
   },
   "arrestCalculation": {
     "page": {
-      "documentTitle": "Tutuklama Hesaplaması",
-      "loadingDescription": "Paylaşılan hesaplama yükleniyor...",
-      "title": "Tutuklama Hesaplaması",
-      "description": "Paylaşılan tutuklama hesaplaması.",
+      "documentTitle": "Tutuklama Hesaplayıcı",
+      "loadingDescription": "",
+      "title": "Tutuklama Hesaplayıcı",
+      "description": "",
       "error": {
         "title": "Hesaplama yüklenemedi",
-        "description": "Paylaşılan hesaplama linki işlenirken bir sorun oluştu.",
+        "description": "Hesaplama linki işlenirken bir sorun oluştu.",
         "alertTitle": "Hata",
         "missingCharges": "Linkte suçlama bilgisi yok.",
         "invalidFormat": "{index}. suçlamanın biçimi geçersiz. En az 3 parça bekleniyordu, {parts} bulundu.",
@@ -315,7 +315,7 @@
       },
       "currency": "${value}",
       "time": {
-        "zero": "0 dakika",
+        "zero": "0 Dakika",
         "days": {
           "one": "{count} Gün",
           "other": "{count} Gün"
@@ -328,12 +328,12 @@
           "one": "{count} Dakika",
           "other": "{count} Dakika"
         },
-        "summary": "{parts} (toplam {minutes} dk)"
+        "summary": "{minutes} Dakika ({parts})"
       },
       "charges": {
         "cardTitle": "Suçlamalar",
-        "copyLink": "Hesaplama linkini kopyala",
-        "modify": "Suçlamaları düzenle",
+        "copyLink": "Hesaplamayı Paylaş",
+        "modify": "Suçlamaları Düzenle",
         "title": "{prefix} {id}. {charge}",
         "categorySuffix": "(Kategori: {category})",
         "offenseSuffix": "({label})",
@@ -345,8 +345,8 @@
           "addition": "Suçun Tarafı",
           "offense": "Suçun Tekrarlanma Durumu",
           "type": "Tür",
-          "minTime": "Asgari Süre",
-          "maxTime": "Azami Süre",
+          "minTime": "Minimum Süre",
+          "maxTime": "Maksimum Süre",
           "points": "Puan",
           "fine": "Para Cezası",
           "impound": "Araç Bağlama",
@@ -376,22 +376,22 @@
         "alerts": {
           "sentence": {
             "title": "Süre sınırlandı",
-            "description": "Toplam ceza azami {maxMinutes} dakikayı ({maxLabel}) aşıyor. Gösterilen süre bu sınıra çekildi.",
-            "originalMinLabel": "Asıl asgari:",
-            "originalMaxLabel": "Asıl azami:"
+            "description": "Toplam ceza {maxLabel} sınırını aşıyor. Gösterilen süre bu sınıra çekildi.",
+            "originalMinLabel": "Asıl minimum:",
+            "originalMaxLabel": "Asıl maksimum:"
           },
           "impound": {
             "title": "Araç bağlama sınırlandı",
-            "description": "Toplam araç bağlama süresi azami {maxDays} günü aşıyor. Gösterilen değer: {value}."
+            "description": "Toplam araç bağlama süresi maksimum {maxDays} günü aşıyor. Gösterilen değer: {value}."
           },
           "suspension": {
             "title": "Ehliyete el koyma sınırlandı",
-            "description": "Toplam ehliyete el koyma süresi azami {maxDays} günü aşıyor. Gösterilen değer: {value}."
+            "description": "Toplam ehliyete el koyma süresi maksimum {maxDays} günü aşıyor. Gösterilen değer: {value}."
           }
         },
         "mobile": {
-          "minTime": "Asgari Süre",
-          "maxTime": "Azami Süre",
+          "minTime": "Minimum Süre",
+          "maxTime": "Maksimum Süre",
           "points": "Puan",
           "fine": "Para Cezası",
           "impound": "Araç Bağlama",
@@ -400,8 +400,8 @@
           "highestBail": "Kefalet Tutarı"
         },
         "table": {
-          "minTime": "Asgari Süre",
-          "maxTime": "Azami Süre",
+          "minTime": "Minimum Süre",
+          "maxTime": "Maksimum Süre",
           "points": "Puan",
           "fine": "Para Cezası",
           "impound": "Araç Bağlama",
@@ -411,8 +411,8 @@
         }
       },
       "copyables": {
-        "minMinutes": "Asgari Dakika",
-        "maxMinutes": "Azami Dakika",
+        "minMinutes": "Minimum Dakika",
+        "maxMinutes": "Maksimum Dakika",
         "totalImpound": "Toplam Araç Bağlama (gün)",
         "totalSuspension": "Toplam Ehliyete El Koyma (gün)",
         "bailCost": "Kefalet Tutarı",

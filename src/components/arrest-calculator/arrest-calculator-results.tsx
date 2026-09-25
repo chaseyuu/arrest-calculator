@@ -244,10 +244,11 @@ export function ArrestCalculatorResults({
       if (hours > 0) parts.push(formatUnit('hours', hours));
       if (minutes > 0) parts.push(formatUnit('minutes', minutes));
 
-      const label = parts.join(' ');
-      const detailed = t('time.summary', { parts: label, minutes: rounded });
+      // Shown as "4320 Dakika (3 Gün)"; under an hour just "45 Dakika".
+      const breakdown = parts.join(' ');
+      const label = rounded < 60 ? breakdown : t('time.summary', { parts: breakdown, minutes: rounded });
 
-      return { label, detailed };
+      return { label, detailed: label };
     },
     [formatUnit, t, zeroLabel],
   );
