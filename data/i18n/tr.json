@@ -68,7 +68,7 @@
         },
         "currentPoints": {
           "title": "Eksik Bilgi",
-          "description": "Mevcut suç puanı için 0 ile 30 arasında bir tam sayı gir."
+          "description": "Suç puanının hesaplanması için değer girmelisiniz."
         }
       },
       "currentPoints": {
