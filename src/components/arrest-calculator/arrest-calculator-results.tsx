@@ -530,7 +530,8 @@ export function ArrestCalculatorResults({
       value: isMandatoryCourt ? mandatoryCourtLabel : maxTimeCappedDisplay.label,
       copy: isMandatoryCourt ? mandatoryCourtLabel : Math.round(maxTimeCapped),
     },
-    { key: 'points', label: t('criminalPoints.fromCharges'), value: chargePoints, copy: chargePoints },
+    // Placeholder until cell assignment is defined.
+    { key: 'cellId', label: t('summary.cellId'), value: 0, copy: 0 },
     {
       key: 'newPoints',
       label: t('criminalPoints.new'),

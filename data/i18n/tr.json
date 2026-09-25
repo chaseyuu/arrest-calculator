@@ -216,7 +216,8 @@
           "bailStatus": "Kefalet Durumu",
           "highestBail": "Kefalet Tutarı"
         },
-        "copyHint": "Kopyalamak için değerin üzerine tıkla"
+        "copyHint": "Kopyalamak için değerin üzerine tıkla",
+        "cellId": "Hücre ID"
       },
       "copyables": {
         "minMinutes": "Minimum Dakika",
@@ -247,7 +248,7 @@
         "fromCharges": "Suç Puanı",
         "new": "Yeni Suç Puanı",
         "overLimit": "Tutuklayacağınız karakterin suç puanı otuzu aşıyor. Tutuklamayı hemen gerçekleştirmeyin ve ömür boyu hapis cezası için aşağıda listelenmiş olan adımları izleyin.",
-        "breakdown": "Mevcut {current} + {added}"
+        "breakdown": "{current} (Mevcut) + {added} (Yeni)"
       },
       "offenseOrdinals": {
         "1": "İlk Kez",
@@ -416,7 +417,8 @@
           "bailStatus": "Kefalet Durumu",
           "highestBail": "Kefalet Tutarı"
         },
-        "copyHint": "Kopyalamak için değerin üzerine tıkla"
+        "copyHint": "Kopyalamak için değerin üzerine tıkla",
+        "cellId": "Hücre ID"
       },
       "copyables": {
         "minMinutes": "Minimum Dakika",
@@ -447,7 +449,7 @@
         "fromCharges": "Suç Puanı",
         "new": "Yeni Suç Puanı",
         "overLimit": "Tutuklayacağınız karakterin suç puanı otuzu aşıyor. Tutuklamayı hemen gerçekleştirmeyin ve ömür boyu hapis cezası için aşağıda listelenmiş olan adımları izleyin.",
-        "breakdown": "Mevcut {current} + {added}"
+        "breakdown": "{current} (Mevcut) + {added} (Yeni)"
       },
       "offenseOrdinals": {
         "1": "İlk Kez",
