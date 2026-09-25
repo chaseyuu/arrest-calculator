@@ -31,7 +31,7 @@ body {
     --gold: 43 60% 50%;
     --header: 216 24% 11%;
     --header-foreground: 0 0% 100%;
-    --radius: 0.25rem;
+    --radius: 0.5rem;
   }
   .dark {
     --background: 213 14% 20%;
