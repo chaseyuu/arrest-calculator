@@ -257,7 +257,7 @@
       },
       "mandatoryCourt": {
         "label": "Zorunlu Mahkeme",
-        "notice": "Şüpheli şartlı tahliye ihlalcisi olduğu için dava zorunlu olarak mahkemeye gider. Hapis süresi mahkeme tarafından belirlenir."
+        "notice": "Şüpheli şartlı tahliye ihlalcisi olduğu için dava zorunlu olarak mahkemeye gider. Hapis süresi ve kefalet mahkeme tarafından belirlenir."
       }
     }
   },
@@ -457,7 +457,7 @@
       },
       "mandatoryCourt": {
         "label": "Zorunlu Mahkeme",
-        "notice": "Şüpheli şartlı tahliye ihlalcisi olduğu için dava zorunlu olarak mahkemeye gider. Hapis süresi mahkeme tarafından belirlenir."
+        "notice": "Şüpheli şartlı tahliye ihlalcisi olduğu için dava zorunlu olarak mahkemeye gider. Hapis süresi ve kefalet mahkeme tarafından belirlenir."
       }
     }
   },

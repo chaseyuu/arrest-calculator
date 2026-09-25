@@ -1,5 +1,5 @@
 {
-  "_source": "San Andreas Ceza Kanunu, Başlık VIII - Suçun Tarafları (801-806). Şartlı Tahliye İhlali: MDC Panel+ varsayılanı.",
+  "_source": "San Andreas Ceza Kanunu, Başlık VIII - Suçun Tarafları (801-806). Şartlı Tahliye İhlali: çarpan yok, dava zorunlu olarak mahkemeye gider.",
   "additions": [
     {
       "name": "Offender",
@@ -39,7 +39,7 @@
     {
       "name": "Parole Violation",
       "sentence_multiplier": 1.0,
-      "points_multiplier": 2.0
+      "points_multiplier": 1.0
     }
   ]
 }

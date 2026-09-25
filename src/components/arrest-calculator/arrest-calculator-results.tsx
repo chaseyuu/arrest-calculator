@@ -557,9 +557,11 @@ export function ArrestCalculatorResults({
     {
       key: 'bail',
       label: t('summary.table.highestBail'),
-      value: isNoBail ? '—' : highestBailDisplay,
-      copy: displayBailCost,
-      className: isNoBail
+      value: isMandatoryCourt ? mandatoryCourtLabel : isNoBail ? '—' : highestBailDisplay,
+      copy: isMandatoryCourt ? mandatoryCourtLabel : displayBailCost,
+      className: isMandatoryCourt
+        ? undefined
+        : isNoBail
         ? 'border-red-300 text-red-700 dark:border-red-900 dark:text-red-400'
         : bailStatus === 'ELIGIBLE'
           ? 'border-green-300 dark:border-green-900'
@@ -709,9 +711,9 @@ export function ArrestCalculatorResults({
                         <TableCell>{charge.impoundDisplay}</TableCell>
                         <TableCell>{charge.suspensionDisplay}</TableCell>
                         <TableCell>
-                          <BailStatusBadge bailInfo={{ auto: charge.bailAuto }} />
+                          {isMandatoryCourt ? mandatoryCourtLabel : <BailStatusBadge bailInfo={{ auto: charge.bailAuto }} />}
                         </TableCell>
-                        <TableCell>{charge.bailCostDisplay}</TableCell>
+                        <TableCell>{isMandatoryCourt ? mandatoryCourtLabel : charge.bailCostDisplay}</TableCell>
                       </TableRow>
                     ))}
                   </TableBody>
@@ -854,14 +856,14 @@ export function ArrestCalculatorResults({
                           {t('charges.table.autoBail')}
                         </dt>
                         <dd className="mt-1">
-                          <BailStatusBadge bailInfo={{ auto: charge.bailAuto }} />
+                          {isMandatoryCourt ? mandatoryCourtLabel : <BailStatusBadge bailInfo={{ auto: charge.bailAuto }} />}
                         </dd>
                       </div>
                       <div>
                         <dt className="text-xs font-semibold text-muted-foreground">
                           {t('charges.table.bail')}
                         </dt>
-                        <dd className="mt-1">{charge.bailCostDisplay}</dd>
+                        <dd className="mt-1">{isMandatoryCourt ? mandatoryCourtLabel : charge.bailCostDisplay}</dd>
                       </div>
                     </dl>
                   </div>
@@ -959,6 +961,7 @@ export function ArrestCalculatorResults({
                 ))}
               </div>
 
+              {!isMandatoryCourt && (
               <div
                 className={cn(
                   'flex items-center gap-2 rounded-lg border px-4 py-3 font-medium',
@@ -972,6 +975,7 @@ export function ArrestCalculatorResults({
                 {isNoBail ? <AlertTriangle className="h-4 w-4 shrink-0" /> : <Check className="h-4 w-4 shrink-0" />}
                 <span>{isNoBail ? bailTooltip : getBailStatusLabel(bailStatus)}</span>
               </div>
+              )}
 
               {isOverPointLimit && (
                 <div
