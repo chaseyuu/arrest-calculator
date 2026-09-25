@@ -1,0 +1,561 @@
+{
+  "_source": "GTA World Türkiye Yeni Kefalet Şablonu – LEO sayfası, 'Tam Kefalet Tutarı' sütunu. null = OTOMATİK KEFALET YOK. Felony/Misdemeanor ayrımı olan maddelerde yüksek tutar alındı.",
+  "charges": {
+    "001": {
+      "title": "İhanet",
+      "bail": null
+    },
+    "002": {
+      "title": "Casusluk",
+      "bail": null
+    },
+    "003": {
+      "title": "İç Terörizm",
+      "bail": null
+    },
+    "004": {
+      "title": "İç Terörizm Tehdidi",
+      "bail": null
+    },
+    "101": {
+      "title": "Vergi Kaçakçılığı",
+      "bail": 100000
+    },
+    "102": {
+      "title": "Seçimde Sahtekarlık",
+      "bail": 60000
+    },
+    "103": {
+      "title": "Kamu Görevinde Yolsuzluk",
+      "bail": null
+    },
+    "104": {
+      "title": "Kamu Görevini İhmal",
+      "bail": 200000
+    },
+    "105": {
+      "title": "Kamu Görevlisine Rüşvet",
+      "bail": 300000
+    },
+    "106": {
+      "title": "İsyana Teşvik",
+      "bail": null
+    },
+    "107": {
+      "title": "Yasa Dışı Toplanma",
+      "bail": 50000
+    },
+    "108": {
+      "title": "Delillerle Oynama",
+      "bail": 150000
+    },
+    "109": {
+      "title": "Tanık veya Mağdura Tehdit",
+      "bail": 500000
+    },
+    "110": {
+      "title": "Mahkemeye Saygısızlık",
+      "bail": null
+    },
+    "111": {
+      "title": "Yalancı Şahitlik",
+      "bail": 80000
+    },
+    "112": {
+      "title": "Kamu Görevini Engellemek",
+      "bail": 250000
+    },
+    "113": {
+      "title": "Kolluk Kuvvetlerinde Görevli Hayvanı Engellemek",
+      "bail": 250000
+    },
+    "114": {
+      "title": "Yasal Gözaltından Kaçmak",
+      "bail": null
+    },
+    "115": {
+      "title": "Kolluk Kuvvetlerinden Kaçmak",
+      "bail": 500000
+    },
+    "116": {
+      "title": "Tutuklamaya Direnmek",
+      "bail": 50000
+    },
+    "117": {
+      "title": "Devlet Görevlilerine Yalan Söylemek",
+      "bail": 150000
+    },
+    "118": {
+      "title": "Acil Yardım Hatlarının Kötüye Kullanımı",
+      "bail": 90000
+    },
+    "119": {
+      "title": "Kimlik Hırsızlığı",
+      "bail": 150000
+    },
+    "120": {
+      "title": "Bir Kamu Çalışanına Saldırı Tehdidi veya Darp",
+      "bail": null
+    },
+    "121": {
+      "title": "Sahtecilik",
+      "bail": 350000
+    },
+    "122": {
+      "title": "Dolandırıcılık",
+      "bail": null
+    },
+    "123": {
+      "title": "Para Aklamak",
+      "bail": 500000
+    },
+    "124": {
+      "title": "ABD Para Birimine Zarar Vermek",
+      "bail": 350000
+    },
+    "125": {
+      "title": "Huzuru Bozmak",
+      "bail": 100000
+    },
+    "126": {
+      "title": "Haraç Kesmek",
+      "bail": 500000
+    },
+    "127": {
+      "title": "EFCE Yasasının İhlali - Sinyal Bozucu",
+      "bail": 75000
+    },
+    "128": {
+      "title": "EFCE Yasasının İhlali - Kart Kopyalama",
+      "bail": 75000
+    },
+    "129": {
+      "title": "EFCE Yasasının İhlali - Araç Takibi",
+      "bail": 75000
+    },
+    "130": {
+      "title": "Bir Mahkumu Kaçırmak",
+      "bail": 500000
+    },
+    "131": {
+      "title": "Hapishane İçerisinde Uyuşturucu Madde Bulundurmak",
+      "bail": 250000
+    },
+    "132": {
+      "title": "Hapishane İçerisinde İletişim Aleti Bulundurmak",
+      "bail": 250000
+    },
+    "134": {
+      "title": "Hapishane İçerisinde Yetkisiz Anahtar Bulundurmak",
+      "bail": 250000
+    },
+    "135": {
+      "title": "Barış Görevlisi Köpeğini Öldürmek",
+      "bail": null
+    },
+    "136": {
+      "title": "Barış Görevlisi Köpeğini Ağır Yaralamak",
+      "bail": null
+    },
+    "137": {
+      "title": "Barış Görevlisi Köpeğine Saldırmak",
+      "bail": 100000
+    },
+    "138": {
+      "title": "Barış Görevlisi Köpeğini Engelleme",
+      "bail": 75000
+    },
+    "139": {
+      "title": "Mobil Veri Bilgisayarının Kötüye Kullanımı",
+      "bail": 200000
+    },
+    "140": {
+      "title": "Mobil Veri Bilgisayarından Yetkisiz Bilgi Paylaşımı",
+      "bail": 500000
+    },
+    "141": {
+      "title": "Mahkumla Yasa Dışı İletişim Kurmak",
+      "bail": 100000
+    },
+    "142": {
+      "title": "Mahkemeye Katılmamak",
+      "bail": null
+    },
+    "201": {
+      "title": "Cinayet",
+      "bail": null
+    },
+    "202": {
+      "title": "Birinci Derece Cinayet",
+      "bail": null
+    },
+    "203": {
+      "title": "İkinci Derece Cinayet",
+      "bail": null
+    },
+    "204": {
+      "title": "Kasten Adam Öldürme",
+      "bail": null
+    },
+    "205": {
+      "title": "Kasıtsız Adam Öldürme",
+      "bail": null
+    },
+    "206": {
+      "title": "Saldırı",
+      "bail": 200000
+    },
+    "207": {
+      "title": "Ölümcül Silahla Saldırı",
+      "bail": null
+    },
+    "208": {
+      "title": "Darp",
+      "bail": 150000
+    },
+    "209": {
+      "title": "Ağırlaştırılmış Darp",
+      "bail": null
+    },
+    "210": {
+      "title": "Kaçırma",
+      "bail": null
+    },
+    "211": {
+      "title": "İnsan Kaçakçılığı",
+      "bail": null
+    },
+    "212": {
+      "title": "Yasa Dışı Hapis",
+      "bail": 500000
+    },
+    "213": {
+      "title": "İşkence",
+      "bail": null
+    },
+    "214": {
+      "title": "Tehdit Suçu",
+      "bail": 500000
+    },
+    "215": {
+      "title": "Soygun",
+      "bail": null
+    },
+    "216": {
+      "title": "Silahlı Soygun",
+      "bail": null
+    },
+    "217": {
+      "title": "Tecavüz",
+      "bail": null
+    },
+    "218": {
+      "title": "Yasal Tecavüz",
+      "bail": null
+    },
+    "219": {
+      "title": "Cinsel Saldırı",
+      "bail": null
+    },
+    "220": {
+      "title": "Taciz",
+      "bail": 50000
+    },
+    "221": {
+      "title": "Aile İçi Şiddet",
+      "bail": 120000
+    },
+    "222": {
+      "title": "Yakıcı Kimyasal Maddelerle Saldırı",
+      "bail": 325000
+    },
+    "301": {
+      "title": "Kundakçılık",
+      "bail": 500000
+    },
+    "302": {
+      "title": "Hırsızlık",
+      "bail": 400000
+    },
+    "303": {
+      "title": "Haneye Tecavüz",
+      "bail": 450000
+    },
+    "304": {
+      "title": "Büyük Çaplı Hırsızlık",
+      "bail": 200000
+    },
+    "305": {
+      "title": "Küçük Çaplı Hırsızlık",
+      "bail": 25000
+    },
+    "306": {
+      "title": "Araç Hırsızlığı",
+      "bail": 300000
+    },
+    "307": {
+      "title": "Ateşli Silah Hırsızlığı",
+      "bail": 400000
+    },
+    "308": {
+      "title": "Hırsızlık Aletlerinin Bulundurulması",
+      "bail": 50000
+    },
+    "309": {
+      "title": "Çalınan Mal Varlığının Alınması",
+      "bail": 100000
+    },
+    "310": {
+      "title": "İzinsiz Giriş",
+      "bail": 100000
+    },
+    "311": {
+      "title": "Vandalizm",
+      "bail": 100000
+    },
+    "312": {
+      "title": "Zimmetine Geçirme",
+      "bail": 500000
+    },
+    "313": {
+      "title": "Taşıt Tescil Hırsızlığı",
+      "bail": 550000
+    },
+    "314": {
+      "title": "Hapishane Mülküne Zarar Verme",
+      "bail": 100000
+    },
+    "401": {
+      "title": "Geçerli Bir Sürücü Lisansı Olmadan Araç Kullanma",
+      "bail": 60000
+    },
+    "402": {
+      "title": "Askıya Alınmış Bir Sürücü Lisansıyla Araç Kullanma",
+      "bail": 100000
+    },
+    "408": {
+      "title": "Vur Kaç",
+      "bail": 400000
+    },
+    "409": {
+      "title": "Bir Arazi veya Deniz Aracının Dikkatsiz Kullanımı",
+      "bail": 80000
+    },
+    "419": {
+      "title": "Dikkatsiz Sürüş",
+      "bail": 100000
+    },
+    "420": {
+      "title": "Araç Tehlikesi",
+      "bail": 500000
+    },
+    "430": {
+      "title": "Etki Altında Sürüş [DUI] (Misdemeanor/Felony)",
+      "bail": 200000
+    },
+    "431": {
+      "title": "Test Yapılmasını Reddetme",
+      "bail": 75000
+    },
+    "432": {
+      "title": "Motorlu Taşıt Yarışı",
+      "bail": 500000
+    },
+    "437": {
+      "title": "Geçerli Bir Lisans Olmadan Hava Aracı Kullanma",
+      "bail": 500000
+    },
+    "438": {
+      "title": "Hava Aracının Dikkatsiz Kullanımı",
+      "bail": 250000
+    },
+    "439": {
+      "title": "ATC Talimatlarına Uymamak",
+      "bail": 200000
+    },
+    "440": {
+      "title": "Hava Aracıyla Kaçma",
+      "bail": 500000
+    },
+    "443": {
+      "title": "Sokağı İşgal Etme",
+      "bail": 350000
+    },
+    "501": {
+      "title": "Teşhircilik",
+      "bail": 300000
+    },
+    "502": {
+      "title": "Kamu İçinde Uygunsuz veya Ahlaksız Davranış",
+      "bail": 200000
+    },
+    "503": {
+      "title": "Fuhuş",
+      "bail": 150000
+    },
+    "504": {
+      "title": "Fuhuşa Teşvik",
+      "bail": 500000
+    },
+    "505": {
+      "title": "Tacizci Takip",
+      "bail": 400000
+    },
+    "506": {
+      "title": "Kumar Dolandırıcılığı",
+      "bail": 450000
+    },
+    "507": {
+      "title": "Çocuk İstismarı",
+      "bail": null
+    },
+    "508": {
+      "title": "Çocuk İhmali",
+      "bail": 250000
+    },
+    "509": {
+      "title": "Reşit Olmayan Bireye Alkol veya Tütün Satışı",
+      "bail": 80000
+    },
+    "510": {
+      "title": "Reşit Olmadan Alkol veya Tütün Kullanımı",
+      "bail": 50000
+    },
+    "511": {
+      "title": "Hayvan İstismarı",
+      "bail": 100000
+    },
+    "512": {
+      "title": "Mahkumla Cinsel İlişkiye Girme",
+      "bail": 350000
+    },
+    "601": {
+      "title": "Kontrollü Madde Üretimi",
+      "variants": {
+        "cat:A": 500000,
+        "cat:B": 470000,
+        "cat:C": 470000,
+        "cat:D": 470000,
+        "cat:T": 470000
+      }
+    },
+    "602": {
+      "title": "Kontrollü Madde Bulundurmak",
+      "variants": {
+        "cat:A": 150000,
+        "cat:B": 100000,
+        "cat:C": 60000,
+        "cat:D": 35000,
+        "cat:T": 20000
+      }
+    },
+    "603": {
+      "title": "Kontrollü Maddeyi Dağıtım Amacıyla Bulundurmak",
+      "variants": {
+        "cat:A": 250000,
+        "cat:B": 150000,
+        "cat:C": 80000,
+        "cat:D": 50000,
+        "cat:T": 30000
+      }
+    },
+    "604": {
+      "title": "Kontrollü Madde Satmak",
+      "variants": {
+        "cat:A": 350000,
+        "cat:B": 250000,
+        "cat:C": 160000,
+        "cat:D": 100000,
+        "cat:T": 70000
+      }
+    },
+    "605": {
+      "title": "Uyuşturucu Kaçakçılığı",
+      "variants": {
+        "cat:A": 400000,
+        "cat:B": 250000,
+        "cat:C": 150000,
+        "cat:D": 100000,
+        "cat:T": 80000
+      }
+    },
+    "606": {
+      "title": "Uyuşturucu Ticareti",
+      "variants": {
+        "cat:A": 500000,
+        "cat:B": 300000,
+        "cat:C": 250000,
+        "cat:D": 150000,
+        "cat:T": 100000
+      }
+    },
+    "607": {
+      "title": "Uyuşturucu Aletlerini Bulundurma",
+      "bail": 0
+    },
+    "609": {
+      "title": "Yasa Dışı Dinleme",
+      "bail": 200000
+    },
+    "610": {
+      "title": "Yüzün Gizlenmesi",
+      "bail": 100000
+    },
+    "613": {
+      "title": "SRCB İhlali",
+      "bail": 100000
+    },
+    "701": {
+      "title": "İzinsiz Ateşli Silah Bulundurma",
+      "bail": 400000
+    },
+    "702": {
+      "title": "Yasaklı Ateşli Silah Bulundurma",
+      "bail": 400000
+    },
+    "703": {
+      "title": "Ağırlaştırılmış Silah Bulundurma",
+      "bail": 500000
+    },
+    "704": {
+      "title": "Patlayıcı veya Yanıcı Cihazların Bulundurulması",
+      "bail": 500000
+    },
+    "705": {
+      "title": "Yasal Olmayan Ateşli Silah ve Patlayıcı Maddelerin Satışı",
+      "bail": 800000
+    },
+    "706": {
+      "title": "Ölümcül Silahın Sergilenmesi",
+      "bail": null
+    },
+    "707": {
+      "title": "Ateşli Silahların Kamu Alanında Ateşlenmesi",
+      "bail": null
+    },
+    "708": {
+      "title": "Silahla Motorlu Taşıttan Ateş Etmek",
+      "bail": null
+    },
+    "709": {
+      "title": "Ateşli Silahların Dikkatsiz Kullanımı",
+      "bail": 250000
+    },
+    "710": {
+      "title": "SHAFT İhlali",
+      "bail": 100000
+    },
+    "711": {
+      "title": "Felony Hükümlüsünün Silah Bulundurması",
+      "bail": 800000
+    },
+    "712": {
+      "title": "Felony Hükümlüsünün Mühimmat Bulundurması",
+      "bail": 200000
+    },
+    "713": {
+      "title": "Hapishanede Ölümcül Silah Bulundurmak",
+      "bail": 500000
+    }
+  }
+}

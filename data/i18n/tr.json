@@ -1,0 +1,415 @@
+{
+  "arrestCalculator": {
+    "page": {
+      "documentTitle": "MDC Panel – Tutuklama Hesaplayıcı",
+      "header": {
+        "title": "Tutuklama Hesaplayıcı",
+        "description": "Suçlamalara göre ceza süresini, para cezasını ve kefaleti hesapla."
+      },
+      "buttons": {
+        "addCharge": "Suçlama Ekle",
+        "calculate": "Hesapla",
+        "removeCharge": "Suçlamayı Kaldır"
+      },
+      "paroleViolatorLabel": "Şüpheli şartlı tahliye ihlalcisi",
+      "priorArrest": {
+        "label": "Bu kişi daha önce tutuklandı mı?",
+        "yes": "Evet",
+        "no": "Hayır",
+        "required": "Kefalet hesaplaması için bu soruyu cevapla."
+      },
+      "fields": {
+        "charge": "Suçlama",
+        "class": "Sınıf",
+        "offense": "Tekerrür",
+        "addition": "Ek Durum",
+        "category": "Kategori"
+      },
+      "placeholders": {
+        "selectCharge": "Suçlama seç...",
+        "searchCharge": "Ad veya madde numarasıyla ara...",
+        "selectClass": "Sınıf seç",
+        "selectOffense": "Tekerrür seç",
+        "selectAddition": "Ek durum seç",
+        "selectCategory": "Kategori seç"
+      },
+      "options": {
+        "classA": "A Sınıfı",
+        "classB": "B Sınıfı",
+        "classC": "C Sınıfı",
+        "offense": "{number}. suç"
+      },
+      "noChargeFound": "Suçlama bulunamadı.",
+      "depaWarning": {
+        "title": "Dikkat!",
+        "description": "Uyuşturucu suçlamalarında doğru kategoriyi seçtiğinden emin ol. Varsa arama emrini kontrol et.",
+        "link": "Drug Enforcement & Prevention Act of 2020 (DEPA)"
+      },
+      "depaCategories": {
+        "title": "DEPA Kontrollü Madde Kategorileri"
+      },
+      "loadingPenalCode": "Ceza kanunu yükleniyor...",
+      "toasts": {
+        "noCharges": {
+          "title": "Suçlama yok",
+          "description": "En az bir suçlama ekle."
+        },
+        "priorArrest": {
+          "title": "Eksik bilgi",
+          "description": "Kişinin daha önce tutuklanıp tutuklanmadığını seç."
+        },
+        "incomplete": {
+          "title": "Eksik suçlama",
+          "selectCharge": "Tüm satırlarda bir suçlama seç.",
+          "selectClass": "\"{charge}\" için sınıf seç.",
+          "selectOffense": "\"{charge}\" için tekerrür seç.",
+          "selectAddition": "\"{charge}\" için ek durum seç.",
+          "selectCategory": "\"{charge}\" uyuşturucu suçlaması için kategori seç."
+        }
+      }
+    },
+    "results": {
+      "additionNames": {
+        "offender": "Fail",
+        "attempt": "Teşebbüs",
+        "accomplice": "Suç Ortağı",
+        "accessory": "Yardım ve Yataklık",
+        "conspiracy": "Suç İçin Anlaşma",
+        "solicitation": "Azmettirme",
+        "paroleViolation": "Şartlı Tahliye İhlali"
+      },
+      "types": {
+        "felony": "Ağır Suç",
+        "misdemeanor": "Kabahat",
+        "infraction": "İhlal",
+        "unknown": "Bilinmiyor"
+      },
+      "autoBail": {
+        "na": "YOK",
+        "noBail": "OTOMATİK KEFALET YOK",
+        "auto": "OTOMATİK KEFALET",
+        "discretionary": "TAKDİRE BAĞLI"
+      },
+      "bailStatus": {
+        "na": "YOK",
+        "notEligible": "KEFALETE UYGUN DEĞİL",
+        "discretionary": "TAKDİRE BAĞLI",
+        "eligible": "KEFALETE UYGUN"
+      },
+      "labels": {
+        "yes": "Evet",
+        "no": "Hayır",
+        "notAvailable": "Yok",
+        "yesWithValue": "Evet ({value})"
+      },
+      "currency": "${value}",
+      "time": {
+        "zero": "0 dakika",
+        "days": {
+          "one": "{count} Gün",
+          "other": "{count} Gün"
+        },
+        "hours": {
+          "one": "{count} Saat",
+          "other": "{count} Saat"
+        },
+        "minutes": {
+          "one": "{count} Dakika",
+          "other": "{count} Dakika"
+        },
+        "summary": "{parts} (toplam {minutes} dk)"
+      },
+      "charges": {
+        "cardTitle": "Suçlamalar",
+        "copyLink": "Hesaplama linkini kopyala",
+        "modify": "Suçlamaları düzenle",
+        "title": "{prefix} {id}. {charge}",
+        "categorySuffix": "(Kategori: {category})",
+        "offenseSuffix": "({offense}. suç)",
+        "offenseNumber": "{offense}. suç",
+        "copyTooltip": "{field} değerini kopyala",
+        "copyAria": "{field} değerini kopyala",
+        "table": {
+          "title": "Suçlama",
+          "addition": "Ek Durum",
+          "offense": "Tekerrür",
+          "type": "Tür",
+          "minTime": "Asgari Süre",
+          "maxTime": "Azami Süre",
+          "points": "Puan",
+          "fine": "Para Cezası",
+          "impound": "Araç Bağlama",
+          "suspension": "Ehliyet Askısı",
+          "autoBail": "Otomatik Kefalet",
+          "bail": "Tam Kefalet Tutarı"
+        },
+        "tooltip": {
+          "sentenceMultiplier": "Süre çarpanı: x{value}",
+          "pointsMultiplier": "Puan çarpanı: x{value}",
+          "originalTime": "Asıl süre: {value}",
+          "modifiedTime": "Uygulanan süre: {value}",
+          "originalPoints": "Asıl puan: {value}",
+          "modifiedPoints": "Uygulanan puan: {value}"
+        }
+      },
+      "copyLabels": {
+        "rawFine": "Para Cezası (ham)"
+      },
+      "stipulations": {
+        "title": "Ek Hükümler",
+        "charge": "Suçlama",
+        "stipulation": "Hüküm"
+      },
+      "summary": {
+        "title": "Özet",
+        "alerts": {
+          "sentence": {
+            "title": "Süre sınırlandı",
+            "description": "Toplam ceza azami {maxDays} günü aşıyor. Gösterilen süre sınıra çekildi.",
+            "originalMinLabel": "Asıl asgari:",
+            "originalMaxLabel": "Asıl azami:"
+          },
+          "impound": {
+            "title": "Araç bağlama sınırlandı",
+            "description": "Toplam araç bağlama süresi azami {maxDays} günü aşıyor. Gösterilen değer: {value}."
+          },
+          "suspension": {
+            "title": "Ehliyet askısı sınırlandı",
+            "description": "Toplam ehliyet askısı süresi azami {maxDays} günü aşıyor. Gösterilen değer: {value}."
+          }
+        },
+        "mobile": {
+          "minTime": "Asgari Süre",
+          "maxTime": "Azami Süre",
+          "points": "Puan",
+          "fine": "Para Cezası",
+          "impound": "Araç Bağlama",
+          "suspension": "Ehliyet Askısı",
+          "bailStatus": "Kefalet Durumu",
+          "highestBail": "Kefalet Tutarı"
+        },
+        "table": {
+          "minTime": "Asgari Süre",
+          "maxTime": "Azami Süre",
+          "points": "Puan",
+          "fine": "Para Cezası",
+          "impound": "Araç Bağlama",
+          "suspension": "Ehliyet Askısı",
+          "bailStatus": "Kefalet Durumu",
+          "highestBail": "Kefalet Tutarı"
+        }
+      },
+      "copyables": {
+        "minMinutes": "Asgari Dakika",
+        "maxMinutes": "Azami Dakika",
+        "totalImpound": "Toplam Araç Bağlama (gün)",
+        "totalSuspension": "Toplam Ehliyet Askısı (gün)",
+        "bailCost": "Kefalet Tutarı",
+        "toastTitle": "Kopyalandı",
+        "toastDescription": "{label} panoya kopyalandı.",
+        "originalValue": "Asıl değer: {value}"
+      },
+      "toasts": {
+        "copiedTitle": "Kopyalandı",
+        "copiedDescription": "{value} panoya kopyalandı.",
+        "copiedDescriptionWithLabel": "{label}: {value} panoya kopyalandı.",
+        "linkCopiedTitle": "Link kopyalandı",
+        "linkCopiedDescription": "Aynı hesaplamayı görmek için bu linki paylaşabilirsin."
+      },
+      "priorArrest": {
+        "yes": "Evet",
+        "no": "Hayır",
+        "label": "Daha önce tutuklandı mı?",
+        "notEligibleReason": "Şüpheli daha önce tutuklandığı için kefalete uygun değil.",
+        "noAutoBailReason": "Suçlamalardan en az birinde otomatik kefalet yok."
+      }
+    }
+  },
+  "arrestCalculation": {
+    "page": {
+      "documentTitle": "Tutuklama Hesaplaması",
+      "loadingDescription": "Paylaşılan hesaplama yükleniyor...",
+      "title": "Tutuklama Hesaplaması",
+      "description": "Paylaşılan tutuklama hesaplaması.",
+      "error": {
+        "title": "Hesaplama yüklenemedi",
+        "description": "Paylaşılan hesaplama linki işlenirken bir sorun oluştu.",
+        "alertTitle": "Hata",
+        "missingCharges": "Linkte suçlama bilgisi yok.",
+        "invalidFormat": "{index}. suçlamanın biçimi geçersiz. En az 3 parça bekleniyordu, {parts} bulundu.",
+        "unknownCharge": "'{id}' numaralı madde ceza kanununda yok.",
+        "invalidCategory": "'{id}' maddesi için geçersiz uyuşturucu kategorisi: '{category}'."
+      },
+      "errors": {
+        "penalCodeFetch": "Ceza kanunu verisi yüklenemedi."
+      },
+      "empty": {
+        "title": "Suçlama bulunamadı",
+        "description": "Linkte geçerli bir suçlama bulunamadı."
+      }
+    },
+    "results": {
+      "additionNames": {
+        "offender": "Fail",
+        "attempt": "Teşebbüs",
+        "accomplice": "Suç Ortağı",
+        "accessory": "Yardım ve Yataklık",
+        "conspiracy": "Suç İçin Anlaşma",
+        "solicitation": "Azmettirme",
+        "paroleViolation": "Şartlı Tahliye İhlali"
+      },
+      "types": {
+        "felony": "Ağır Suç",
+        "misdemeanor": "Kabahat",
+        "infraction": "İhlal",
+        "unknown": "Bilinmiyor"
+      },
+      "autoBail": {
+        "na": "YOK",
+        "noBail": "OTOMATİK KEFALET YOK",
+        "auto": "OTOMATİK KEFALET",
+        "discretionary": "TAKDİRE BAĞLI"
+      },
+      "bailStatus": {
+        "na": "YOK",
+        "notEligible": "KEFALETE UYGUN DEĞİL",
+        "discretionary": "TAKDİRE BAĞLI",
+        "eligible": "KEFALETE UYGUN"
+      },
+      "labels": {
+        "yes": "Evet",
+        "no": "Hayır",
+        "notAvailable": "Yok",
+        "yesWithValue": "Evet ({value})"
+      },
+      "currency": "${value}",
+      "time": {
+        "zero": "0 dakika",
+        "days": {
+          "one": "{count} Gün",
+          "other": "{count} Gün"
+        },
+        "hours": {
+          "one": "{count} Saat",
+          "other": "{count} Saat"
+        },
+        "minutes": {
+          "one": "{count} Dakika",
+          "other": "{count} Dakika"
+        },
+        "summary": "{parts} (toplam {minutes} dk)"
+      },
+      "charges": {
+        "cardTitle": "Suçlamalar",
+        "copyLink": "Hesaplama linkini kopyala",
+        "modify": "Suçlamaları düzenle",
+        "title": "{prefix} {id}. {charge}",
+        "categorySuffix": "(Kategori: {category})",
+        "offenseSuffix": "({offense}. suç)",
+        "offenseNumber": "{offense}. suç",
+        "copyTooltip": "{field} değerini kopyala",
+        "copyAria": "{field} değerini kopyala",
+        "table": {
+          "title": "Suçlama",
+          "addition": "Ek Durum",
+          "offense": "Tekerrür",
+          "type": "Tür",
+          "minTime": "Asgari Süre",
+          "maxTime": "Azami Süre",
+          "points": "Puan",
+          "fine": "Para Cezası",
+          "impound": "Araç Bağlama",
+          "suspension": "Ehliyet Askısı",
+          "autoBail": "Otomatik Kefalet",
+          "bail": "Tam Kefalet Tutarı"
+        },
+        "tooltip": {
+          "sentenceMultiplier": "Süre çarpanı: x{value}",
+          "pointsMultiplier": "Puan çarpanı: x{value}",
+          "originalTime": "Asıl süre: {value}",
+          "modifiedTime": "Uygulanan süre: {value}",
+          "originalPoints": "Asıl puan: {value}",
+          "modifiedPoints": "Uygulanan puan: {value}"
+        }
+      },
+      "copyLabels": {
+        "rawFine": "Para Cezası (ham)"
+      },
+      "stipulations": {
+        "title": "Ek Hükümler",
+        "charge": "Suçlama",
+        "stipulation": "Hüküm"
+      },
+      "summary": {
+        "title": "Özet",
+        "alerts": {
+          "sentence": {
+            "title": "Süre sınırlandı",
+            "description": "Toplam ceza azami {maxDays} günü aşıyor. Gösterilen süre sınıra çekildi.",
+            "originalMinLabel": "Asıl asgari:",
+            "originalMaxLabel": "Asıl azami:"
+          },
+          "impound": {
+            "title": "Araç bağlama sınırlandı",
+            "description": "Toplam araç bağlama süresi azami {maxDays} günü aşıyor. Gösterilen değer: {value}."
+          },
+          "suspension": {
+            "title": "Ehliyet askısı sınırlandı",
+            "description": "Toplam ehliyet askısı süresi azami {maxDays} günü aşıyor. Gösterilen değer: {value}."
+          }
+        },
+        "mobile": {
+          "minTime": "Asgari Süre",
+          "maxTime": "Azami Süre",
+          "points": "Puan",
+          "fine": "Para Cezası",
+          "impound": "Araç Bağlama",
+          "suspension": "Ehliyet Askısı",
+          "bailStatus": "Kefalet Durumu",
+          "highestBail": "Kefalet Tutarı"
+        },
+        "table": {
+          "minTime": "Asgari Süre",
+          "maxTime": "Azami Süre",
+          "points": "Puan",
+          "fine": "Para Cezası",
+          "impound": "Araç Bağlama",
+          "suspension": "Ehliyet Askısı",
+          "bailStatus": "Kefalet Durumu",
+          "highestBail": "Kefalet Tutarı"
+        }
+      },
+      "copyables": {
+        "minMinutes": "Asgari Dakika",
+        "maxMinutes": "Azami Dakika",
+        "totalImpound": "Toplam Araç Bağlama (gün)",
+        "totalSuspension": "Toplam Ehliyet Askısı (gün)",
+        "bailCost": "Kefalet Tutarı",
+        "toastTitle": "Kopyalandı",
+        "toastDescription": "{label} panoya kopyalandı.",
+        "originalValue": "Asıl değer: {value}"
+      },
+      "toasts": {
+        "copiedTitle": "Kopyalandı",
+        "copiedDescription": "{value} panoya kopyalandı.",
+        "copiedDescriptionWithLabel": "{label}: {value} panoya kopyalandı.",
+        "linkCopiedTitle": "Link kopyalandı",
+        "linkCopiedDescription": "Aynı hesaplamayı görmek için bu linki paylaşabilirsin."
+      },
+      "priorArrest": {
+        "yes": "Evet",
+        "no": "Hayır",
+        "label": "Daha önce tutuklandı mı?",
+        "notEligibleReason": "Şüpheli daha önce tutuklandığı için kefalete uygun değil.",
+        "noAutoBailReason": "Suçlamalardan en az birinde otomatik kefalet yok."
+      }
+    }
+  },
+  "shared": {
+    "streetsAct": {
+      "title": "Dikkat!",
+      "description": "Suçlamalardan en az biri STREETS Act'in <strong>IV. Bölümü</strong> kapsamında.<br/>Şüpheliye tekerrür hükmü uygulanabilir; araç bağlama ve ehliyet askısı süreleri artabilir (7 günden 28 güne).<br/> Kaynak: {link}",
+      "linkLabel": "STREETS Act (2024)"
+    }
+  }
+}
