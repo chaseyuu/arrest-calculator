@@ -214,7 +214,8 @@
           "suspension": "Ehliyete El Koyma",
           "bailStatus": "Kefalet Durumu",
           "highestBail": "Kefalet Tutarı"
-        }
+        },
+        "copyHint": "Kopyalamak için değerin üzerine tıkla"
       },
       "copyables": {
         "minMinutes": "Minimum Dakika",
@@ -229,7 +230,7 @@
       "toasts": {
         "copiedTitle": "Kopyalandı",
         "copiedDescription": "{value} panoya kopyalandı.",
-        "copiedDescriptionWithLabel": "{label}: {value} panoya kopyalandı.",
+        "copiedDescriptionWithLabel": "{label}: {value}",
         "linkCopiedTitle": "Link kopyalandı",
         "linkCopiedDescription": "Aynı hesaplamayı görmek için bu linki paylaşabilirsin."
       },
@@ -242,9 +243,10 @@
       },
       "criminalPoints": {
         "current": "Mevcut Suç Puanı",
-        "fromCharges": "Suçlamalardan Gelen Puan",
+        "fromCharges": "Suç Puanı",
         "new": "Yeni Suç Puanı",
-        "overLimit": "Tutuklayacağınız karakterin suç puanı otuzu aşıyor. Tutuklamayı hemen gerçekleştirmeyin ve ömür boyu hapis cezası için aşağıda listelenmiş olan adımları izleyin."
+        "overLimit": "Tutuklayacağınız karakterin suç puanı otuzu aşıyor. Tutuklamayı hemen gerçekleştirmeyin ve ömür boyu hapis cezası için aşağıda listelenmiş olan adımları izleyin.",
+        "breakdown": "Mevcut {current} + {added}"
       },
       "offenseOrdinals": {
         "1": "İlk Kez",
@@ -408,7 +410,8 @@
           "suspension": "Ehliyete El Koyma",
           "bailStatus": "Kefalet Durumu",
           "highestBail": "Kefalet Tutarı"
-        }
+        },
+        "copyHint": "Kopyalamak için değerin üzerine tıkla"
       },
       "copyables": {
         "minMinutes": "Minimum Dakika",
@@ -423,7 +426,7 @@
       "toasts": {
         "copiedTitle": "Kopyalandı",
         "copiedDescription": "{value} panoya kopyalandı.",
-        "copiedDescriptionWithLabel": "{label}: {value} panoya kopyalandı.",
+        "copiedDescriptionWithLabel": "{label}: {value}",
         "linkCopiedTitle": "Link kopyalandı",
         "linkCopiedDescription": "Aynı hesaplamayı görmek için bu linki paylaşabilirsin."
       },
@@ -436,9 +439,10 @@
       },
       "criminalPoints": {
         "current": "Mevcut Suç Puanı",
-        "fromCharges": "Suçlamalardan Gelen Puan",
+        "fromCharges": "Suç Puanı",
         "new": "Yeni Suç Puanı",
-        "overLimit": "Tutuklayacağınız karakterin suç puanı otuzu aşıyor. Tutuklamayı hemen gerçekleştirmeyin ve ömür boyu hapis cezası için aşağıda listelenmiş olan adımları izleyin."
+        "overLimit": "Tutuklayacağınız karakterin suç puanı otuzu aşıyor. Tutuklamayı hemen gerçekleştirmeyin ve ömür boyu hapis cezası için aşağıda listelenmiş olan adımları izleyin.",
+        "breakdown": "Mevcut {current} + {added}"
       },
       "offenseOrdinals": {
         "1": "İlk Kez",

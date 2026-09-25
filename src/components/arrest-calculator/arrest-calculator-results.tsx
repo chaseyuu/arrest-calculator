@@ -12,7 +12,7 @@ import {
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
-import { AlertTriangle, Clipboard, Pencil, Link2, Asterisk } from 'lucide-react';
+import { AlertTriangle, Clipboard, Pencil, Link2, Asterisk, Info, Check } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -505,6 +505,54 @@ export function ArrestCalculatorResults({
     return <Badge variant="secondary">{getBailStatusLabel('N/A')}</Badge>;
   };
 
+  // Summary tiles: each one copies its raw value when clicked.
+  const summaryTiles: {
+    key: string;
+    label: string;
+    value: React.ReactNode;
+    copy: string | number;
+    sub?: string;
+    className?: string;
+  }[] = [
+    { key: 'min', label: t('summary.table.minTime'), value: minTimeCappedDisplay.label, copy: Math.round(minTimeCapped) },
+    { key: 'max', label: t('summary.table.maxTime'), value: maxTimeCappedDisplay.label, copy: Math.round(maxTimeCapped) },
+    { key: 'points', label: t('criminalPoints.fromCharges'), value: chargePoints, copy: chargePoints },
+    {
+      key: 'newPoints',
+      label: t('criminalPoints.new'),
+      value: newCriminalPoints,
+      copy: newCriminalPoints,
+      sub: t('criminalPoints.breakdown', { current: effectiveCurrentPoints, added: chargePoints }),
+      className: isOverPointLimit
+        ? 'border-red-300 text-red-700 dark:border-red-900 dark:text-red-400'
+        : undefined,
+    },
+    { key: 'fine', label: t('summary.table.fine'), value: totalFineDisplay, copy: totals.fine },
+    {
+      key: 'impound',
+      label: t('summary.table.impound'),
+      value: formatDaysOrNone(impoundCapped),
+      copy: Math.round(impoundCapped),
+    },
+    {
+      key: 'suspension',
+      label: t('summary.table.suspension'),
+      value: formatDaysOrNone(suspensionCapped),
+      copy: Math.round(suspensionCapped),
+    },
+    {
+      key: 'bail',
+      label: t('summary.table.highestBail'),
+      value: isNoBail ? '—' : highestBailDisplay,
+      copy: displayBailCost,
+      className: isNoBail
+        ? 'border-red-300 text-red-700 dark:border-red-900 dark:text-red-400'
+        : bailStatus === 'ELIGIBLE'
+          ? 'border-green-300 dark:border-green-900'
+          : undefined,
+    },
+  ];
+
   return (
     <TooltipProvider>
       <div className="space-y-6">
@@ -811,40 +859,26 @@ export function ArrestCalculatorResults({
 
         {isStreetsEligible && <StreetsAlert />}
 
-        {showStipulations && extras && extras.length > 0 && (
-          <Card>
-            <CardHeader>
-              <CardTitle>{t('stipulations.title')}</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="w-full overflow-x-auto">
-                <Table className="w-full sm:min-w-[480px]">
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead>{t('stipulations.charge')}</TableHead>
-                      <TableHead>{t('stipulations.stipulation')}</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {extras.map((item, index) => (
-                      <TableRow key={index}>
-                        <TableCell className="font-medium">{item.title}</TableCell>
-                        <TableCell className="whitespace-pre-wrap">{item.extra}</TableCell>
-                      </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
         {showSummary && (
           <Card>
-            <CardHeader>
+            <CardHeader className="flex flex-row items-center gap-2 space-y-0">
               <CardTitle>{t('summary.title')}</CardTitle>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <button
+                    type="button"
+                    aria-label={t('summary.copyHint')}
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    <Info className="h-4 w-4" />
+                  </button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{t('summary.copyHint')}</p>
+                </TooltipContent>
+              </Tooltip>
             </CardHeader>
-            <CardContent>
+            <CardContent className="space-y-4">
               {isCapped && (
                 <Alert variant="warning" className="mb-4">
                   <AlertTriangle className="h-4 w-4" />
@@ -886,178 +920,75 @@ export function ArrestCalculatorResults({
                 </Alert>
               )}
 
-              {/* Mobile summary */}
-              <div className="grid gap-3 sm:hidden">
-                <div className="rounded-lg border bg-card p-4 text-center shadow-sm">
-                  <p className="text-xs font-semibold text-muted-foreground">{t('summary.mobile.minTime')}</p>
-                  <div className="mt-1 flex items-center justify-center gap-1 text-sm font-medium">
-                    {minTimeCappedDisplay.label}
-                    {hasAnyModifiers && (
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <Asterisk className="h-3 w-3 text-yellow-500" />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{t('charges.tooltip.originalTime', { value: originalMinDisplay.detailed })}</p>
-                          <p>{t('charges.tooltip.modifiedTime', { value: modifiedMinDisplay.detailed })}</p>
-                        </TooltipContent>
-                      </Tooltip>
+              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
+                {summaryTiles.map((tile) => (
+                  <button
+                    key={tile.key}
+                    type="button"
+                    onClick={() => handleCopyToClipboard(tile.copy, tile.label)}
+                    className={cn(
+                      'group relative flex flex-col items-start justify-start rounded-lg border p-4 text-left transition-colors hover:bg-muted/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-ring',
+                      tile.className,
                     )}
-                  </div>
-                </div>
-                <div className="rounded-lg border bg-card p-4 text-center shadow-sm">
-                  <p className="text-xs font-semibold text-muted-foreground">{t('summary.mobile.maxTime')}</p>
-                  <div className="mt-1 flex items-center justify-center gap-1 text-sm font-medium">
-                    {maxTimeCappedDisplay.label}
-                    {hasAnyModifiers && (
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <Asterisk className="h-3 w-3 text-yellow-500" />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{t('charges.tooltip.originalTime', { value: originalMaxDisplay.detailed })}</p>
-                          <p>{t('charges.tooltip.modifiedTime', { value: modifiedMaxDisplay.detailed })}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    )}
-                  </div>
-                </div>
-                <div className="rounded-lg border bg-card p-4 text-center shadow-sm">
-                  <p className="text-xs font-semibold text-muted-foreground">{t('summary.mobile.points')}</p>
-                  <div className="mt-1 flex items-center justify-center gap-1 text-sm font-medium">
-                    {Math.round(totals.modified.points)}
-                    {hasAnyModifiers && (
-                      <Tooltip>
-                        <TooltipTrigger>
-                          <Asterisk className="h-3 w-3 text-yellow-500" />
-                        </TooltipTrigger>
-                        <TooltipContent>
-                          <p>{t('charges.tooltip.originalPoints', { value: totals.original.points })}</p>
-                          <p>{t('charges.tooltip.modifiedPoints', { value: Math.round(totals.modified.points) })}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    )}
-                  </div>
-                </div>
-                <div className="rounded-lg border bg-card p-4 text-center shadow-sm">
-                  <p className="text-xs font-semibold text-muted-foreground">{t('summary.mobile.fine')}</p>
-                  <p className="mt-1 text-sm font-medium">{totalFineDisplay}</p>
-                </div>
-                <div className="rounded-lg border bg-card p-4 text-center shadow-sm">
-                  <p className="text-xs font-semibold text-muted-foreground">{t('summary.mobile.impound')}</p>
-                  <p className="mt-1 text-sm font-medium">{formatDaysOrNone(impoundCapped)}</p>
-                </div>
-                <div className="rounded-lg border bg-card p-4 text-center shadow-sm">
-                  <p className="text-xs font-semibold text-muted-foreground">{t('summary.mobile.suspension')}</p>
-                  <p className="mt-1 text-sm font-medium">{formatDaysOrNone(suspensionCapped)}</p>
-                </div>
-                <div className="rounded-lg border bg-card p-4 text-center shadow-sm">
-                  <p className="text-xs font-semibold text-muted-foreground">{t('summary.mobile.bailStatus')}</p>
-                  <div className="mt-2 flex justify-center">{renderOverallBailStatus()}</div>
-                </div>
-                <div className="rounded-lg border bg-card p-4 text-center shadow-sm">
-                  <p className="text-xs font-semibold text-muted-foreground">{t('summary.mobile.highestBail')}</p>
-                  <div className="mt-1 flex items-center justify-center gap-1 text-sm font-medium">
-                    <Tooltip>
-                        <TooltipTrigger asChild>
-                            <span className={cn("px-2 py-1 rounded", bailColorClass)}>
-                                {highestBailDisplay}
-                            </span>
-                        </TooltipTrigger>
-                        {bailTooltip && (
-                            <TooltipContent>
-                                <p>{bailTooltip}</p>
-                            </TooltipContent>
-                        )}
-                    </Tooltip>
-                  </div>
-                </div>
+                  >
+                    <Clipboard className="absolute right-3 top-3 h-3.5 w-3.5 opacity-40 transition-opacity group-hover:opacity-100" />
+                    <p className="text-xs font-medium text-muted-foreground">{tile.label}</p>
+                    <p className="mt-1 text-lg font-semibold leading-tight">{tile.value}</p>
+                    {tile.sub && <p className="mt-1 text-xs text-muted-foreground">{tile.sub}</p>}
+                  </button>
+                ))}
               </div>
 
-              {/* Desktop summary */}
-              <div className="hidden w-full overflow-x-auto sm:block">
-                <Table className="w-full sm:min-w-[720px]">
+              <div
+                className={cn(
+                  'flex items-center gap-2 rounded-lg border px-4 py-3 font-medium',
+                  isNoBail
+                    ? 'border-red-300 bg-red-50 text-red-800 dark:border-red-900 dark:bg-red-950/60 dark:text-red-300'
+                    : bailStatus === 'ELIGIBLE'
+                      ? 'border-green-300 bg-green-50 text-green-800 dark:border-green-900 dark:bg-green-950/60 dark:text-green-300'
+                      : 'text-muted-foreground',
+                )}
+              >
+                {isNoBail ? <AlertTriangle className="h-4 w-4 shrink-0" /> : <Check className="h-4 w-4 shrink-0" />}
+                <span>{isNoBail ? bailTooltip : getBailStatusLabel(bailStatus)}</span>
+              </div>
+
+              {isOverPointLimit && (
+                <div
+                  role="alert"
+                  className="rounded-lg border border-red-300 bg-red-100 p-4 font-medium text-red-800 dark:border-red-800 dark:bg-red-950/70 dark:text-red-200"
+                >
+                  <div className="flex items-start gap-3">
+                    <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
+                    <p>{t('criminalPoints.overLimit')}</p>
+                  </div>
+                </div>
+              )}
+            </CardContent>
+          </Card>
+        )}
+
+        {showStipulations && extras && extras.length > 0 && (
+          <Card>
+            <CardHeader>
+              <CardTitle>{t('stipulations.title')}</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="w-full overflow-x-auto">
+                <Table className="w-full sm:min-w-[480px]">
                   <TableHeader>
                     <TableRow>
-                      <TableHead>{t('summary.table.minTime')}</TableHead>
-                      <TableHead>{t('summary.table.maxTime')}</TableHead>
-                      <TableHead>{t('summary.table.points')}</TableHead>
-                      <TableHead>{t('summary.table.fine')}</TableHead>
-                      <TableHead>{t('summary.table.impound')}</TableHead>
-                      <TableHead>{t('summary.table.suspension')}</TableHead>
-                      <TableHead>{t('summary.table.bailStatus')}</TableHead>
-                      <TableHead>{t('summary.table.highestBail')}</TableHead>
+                      <TableHead>{t('stipulations.charge')}</TableHead>
+                      <TableHead>{t('stipulations.stipulation')}</TableHead>
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    <TableRow>
-                      <TableCell>
-                        <div className="flex items-center gap-1">
-                          {minTimeCappedDisplay.label}
-                          {hasAnyModifiers && (
-                            <Tooltip>
-                              <TooltipTrigger>
-                                <Asterisk className="h-3 w-3 text-yellow-500" />
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>{t('charges.tooltip.originalTime', { value: originalMinDisplay.detailed })}</p>
-                                <p>{t('charges.tooltip.modifiedTime', { value: modifiedMinDisplay.detailed })}</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          )}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-1">
-                          {maxTimeCappedDisplay.label}
-                          {hasAnyModifiers && (
-                            <Tooltip>
-                              <TooltipTrigger>
-                                <Asterisk className="h-3 w-3 text-yellow-500" />
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>{t('charges.tooltip.originalTime', { value: originalMaxDisplay.detailed })}</p>
-                                <p>{t('charges.tooltip.modifiedTime', { value: modifiedMaxDisplay.detailed })}</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          )}
-                        </div>
-                      </TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-1">
-                          {Math.round(totals.modified.points)}
-                          {hasAnyModifiers && (
-                            <Tooltip>
-                              <TooltipTrigger>
-                                <Asterisk className="h-3 w-3 text-yellow-500" />
-                              </TooltipTrigger>
-                              <TooltipContent>
-                                <p>{t('charges.tooltip.originalPoints', { value: totals.original.points })}</p>
-                                <p>{t('charges.tooltip.modifiedPoints', { value: Math.round(totals.modified.points) })}</p>
-                              </TooltipContent>
-                            </Tooltip>
-                          )}
-                        </div>
-                      </TableCell>
-                      <TableCell>{totalFineDisplay}</TableCell>
-                      <TableCell>{formatDaysOrNone(impoundCapped)}</TableCell>
-                      <TableCell>{formatDaysOrNone(suspensionCapped)}</TableCell>
-                      <TableCell>{renderOverallBailStatus()}</TableCell>
-                      <TableCell>
-                        <Tooltip>
-                            <TooltipTrigger asChild>
-                                <span className={cn("px-2 py-1 rounded font-bold", bailColorClass)}>
-                                    {highestBailDisplay}
-                                </span>
-                            </TooltipTrigger>
-                            {bailTooltip && (
-                                <TooltipContent>
-                                    <p>{bailTooltip}</p>
-                                </TooltipContent>
-                            )}
-                        </Tooltip>
-                      </TableCell>
-                    </TableRow>
+                    {extras.map((item, index) => (
+                      <TableRow key={index}>
+                        <TableCell className="font-medium">{item.title}</TableCell>
+                        <TableCell className="whitespace-pre-wrap">{item.extra}</TableCell>
+                      </TableRow>
+                    ))}
                   </TableBody>
                 </Table>
               </div>
@@ -1065,88 +996,6 @@ export function ArrestCalculatorResults({
           </Card>
         )}
 
-        {showSummary && (
-          <Alert variant={isNoBail ? 'destructive' : 'default'}>
-            <AlertTriangle className="h-4 w-4" />
-            {isNoBail ? (
-              <AlertTitle className="mb-0">{bailTooltip}</AlertTitle>
-            ) : (
-              <AlertTitle className="mb-0">
-                {t('priorArrest.label')} {effectivePriorArrest ? t('priorArrest.yes') : t('priorArrest.no')}
-                {' · '}
-                {getBailStatusLabel(bailStatus)}
-              </AlertTitle>
-            )}
-          </Alert>
-        )}
-
-        {showSummary && (
-          <Card>
-            <CardContent className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-3">
-              <div>
-                <p className="text-xs font-semibold text-muted-foreground">{t('criminalPoints.current')}</p>
-                <p className="mt-1 text-2xl font-bold">{effectiveCurrentPoints}</p>
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-muted-foreground">{t('criminalPoints.fromCharges')}</p>
-                <p className="mt-1 text-2xl font-bold">+{chargePoints}</p>
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-muted-foreground">{t('criminalPoints.new')}</p>
-                <p className={cn('mt-1 text-2xl font-bold', isOverPointLimit && 'text-red-600 dark:text-red-400')}>
-                  {newCriminalPoints}
-                </p>
-              </div>
-            </CardContent>
-          </Card>
-        )}
-
-        {showSummary && isOverPointLimit && (
-          <div
-            role="alert"
-            className="rounded-lg border border-red-300 bg-red-100 p-4 font-medium text-red-800 dark:border-red-800 dark:bg-red-950/70 dark:text-red-200"
-          >
-            <div className="flex items-start gap-3">
-              <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
-              <p>{t('criminalPoints.overLimit')}</p>
-            </div>
-          </div>
-        )}
-
-        {showCopyables && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-            <CopyableCard
-              label={t('copyables.minMinutes')}
-              value={Math.round(minTimeCapped)}
-              tooltipContent={
-                hasAnyModifiers ? t('copyables.originalValue', { value: Math.round(totals.original.minTime) }) : undefined
-              }
-            />
-            <CopyableCard
-              label={t('copyables.maxMinutes')}
-              value={Math.round(maxTimeCapped)}
-              tooltipContent={
-                hasAnyModifiers ? t('copyables.originalValue', { value: Math.round(totals.original.maxTime) }) : undefined
-              }
-            />
-            <CopyableCard
-              label={t('summary.table.points')}
-              value={Math.round(totals.modified.points)}
-              tooltipContent={
-                hasAnyModifiers ? t('copyables.originalValue', { value: Math.round(totals.original.points) }) : undefined
-              }
-            />
-            <CopyableCard label={t('criminalPoints.new')} value={newCriminalPoints} />
-            <CopyableCard label={t('summary.table.fine')} value={totals.fine} />
-            <CopyableCard label={t('copyables.totalImpound')} value={Math.round(impoundCapped)} />
-            <CopyableCard 
-                label={t('copyables.bailCost')} 
-                value={displayBailCost} 
-                colorClass={bailColorClass}
-                tooltipContent={bailTooltip}
-            />
-          </div>
-        )}
       </div>
     </TooltipProvider>
   );
