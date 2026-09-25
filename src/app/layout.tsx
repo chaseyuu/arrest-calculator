@@ -4,8 +4,8 @@ import { AppProviders } from '@/components/layout/app-providers';
 
 export const metadata: Metadata = {
   title: {
-    default: 'Tutuklama Hesaplayıcı – MDC Panel+',
-    template: '%s – MDC Panel+',
+    default: 'Tutuklama Hesaplayıcı',
+    template: '%s',
   },
   description: 'San Andreas Ceza Kanunu’na göre ceza süresi, para cezası ve kefalet hesaplayıcı.',
 };

@@ -811,23 +811,6 @@ export function ArrestCalculatorPage() {
 
         {showStreetsActWarning && <StreetsAlert />}
 
-        {showDrugChargeWarning && (
-          <Alert variant="warning" className="mt-4">
-            <AlertTriangle className="h-4 w-4" />
-            <AlertTitle>{tPage('depaWarning.title')}</AlertTitle>
-            <AlertDescription>
-              {tPage('depaWarning.description')}{' '}
-              <a
-                href={configData.URL_DEPA}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="underline hover:text-yellow-700"
-              >
-                {tPage('depaWarning.link')}
-              </a>
-            </AlertDescription>
-          </Alert>
-        )}
 
         {showDrugChargeWarning && depaData && (
           <Card className="mt-4">
