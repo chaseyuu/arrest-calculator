@@ -2,9 +2,10 @@
 
 import { useEffect } from 'react';
 import { useTheme } from 'next-themes';
-import { Moon, Settings, Sun } from 'lucide-react';
+import { Moon, Sun } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { basePath } from '@/lib/gtaw-data';
+import { CharacterSwitcher } from './character-switcher';
 
 const DASHBOARD_URL = 'https://chaseyuu.github.io/lspd-tools/';
 const SETTINGS_URL = 'https://chaseyuu.github.io/lspd-tools/settings/';
@@ -54,16 +55,7 @@ export function AppHeader() {
             <Sun className="hidden h-5 w-5 dark:block" />
             <Moon className="h-5 w-5 dark:hidden" />
           </Button>
-          <Button
-            asChild
-            variant="ghost"
-            size="icon"
-            className="text-white/80 hover:bg-white/10 hover:text-white"
-          >
-            <a href={SETTINGS_URL} aria-label="Ayarlar" title="Ayarlar">
-              <Settings className="h-5 w-5" />
-            </a>
-          </Button>
+          <CharacterSwitcher settingsUrl={SETTINGS_URL} />
         </div>
       </div>
     </header>
