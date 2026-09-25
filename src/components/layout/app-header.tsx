@@ -10,20 +10,21 @@ export function AppHeader() {
   const { resolvedTheme, setTheme } = useTheme();
 
   return (
-    <header className="border-b bg-card/50">
-      <div className="container mx-auto flex h-14 items-center justify-between gap-2 px-4 md:px-6 lg:px-8">
-        <Link href="/" className="flex items-center gap-2 font-semibold">
+    <header className="sticky top-0 z-40 border-b-4 border-primary bg-header text-header-foreground shadow-md">
+      <div className="container mx-auto flex h-16 items-center justify-between gap-2 px-4 md:px-6 lg:px-8">
+        <Link href="/" className="flex items-center gap-3">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={`${basePath}/img/lspd.webp`} alt="LSPD" width={36} height={34} className="h-9 w-auto" />
-          <span>LSPD Tools</span>
+          <img src={`${basePath}/img/lspd.webp`} alt="LSPD" width={44} height={42} className="h-11 w-auto drop-shadow" />
+          <span className="text-lg font-semibold">LSPD Tools</span>
         </Link>
         <Button
           variant="ghost"
           size="icon"
           aria-label="Temayı değiştir"
+          className="text-white/80 hover:bg-white/10 hover:text-white"
           onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
         >
-          <Sun className="h-5 w-5 hidden dark:block" />
+          <Sun className="hidden h-5 w-5 dark:block" />
           <Moon className="h-5 w-5 dark:hidden" />
         </Button>
       </div>

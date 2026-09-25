@@ -393,7 +393,7 @@ export function ArrestCalculatorPage() {
       <div className="space-y-4">
         {/* One box split in two equal halves with the same two-line layout:
             prior arrest on the left, parole violation on the right. */}
-        <div className="grid grid-cols-1 rounded-lg border md:grid-cols-2">
+        <div className="grid grid-cols-1 rounded-lg border bg-card shadow-sm md:grid-cols-2">
           <div className="flex flex-col justify-center gap-1 p-3">
             <div className="flex min-h-7 flex-wrap items-center gap-x-5 gap-y-1">
               <span className="text-base font-medium">{tPage('priorArrest.label')}</span>
@@ -432,7 +432,7 @@ export function ArrestCalculatorPage() {
         </div>
 
         {/* Suspect profile for the cell assignment: gender, gang affiliation, origin. */}
-        <div className="grid grid-cols-1 rounded-lg border md:grid-cols-3">
+        <div className="grid grid-cols-1 rounded-lg border bg-card shadow-sm md:grid-cols-3">
           <div className="flex flex-col justify-center gap-1 p-3">
             <div className="flex min-h-9 flex-wrap items-center gap-x-5 gap-y-1">
               <span className="text-base font-medium">{tPage('profile.gender')}</span>
@@ -507,7 +507,7 @@ export function ArrestCalculatorPage() {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-lg border p-3">
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-lg border bg-card p-3 shadow-sm">
           <Label htmlFor="current-points" className="text-base font-medium">
             {tPage('currentPoints.label')}
           </Label>
@@ -541,7 +541,7 @@ export function ArrestCalculatorPage() {
           const showCategorySelect = isDrugCharge && !isSubstanceBased;
 
           return (
-            <div key={chargeRow.uniqueId} className="space-y-3 rounded-lg border p-4">
+            <div key={chargeRow.uniqueId} className="space-y-3 rounded-lg border bg-card p-4 shadow-sm">
             <div className="flex items-end gap-2">
               <div
                 className={cn(
@@ -786,17 +786,17 @@ export function ArrestCalculatorPage() {
         })}
 
         {preview && (
-          <div className="rounded-lg border bg-muted/30 p-4">
-            <p className="mb-3 text-sm font-medium text-muted-foreground">{tPage('preview.title')}</p>
+          <div className="rounded-md bg-primary p-4 text-primary-foreground shadow-md">
+            <p className="mb-3 text-sm font-semibold">{tPage('preview.title')}</p>
             <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
               {preview.map((item) => (
                 <div key={item.label}>
-                  <p className="text-xs text-muted-foreground">{item.label}</p>
+                  <p className="text-xs text-primary-foreground/80">{item.label}</p>
                   <p className="text-base font-semibold">{item.value}</p>
                 </div>
               ))}
             </div>
-            <p className="mt-3 text-xs text-muted-foreground">{tPage('preview.note')}</p>
+            <p className="mt-3 text-xs text-primary-foreground/80">{tPage('preview.note')}</p>
           </div>
         )}
 

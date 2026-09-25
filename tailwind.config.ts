@@ -17,12 +17,17 @@ export default {
     },
     extend: {
       fontFamily: {
-        body: ['\'Segoe UI\'', 'sans-serif'],
-        headline: ['\'Segoe UI\'', 'sans-serif'],
+        body: ['Inter', 'system-ui', 'sans-serif'],
+        headline: ['Inter', 'system-ui', 'sans-serif'],
         code: ['monospace'],
       },
       colors: {
         background: 'hsl(var(--background))',
+        gold: 'hsl(var(--gold))',
+        header: {
+          DEFAULT: 'hsl(var(--header))',
+          foreground: 'hsl(var(--header-foreground))',
+        },
         foreground: 'hsl(var(--foreground))',
         card: {
           DEFAULT: 'hsl(var(--card))',
