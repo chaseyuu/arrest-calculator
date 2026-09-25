@@ -69,6 +69,12 @@
         "currentPoints": {
           "title": "Eksik Bilgi",
           "description": "Suç puanının hesaplanması için değer girmelisiniz."
+        },
+        "profile": {
+          "title": "Eksik Bilgi",
+          "gender": "Hücre ataması için cinsiyeti seçin.",
+          "gang": "Çete bağlantısını seçin.",
+          "origin": "Çete bağlantısı olan şüpheli için kökeni seçin."
         }
       },
       "currentPoints": {
@@ -83,7 +89,26 @@
         "4": "Dördüncü Kez",
         "5": "Beşinci Kez"
       },
-      "paroleViolatorHint": "Zorunlu Mahkeme durumunu etkiler."
+      "paroleViolatorHint": "Zorunlu Mahkeme durumunu etkiler.",
+      "profile": {
+        "gender": "Cinsiyet",
+        "male": "Erkek",
+        "female": "Kadın",
+        "gang": "Çete Bağlantısı",
+        "origin": "Köken",
+        "notRequired": "Gerekli Değil",
+        "genderHint": "Hücre ataması için cinsiyeti seçin.",
+        "gangHint": "Kadınlar için gerekli değildir.",
+        "originHint": "Yalnızca çete bağlantısı olan erkekler için gereklidir.",
+        "origins": {
+          "black": "Siyahi",
+          "hispanic": "Hispanik veya Latin",
+          "asian": "Asyalı",
+          "white": "Beyaz",
+          "filipino": "Filipinli",
+          "middleEastern": "Orta Doğulu"
+        }
+      }
     },
     "results": {
       "additionNames": {
@@ -217,7 +242,8 @@
           "highestBail": "Kefalet Tutarı"
         },
         "copyHint": "Kopyalamak için değerin üzerine tıkla",
-        "cellId": "Hücre ID"
+        "cellId": "Hücre ID",
+        "cellNotNeeded": "Boş Bırakabilirsiniz"
       },
       "copyables": {
         "minMinutes": "Minimum Dakika",
@@ -418,7 +444,8 @@
           "highestBail": "Kefalet Tutarı"
         },
         "copyHint": "Kopyalamak için değerin üzerine tıkla",
-        "cellId": "Hücre ID"
+        "cellId": "Hücre ID",
+        "cellNotNeeded": "Boş Bırakabilirsiniz"
       },
       "copyables": {
         "minMinutes": "Minimum Dakika",

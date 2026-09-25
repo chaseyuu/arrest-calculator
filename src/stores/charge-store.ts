@@ -60,6 +60,13 @@ interface ChargeState {
   /** Suspect's existing criminal points (0-30). null = not entered yet. */
   currentPoints: number | null;
   reportCurrentPoints: number;
+  /** Suspect profile used for the cell assignment. */
+  gender: 'male' | 'female' | null;
+  gangAffiliation: boolean | null;
+  origin: string | null;
+  setGender: (value: 'male' | 'female' | null) => void;
+  setGangAffiliation: (value: boolean | null) => void;
+  setOrigin: (value: string | null) => void;
   setCurrentPoints: (value: number | null) => void;
   setReportCurrentPoints: (value: number) => void;
   setHasPriorArrest: (value: boolean | null) => void;
@@ -87,6 +94,9 @@ const initialState = {
     reportHasPriorArrest: false,
     currentPoints: null,
     reportCurrentPoints: 0,
+    gender: null,
+    gangAffiliation: null,
+    origin: null,
 };
 
 export const useChargeStore = create<ChargeState>()(
@@ -136,7 +146,13 @@ export const useChargeStore = create<ChargeState>()(
           isParoleViolator: false,
           hasPriorArrest: null,
           currentPoints: null,
+          gender: null,
+          gangAffiliation: null,
+          origin: null,
         })),
+      setGender: (value) => set({ gender: value }),
+      setGangAffiliation: (value) => set({ gangAffiliation: value }),
+      setOrigin: (value) => set({ origin: value }),
       setCurrentPoints: (value) => set({ currentPoints: value }),
       setReportCurrentPoints: (value) => set({ reportCurrentPoints: value }),
       setHasPriorArrest: (value) => set({ hasPriorArrest: value }),

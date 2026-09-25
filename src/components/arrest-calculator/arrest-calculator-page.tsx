@@ -42,6 +42,7 @@ import configData from '../../../data/config.json';
 import additionsJson from '../../../data/additions.json';
 import { fetchGtawData } from '@/lib/gtaw-data';
 import { buildCalculationQuery } from '@/lib/calculation-link';
+import { assignCell, isOrigin, ORIGINS } from '@/lib/cell';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Separator } from '../ui/separator';
 import { Checkbox } from '../ui/checkbox';
@@ -108,6 +109,12 @@ export function ArrestCalculatorPage() {
     currentPoints,
     setCurrentPoints,
     reportCurrentPoints,
+    gender,
+    setGender,
+    gangAffiliation,
+    setGangAffiliation,
+    origin,
+    setOrigin,
   } = useChargeStore();
 
   const [loading, setLoading] = useState(true);
@@ -194,6 +201,19 @@ export function ArrestCalculatorPage() {
       return;
     }
 
+    if (gender === null) {
+      toast({ title: tPage('toasts.profile.title'), description: tPage('toasts.profile.gender'), variant: 'destructive' });
+      return;
+    }
+    if (gender === 'male' && gangAffiliation === null) {
+      toast({ title: tPage('toasts.profile.title'), description: tPage('toasts.profile.gang'), variant: 'destructive' });
+      return;
+    }
+    if (gender === 'male' && gangAffiliation === true && !isOrigin(origin)) {
+      toast({ title: tPage('toasts.profile.title'), description: tPage('toasts.profile.origin'), variant: 'destructive' });
+      return;
+    }
+
     for (const charge of charges) {
 
       if (!charge.chargeId) {
@@ -252,7 +272,12 @@ export function ArrestCalculatorPage() {
     }
     // Standalone build: show the results on the shareable calculation page
     // (the full panel sends users on to the arrest report instead).
-    const query = penalCode ? buildCalculationQuery(charges, penalCode, isParoleViolator, hasPriorArrest === true, currentPoints ?? 0) : '';
+    const query = penalCode ? buildCalculationQuery(charges, penalCode, isParoleViolator, hasPriorArrest === true, currentPoints ?? 0, {
+          gender,
+          gang: gender === 'male' ? gangAffiliation : null,
+          origin: gender === 'male' && gangAffiliation ? origin : null,
+          cell: assignCell(gender, gangAffiliation, isOrigin(origin) ? origin : null),
+        }) : '';
     setReport(charges);
     resetCharges();
     router.push(`/arrest-calculation/?${query}`);
@@ -369,6 +394,82 @@ export function ArrestCalculatorPage() {
               </Label>
             </div>
             <p className="text-xs text-muted-foreground">{tPage('paroleViolatorHint')}</p>
+          </div>
+        </div>
+
+        {/* Suspect profile for the cell assignment: gender, gang affiliation, origin. */}
+        <div className="grid grid-cols-1 rounded-lg border md:grid-cols-3">
+          <div className="flex flex-col justify-center gap-1 p-3">
+            <div className="flex min-h-9 flex-wrap items-center gap-x-5 gap-y-1">
+              <span className="text-base font-medium">{tPage('profile.gender')}</span>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="gender-male"
+                  checked={gender === 'male'}
+                  onCheckedChange={(v) => setGender(v === true ? 'male' : null)}
+                />
+                <Label htmlFor="gender-male" className="text-base font-medium">{tPage('profile.male')}</Label>
+              </div>
+              <div className="flex items-center space-x-2">
+                <Checkbox
+                  id="gender-female"
+                  checked={gender === 'female'}
+                  onCheckedChange={(v) => setGender(v === true ? 'female' : null)}
+                />
+                <Label htmlFor="gender-female" className="text-base font-medium">{tPage('profile.female')}</Label>
+              </div>
+            </div>
+            <p className="text-xs text-muted-foreground">{tPage('profile.genderHint')}</p>
+          </div>
+          <div className="flex flex-col justify-center gap-1 border-t p-3 md:border-l md:border-t-0">
+            <div className="flex min-h-9 flex-wrap items-center gap-x-5 gap-y-1">
+              <span className="text-base font-medium">{tPage('profile.gang')}</span>
+              {gender === 'female' ? (
+                <span className="text-base text-muted-foreground">{tPage('profile.notRequired')}</span>
+              ) : (
+                <>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="gang-yes"
+                      checked={gangAffiliation === true}
+                      onCheckedChange={(v) => setGangAffiliation(v === true ? true : null)}
+                    />
+                    <Label htmlFor="gang-yes" className="text-base font-medium">{tPage('priorArrest.yes')}</Label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Checkbox
+                      id="gang-no"
+                      checked={gangAffiliation === false}
+                      onCheckedChange={(v) => setGangAffiliation(v === true ? false : null)}
+                    />
+                    <Label htmlFor="gang-no" className="text-base font-medium">{tPage('priorArrest.no')}</Label>
+                  </div>
+                </>
+              )}
+            </div>
+            <p className="text-xs text-muted-foreground">{tPage('profile.gangHint')}</p>
+          </div>
+          <div className="flex flex-col justify-center gap-1 border-t p-3 md:border-l md:border-t-0">
+            <div className="flex min-h-9 flex-wrap items-center gap-x-4 gap-y-1">
+              <span className="text-base font-medium">{tPage('profile.origin')}</span>
+              {gender === 'female' || gangAffiliation === false ? (
+                <span className="text-base text-muted-foreground">{tPage('profile.notRequired')}</span>
+              ) : (
+                <Select value={origin ?? ''} onValueChange={(v) => setOrigin(v)}>
+                  <SelectTrigger id="origin" className="h-9 w-48">
+                    <SelectValue placeholder={tPage('placeholders.selectOffense')} />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {ORIGINS.map((o) => (
+                      <SelectItem key={o} value={o}>
+                        {tPage(`profile.origins.${o}`)}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            </div>
+            <p className="text-xs text-muted-foreground">{tPage('profile.originHint')}</p>
           </div>
         </div>
 

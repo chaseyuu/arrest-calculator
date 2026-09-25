@@ -68,6 +68,9 @@ python3 scripts/build-penal-code.py
   Fractional points are rounded per charge and never go below 1 (807).
 - *Şartlı Tahliye İhlali* keeps the MDC Panel+ default: time x1, points x2.
 - The total sentence (min and max) is capped at `MAX_SENTENCE_MINUTES` = 28800 minutes (20 days) (`data/config.json`).
+- *Hücre ID* (`src/lib/cell.ts`): women → *Boş Bırakabilirsiniz*; men without gang affiliation → random cell from
+  309, 311, 312, 313, 314, 316, 317, 318, 323, 325, 333; men with gang affiliation → by origin (Hispanik/Latin and Beyaz:
+  305, 306, 307, 308, 310, 320, 322, 326–332; others: the first list). The cell is drawn on *Hesapla* and kept in the link.
 - *Mevcut Suç Puanı* (0–30) is entered on the calculator; the result shows *Yeni Suç Puanı* = current + charges and warns above `MAX_CRIMINAL_POINTS` (30).
 
 ## License

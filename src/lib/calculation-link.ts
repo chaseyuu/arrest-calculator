@@ -19,6 +19,7 @@ export function buildCalculationQuery(
   isParoleViolator: boolean,
   hasPriorArrest: boolean,
   currentPoints = 0,
+  profile?: { gender: string; gang: boolean | null; origin: string | null; cell: number | null },
 ): string {
   const parts: string[] = [];
   for (const row of charges) {
@@ -35,5 +36,11 @@ export function buildCalculationQuery(
   if (isParoleViolator) parts.push('pv=1');
   parts.push(`pa=${hasPriorArrest ? 1 : 0}`); // prior arrest (affects bail)
   parts.push(`sp=${currentPoints}`); // current criminal points
+  if (profile) {
+    parts.push(`g=${profile.gender === 'female' ? 'f' : 'm'}`);
+    if (profile.gang !== null) parts.push(`gang=${profile.gang ? 1 : 0}`);
+    if (profile.origin) parts.push(`o=${encodeURIComponent(profile.origin)}`);
+    if (profile.cell !== null) parts.push(`cell=${profile.cell}`);
+  }
   return parts.join('&');
 }

@@ -119,6 +119,8 @@ interface ArrestCalculatorResultsProps {
   paroleViolatorOverride?: boolean;
   hasPriorArrestOverride?: boolean;
   currentPointsOverride?: number;
+  /** Assigned cell number, 'female' (no cell needed) or null (unknown). */
+  cellOverride?: string | null;
 }
 
 export function ArrestCalculatorResults({
@@ -133,6 +135,7 @@ export function ArrestCalculatorResults({
   paroleViolatorOverride,
   hasPriorArrestOverride,
   currentPointsOverride,
+  cellOverride,
 }: ArrestCalculatorResultsProps) {
   const { toast } = useToast();
   const router = useRouter();
@@ -530,8 +533,12 @@ export function ArrestCalculatorResults({
       value: isMandatoryCourt ? mandatoryCourtLabel : maxTimeCappedDisplay.label,
       copy: isMandatoryCourt ? mandatoryCourtLabel : Math.round(maxTimeCapped),
     },
-    // Placeholder until cell assignment is defined.
-    { key: 'cellId', label: t('summary.cellId'), value: 0, copy: 0 },
+    {
+      key: 'cellId',
+      label: t('summary.cellId'),
+      value: cellOverride === 'female' ? t('summary.cellNotNeeded') : cellOverride ?? '—',
+      copy: cellOverride === 'female' ? t('summary.cellNotNeeded') : cellOverride ?? '',
+    },
     {
       key: 'newPoints',
       label: t('criminalPoints.new'),

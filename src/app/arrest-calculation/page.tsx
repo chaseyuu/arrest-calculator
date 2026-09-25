@@ -32,7 +32,7 @@ const classMapping: { [key: string]: string } = {
 
 function ArrestCalculationContent() {
   const searchParams = useSearchParams();
-  const { penalCode, setPenalCode, setParoleViolator, setReportParoleViolator, setReport, setReportHasPriorArrest, setReportCurrentPoints } = useChargeStore();
+  const { penalCode, setPenalCode, setParoleViolator, setReportParoleViolator, setReport, setReportHasPriorArrest, setReportCurrentPoints, setGender, setGangAffiliation, setOrigin } = useChargeStore();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const t = useScopedI18n('arrestCalculation.page');
@@ -121,6 +121,13 @@ function ArrestCalculationContent() {
   const hasPriorArrestOverride = priorArrestParam === '1' || priorArrestParam?.toLowerCase() === 'true';
   const pointsParam = Number(searchParams.get('sp') ?? '0');
   const currentPointsOverride = Number.isFinite(pointsParam) ? Math.min(30, Math.max(0, Math.trunc(pointsParam))) : 0;
+  const genderParam = searchParams.get('g');
+  const profileGender: 'male' | 'female' | null = genderParam === 'f' ? 'female' : genderParam === 'm' ? 'male' : null;
+  const gangParam = searchParams.get('gang');
+  const profileGang = gangParam === null ? null : gangParam === '1';
+  const profileOrigin = searchParams.get('o');
+  const cellParam = searchParams.get('cell');
+  const cellOverride = profileGender === 'female' ? 'female' : cellParam && /^\d+$/.test(cellParam) ? cellParam : null;
 
   useEffect(() => {
     if (!penalCode) {
@@ -155,6 +162,10 @@ function ArrestCalculationContent() {
       setReportParoleViolator(paroleViolatorOverride || false);
       setReportHasPriorArrest(hasPriorArrestOverride);
       setReportCurrentPoints(currentPointsOverride);
+      // Keep the profile so "Suçlamaları Düzenle" brings it back into the form.
+      setGender(profileGender);
+      setGangAffiliation(profileGang);
+      setOrigin(profileOrigin);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryKey, penalCode]);
@@ -196,6 +207,7 @@ function ArrestCalculationContent() {
                 showModifyChargesButton={true}
                 hasPriorArrestOverride={hasPriorArrestOverride}
                 currentPointsOverride={currentPointsOverride}
+                cellOverride={cellOverride}
             />
         ) : (
             <Alert variant="secondary">
