@@ -118,6 +118,7 @@ interface ArrestCalculatorResultsProps {
   onModifyCharges?: () => void;
   paroleViolatorOverride?: boolean;
   hasPriorArrestOverride?: boolean;
+  currentPointsOverride?: number;
 }
 
 export function ArrestCalculatorResults({
@@ -131,6 +132,7 @@ export function ArrestCalculatorResults({
   onModifyCharges,
   paroleViolatorOverride,
   hasPriorArrestOverride,
+  currentPointsOverride,
 }: ArrestCalculatorResultsProps) {
   const { toast } = useToast();
   const router = useRouter();
@@ -140,6 +142,8 @@ export function ArrestCalculatorResults({
     reportIsParoleViolator,
     reportHasPriorArrest,
     hasPriorArrest,
+    reportCurrentPoints,
+    currentPoints,
     penalCode,
     setPenalCode,
   } = useChargeStore();
@@ -296,6 +300,9 @@ export function ArrestCalculatorResults({
   const effectivePriorArrest =
     hasPriorArrestOverride ?? (report.length > 0 ? reportHasPriorArrest : hasPriorArrest === true);
 
+  const effectiveCurrentPoints =
+    currentPointsOverride ?? (report.length > 0 ? reportCurrentPoints : currentPoints ?? 0);
+
   // Calculated in the browser (the original panel posted to /api/arrest-calculator).
   useEffect(() => {
     if (!penalCode) {
@@ -362,6 +369,7 @@ export function ArrestCalculatorResults({
       penalCode,
       effectiveParoleStatus,
       effectivePriorArrest,
+      effectiveCurrentPoints,
     );
     const url = `${window.location.origin}${basePath}/arrest-calculation/?${query}`;
     navigator.clipboard.writeText(url);
@@ -372,6 +380,11 @@ export function ArrestCalculatorResults({
   };
 
   const hasAnyModifiers = calculationResults.some((r) => r.isModified);
+
+  // Criminal points: existing points + points from these charges (warn above 30).
+  const chargePoints = Math.round(totals.modified.points);
+  const newCriminalPoints = effectiveCurrentPoints + chargePoints;
+  const isOverPointLimit = newCriminalPoints > ((config as any).MAX_CRIMINAL_POINTS ?? 30);
 
   const charges = calculationResults.map((result) => {
     const {
@@ -835,7 +848,10 @@ export function ArrestCalculatorResults({
                   <AlertTriangle className="h-4 w-4" />
                   <AlertTitle>{t('summary.alerts.sentence.title')}</AlertTitle>
                   <AlertDescription>
-                    {t('summary.alerts.sentence.description', { maxDays: config.MAX_SENTENCE_DAYS })}
+                    {t('summary.alerts.sentence.description', {
+                      maxMinutes: (config as any).MAX_SENTENCE_MINUTES ?? config.MAX_SENTENCE_DAYS * 1440,
+                      maxLabel: formatTotalTime((config as any).MAX_SENTENCE_MINUTES ?? config.MAX_SENTENCE_DAYS * 1440).label,
+                    })}
                     <br />
                     <b>{t('summary.alerts.sentence.originalMinLabel')}</b> {modifiedMinDisplay.detailed}
                     <br />
@@ -1059,8 +1075,41 @@ export function ArrestCalculatorResults({
           </Alert>
         )}
 
+        {showSummary && (
+          <Card>
+            <CardContent className="grid grid-cols-1 gap-4 p-4 sm:grid-cols-3">
+              <div>
+                <p className="text-xs font-semibold uppercase text-muted-foreground">{t('criminalPoints.current')}</p>
+                <p className="mt-1 text-2xl font-bold">{effectiveCurrentPoints}</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase text-muted-foreground">{t('criminalPoints.fromCharges')}</p>
+                <p className="mt-1 text-2xl font-bold">+{chargePoints}</p>
+              </div>
+              <div>
+                <p className="text-xs font-semibold uppercase text-muted-foreground">{t('criminalPoints.new')}</p>
+                <p className={cn('mt-1 text-2xl font-bold', isOverPointLimit && 'text-red-600 dark:text-red-400')}>
+                  {newCriminalPoints}
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+        )}
+
+        {showSummary && isOverPointLimit && (
+          <div
+            role="alert"
+            className="rounded-lg border border-red-300 bg-red-100 p-4 font-medium text-red-800 dark:border-red-800 dark:bg-red-950/70 dark:text-red-200"
+          >
+            <div className="flex items-start gap-3">
+              <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
+              <p>{t('criminalPoints.overLimit')}</p>
+            </div>
+          </div>
+        )}
+
         {showCopyables && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             <CopyableCard
               label={t('copyables.minMinutes')}
               value={Math.round(minTimeCapped)}
@@ -1082,6 +1131,7 @@ export function ArrestCalculatorResults({
                 hasAnyModifiers ? t('copyables.originalValue', { value: Math.round(totals.original.points) }) : undefined
               }
             />
+            <CopyableCard label={t('criminalPoints.new')} value={newCriminalPoints} />
             <CopyableCard label={t('summary.table.fine')} value={totals.fine} />
             <CopyableCard label={t('copyables.totalImpound')} value={Math.round(impoundCapped)} />
             <CopyableCard 

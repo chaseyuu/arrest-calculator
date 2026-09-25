@@ -238,7 +238,8 @@ export function calculateArrest(
   };
   const bailStatus = getBailStatus();
 
-  const maxSentenceMinutes = config.MAX_SENTENCE_DAYS * 1440;
+  // Hard cap on the total sentence (min and max), in minutes.
+  const maxSentenceMinutes = (config as any).MAX_SENTENCE_MINUTES ?? config.MAX_SENTENCE_DAYS * 1440;
   const minTimeCapped = Math.min(totals.modified.minTime, maxSentenceMinutes);
   const maxTimeCapped = Math.min(totals.modified.maxTime, maxSentenceMinutes);
   const isCapped = totals.modified.minTime > maxSentenceMinutes || totals.modified.maxTime > maxSentenceMinutes;

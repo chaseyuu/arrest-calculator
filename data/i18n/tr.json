@@ -11,7 +11,7 @@
         "calculate": "Hesapla",
         "removeCharge": "Suçlamayı Kaldır"
       },
-      "paroleViolatorLabel": "Şüpheli şartlı tahliye ihlalcisi",
+      "paroleViolatorLabel": "Şartlı Tahliye İhlali",
       "priorArrest": {
         "label": "Bu kişi daha önce tutuklandı mı?",
         "yes": "Evet",
@@ -65,7 +65,16 @@
           "selectOffense": "\"{charge}\" için tekerrür seç.",
           "selectAddition": "\"{charge}\" için ek durum seç.",
           "selectCategory": "\"{charge}\" uyuşturucu suçlaması için kategori seç."
+        },
+        "currentPoints": {
+          "title": "Eksik bilgi",
+          "description": "Mevcut suç puanı için 0 ile 30 arasında bir tam sayı gir."
         }
+      },
+      "currentPoints": {
+        "label": "Mevcut Suç Puanı:",
+        "placeholder": "0-30",
+        "required": "0 ile 30 arasında bir değer gir."
       }
     },
     "results": {
@@ -165,7 +174,7 @@
         "alerts": {
           "sentence": {
             "title": "Süre sınırlandı",
-            "description": "Toplam ceza azami {maxDays} günü aşıyor. Gösterilen süre sınıra çekildi.",
+            "description": "Toplam ceza azami {maxMinutes} dakikayı ({maxLabel}) aşıyor. Gösterilen süre bu sınıra çekildi.",
             "originalMinLabel": "Asıl asgari:",
             "originalMaxLabel": "Asıl azami:"
           },
@@ -222,6 +231,12 @@
         "label": "Daha önce tutuklandı mı?",
         "notEligibleReason": "Şüpheli daha önce tutuklandığı için kefalete uygun değil.",
         "noAutoBailReason": "Suçlamalardan en az birinde otomatik kefalet yok."
+      },
+      "criminalPoints": {
+        "current": "Mevcut Suç Puanı",
+        "fromCharges": "Suçlamalardan Gelen Puan",
+        "new": "Yeni Suç Puanı",
+        "overLimit": "Tutuklayacağınız karakterin suç puanı otuzu aşıyor. Tutuklamayı hemen gerçekleştirmeyin ve ömür boyu hapis cezası için aşağıda listelenmiş olan adımları izleyin."
       }
     }
   },
@@ -345,7 +360,7 @@
         "alerts": {
           "sentence": {
             "title": "Süre sınırlandı",
-            "description": "Toplam ceza azami {maxDays} günü aşıyor. Gösterilen süre sınıra çekildi.",
+            "description": "Toplam ceza azami {maxMinutes} dakikayı ({maxLabel}) aşıyor. Gösterilen süre bu sınıra çekildi.",
             "originalMinLabel": "Asıl asgari:",
             "originalMaxLabel": "Asıl azami:"
           },
@@ -402,6 +417,12 @@
         "label": "Daha önce tutuklandı mı?",
         "notEligibleReason": "Şüpheli daha önce tutuklandığı için kefalete uygun değil.",
         "noAutoBailReason": "Suçlamalardan en az birinde otomatik kefalet yok."
+      },
+      "criminalPoints": {
+        "current": "Mevcut Suç Puanı",
+        "fromCharges": "Suçlamalardan Gelen Puan",
+        "new": "Yeni Suç Puanı",
+        "overLimit": "Tutuklayacağınız karakterin suç puanı otuzu aşıyor. Tutuklamayı hemen gerçekleştirmeyin ve ömür boyu hapis cezası için aşağıda listelenmiş olan adımları izleyin."
       }
     }
   },

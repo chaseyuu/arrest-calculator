@@ -57,6 +57,11 @@ interface ChargeState {
   /** Has the suspect been arrested before? null = not answered yet. */
   hasPriorArrest: boolean | null;
   reportHasPriorArrest: boolean;
+  /** Suspect's existing criminal points (0-30). null = not entered yet. */
+  currentPoints: number | null;
+  reportCurrentPoints: number;
+  setCurrentPoints: (value: number | null) => void;
+  setReportCurrentPoints: (value: number) => void;
   setHasPriorArrest: (value: boolean | null) => void;
   setReportHasPriorArrest: (value: boolean) => void;
   setPenalCode: (penalCode: PenalCode) => void;
@@ -80,6 +85,8 @@ const initialState = {
     reportIsParoleViolator: false,
     hasPriorArrest: null,
     reportHasPriorArrest: false,
+    currentPoints: null,
+    reportCurrentPoints: 0,
 };
 
 export const useChargeStore = create<ChargeState>()(
@@ -120,9 +127,18 @@ export const useChargeStore = create<ChargeState>()(
           reportInitialized: true,
           reportIsParoleViolator: state.isParoleViolator,
           reportHasPriorArrest: state.hasPriorArrest === true,
+          reportCurrentPoints: state.currentPoints ?? 0,
         })),
       resetCharges: () =>
-        set((state) => ({ ...state, charges: [], isParoleViolator: false, hasPriorArrest: null })),
+        set((state) => ({
+          ...state,
+          charges: [],
+          isParoleViolator: false,
+          hasPriorArrest: null,
+          currentPoints: null,
+        })),
+      setCurrentPoints: (value) => set({ currentPoints: value }),
+      setReportCurrentPoints: (value) => set({ reportCurrentPoints: value }),
       setHasPriorArrest: (value) => set({ hasPriorArrest: value }),
       setReportHasPriorArrest: (value) => set({ reportHasPriorArrest: value }),
       setCharges: (charges) => set({ charges }),

@@ -57,8 +57,9 @@ python3 scripts/build-penal-code.py
 - 430/431: jail time, points and fines depend on the offence count (3rd count = C (2) felony).
 - Party multipliers follow Başlık VIII (`data/additions.json`): Suç Ortağı 100%, Suça Yardım 50%,
   Teşebbüs 50%, Suç için Anlaşma 75% (time and points), Suça Teşvik 75% time and 100% points.
-- There is no parole-violation modifier in the Turkish penal code, so that option was removed.
-- Limits such as `MAX_SENTENCE_DAYS` are in `data/config.json`.
+- *Şartlı Tahliye İhlali* keeps the MDC Panel+ default: time x1, points x2.
+- The total sentence (min and max) is capped at `MAX_SENTENCE_MINUTES` = 28880 minutes (`data/config.json`).
+- *Mevcut Suç Puanı* (0–30) is entered on the calculator; the result shows *Yeni Suç Puanı* = current + charges and warns above `MAX_CRIMINAL_POINTS` (30).
 
 ## License
 

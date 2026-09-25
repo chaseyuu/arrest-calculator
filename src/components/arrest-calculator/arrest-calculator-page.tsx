@@ -45,6 +45,7 @@ import { buildCalculationQuery } from '@/lib/calculation-link';
 import { Card, CardContent, CardHeader, CardTitle } from '../ui/card';
 import { Separator } from '../ui/separator';
 import { Checkbox } from '../ui/checkbox';
+import { Input } from '../ui/input';
 import { areStreetCharges } from '@/lib/code-enhancement';
 import { StreetsAlert } from '../shared/streets-act-warning';
 import { useI18n, useScopedI18n } from '@/lib/i18n/client';
@@ -104,6 +105,9 @@ export function ArrestCalculatorPage() {
     hasPriorArrest,
     setHasPriorArrest,
     reportHasPriorArrest,
+    currentPoints,
+    setCurrentPoints,
+    reportCurrentPoints,
   } = useChargeStore();
 
   const [loading, setLoading] = useState(true);
@@ -127,6 +131,7 @@ export function ArrestCalculatorPage() {
       setCharges(report); // Load report charges into the calculator for editing
       setParoleViolator(reportIsParoleViolator);
       setHasPriorArrest(reportHasPriorArrest);
+      setCurrentPoints(reportCurrentPoints);
     } else {
       resetCharges();
     }
@@ -157,6 +162,8 @@ export function ArrestCalculatorPage() {
     setParoleViolator,
     reportHasPriorArrest,
     setHasPriorArrest,
+    reportCurrentPoints,
+    setCurrentPoints,
   ]);
 
   const handleCalculate = () => {
@@ -173,6 +180,15 @@ export function ArrestCalculatorPage() {
       toast({
         title: tPage('toasts.priorArrest.title'),
         description: tPage('toasts.priorArrest.description'),
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (currentPoints === null || !Number.isInteger(currentPoints) || currentPoints < 0 || currentPoints > 30) {
+      toast({
+        title: tPage('toasts.currentPoints.title'),
+        description: tPage('toasts.currentPoints.description'),
         variant: 'destructive',
       });
       return;
@@ -236,7 +252,7 @@ export function ArrestCalculatorPage() {
     }
     // Standalone build: show the results on the shareable calculation page
     // (the full panel sends users on to the arrest report instead).
-    const query = penalCode ? buildCalculationQuery(charges, penalCode, isParoleViolator, hasPriorArrest === true) : '';
+    const query = penalCode ? buildCalculationQuery(charges, penalCode, isParoleViolator, hasPriorArrest === true, currentPoints ?? 0) : '';
     setReport(charges);
     resetCharges();
     router.push(`/arrest-calculation/?${query}`);
@@ -316,7 +332,17 @@ export function ArrestCalculatorPage() {
           </Button>
         </div>
 
-        {/* The Turkish penal code has no parole-violation modifier, so that checkbox was removed. */}
+        <div className="flex items-center space-x-2">
+          <Checkbox
+            id="parole-violator"
+            checked={isParoleViolator}
+            onCheckedChange={(value) => setParoleViolator(value === true)}
+          />
+          <Label htmlFor="parole-violator" className="text-base font-medium">
+            {tPage('paroleViolatorLabel')}
+          </Label>
+        </div>
+
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-lg border p-3">
           <span className="text-base font-medium">{tPage('priorArrest.label')}</span>
           <div className="flex items-center space-x-2">
@@ -337,6 +363,33 @@ export function ArrestCalculatorPage() {
           </div>
           {hasPriorArrest === null && (
             <span className="text-sm text-muted-foreground">{tPage('priorArrest.required')}</span>
+          )}
+        </div>
+
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-lg border p-3">
+          <Label htmlFor="current-points" className="text-base font-medium">
+            {tPage('currentPoints.label')}
+          </Label>
+          <Input
+            id="current-points"
+            type="number"
+            inputMode="numeric"
+            min={0}
+            max={30}
+            step={1}
+            placeholder={tPage('currentPoints.placeholder')}
+            className="h-9 w-24"
+            value={currentPoints ?? ''}
+            onChange={(e) => {
+              const raw = e.target.value;
+              if (raw === '') return setCurrentPoints(null);
+              const n = Math.trunc(Number(raw));
+              if (Number.isNaN(n)) return;
+              setCurrentPoints(Math.min(30, Math.max(0, n)));
+            }}
+          />
+          {currentPoints === null && (
+            <span className="text-sm text-muted-foreground">{tPage('currentPoints.required')}</span>
           )}
         </div>
 

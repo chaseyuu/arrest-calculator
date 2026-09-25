@@ -31,7 +31,7 @@ const classMapping: { [key: string]: string } = {
 
 function ArrestCalculationContent() {
   const searchParams = useSearchParams();
-  const { penalCode, setPenalCode, setParoleViolator, setReportParoleViolator, setReport, setReportHasPriorArrest } = useChargeStore();
+  const { penalCode, setPenalCode, setParoleViolator, setReportParoleViolator, setReport, setReportHasPriorArrest, setReportCurrentPoints } = useChargeStore();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const t = useScopedI18n('arrestCalculation.page');
@@ -118,6 +118,8 @@ function ArrestCalculationContent() {
   const paroleViolatorOverride = paroleFromQuery ?? paroleFromAdditions;
   const priorArrestParam = searchParams.get('pa');
   const hasPriorArrestOverride = priorArrestParam === '1' || priorArrestParam?.toLowerCase() === 'true';
+  const pointsParam = Number(searchParams.get('sp') ?? '0');
+  const currentPointsOverride = Number.isFinite(pointsParam) ? Math.min(30, Math.max(0, Math.trunc(pointsParam))) : 0;
 
   useEffect(() => {
     if (!penalCode) {
@@ -151,6 +153,7 @@ function ArrestCalculationContent() {
       setReport(parsedCharges);
       setReportParoleViolator(paroleViolatorOverride || false);
       setReportHasPriorArrest(hasPriorArrestOverride);
+      setReportCurrentPoints(currentPointsOverride);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [queryKey, penalCode]);
@@ -191,6 +194,7 @@ function ArrestCalculationContent() {
                 paroleViolatorOverride={paroleViolatorOverride}
                 showModifyChargesButton={true}
                 hasPriorArrestOverride={hasPriorArrestOverride}
+                currentPointsOverride={currentPointsOverride}
             />
         ) : (
             <Alert variant="secondary">

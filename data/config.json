@@ -43,5 +43,7 @@
     "URL_FOUNDER": "https://cxdezign.dev/",
     "URL_KOFI": "https://ko-fi.com/booskit",
     "URL_STREETS": "https://forum.gta.world/en/topic/122551-strengthen-traffic-regulations-to-ensure-every-travelers-safety-act-2024-streets-act/",
-    "URL_CASEBOARD": "https://cb.booskit.dev/"
+    "URL_CASEBOARD": "https://cb.booskit.dev/",
+    "MAX_SENTENCE_MINUTES": 28880,
+    "MAX_CRIMINAL_POINTS": 30
 }

@@ -17,6 +17,7 @@ export function buildCalculationQuery(
   penalCode: PenalCode,
   isParoleViolator: boolean,
   hasPriorArrest: boolean,
+  currentPoints = 0,
 ): string {
   const parts: string[] = [];
   for (const row of charges) {
@@ -32,5 +33,6 @@ export function buildCalculationQuery(
   }
   if (isParoleViolator) parts.push('pv=1');
   parts.push(`pa=${hasPriorArrest ? 1 : 0}`); // prior arrest (affects bail)
+  parts.push(`sp=${currentPoints}`); // current criminal points
   return parts.join('&');
 }
