@@ -332,38 +332,40 @@ export function ArrestCalculatorPage() {
           </Button>
         </div>
 
-        <div className="flex items-center space-x-2">
-          <Checkbox
-            id="parole-violator"
-            checked={isParoleViolator}
-            onCheckedChange={(value) => setParoleViolator(value === true)}
-          />
-          <Label htmlFor="parole-violator" className="text-base font-medium">
-            {tPage('paroleViolatorLabel')}
-          </Label>
-        </div>
-
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-lg border p-3">
-          <span className="text-base font-medium">{tPage('priorArrest.label')}</span>
-          <div className="flex items-center space-x-2">
-            <Checkbox
-              id="prior-arrest-yes"
-              checked={hasPriorArrest === true}
-              onCheckedChange={(value) => setHasPriorArrest(value === true ? true : null)}
-            />
-            <Label htmlFor="prior-arrest-yes" className="text-base">{tPage('priorArrest.yes')}</Label>
+        {/* One box split in two: prior arrest on the left, parole violation on the right. */}
+        <div className="grid grid-cols-1 rounded-lg border md:grid-cols-2">
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 p-3">
+            <span className="text-base font-medium">{tPage('priorArrest.label')}</span>
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="prior-arrest-yes"
+                checked={hasPriorArrest === true}
+                onCheckedChange={(value) => setHasPriorArrest(value === true ? true : null)}
+              />
+              <Label htmlFor="prior-arrest-yes" className="text-base">{tPage('priorArrest.yes')}</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="prior-arrest-no"
+                checked={hasPriorArrest === false}
+                onCheckedChange={(value) => setHasPriorArrest(value === true ? false : null)}
+              />
+              <Label htmlFor="prior-arrest-no" className="text-base">{tPage('priorArrest.no')}</Label>
+            </div>
+            {hasPriorArrest === null && (
+              <span className="text-sm text-muted-foreground">{tPage('priorArrest.required')}</span>
+            )}
           </div>
-          <div className="flex items-center space-x-2">
+          <div className="flex items-center space-x-2 border-t p-3 md:border-l md:border-t-0">
             <Checkbox
-              id="prior-arrest-no"
-              checked={hasPriorArrest === false}
-              onCheckedChange={(value) => setHasPriorArrest(value === true ? false : null)}
+              id="parole-violator"
+              checked={isParoleViolator}
+              onCheckedChange={(value) => setParoleViolator(value === true)}
             />
-            <Label htmlFor="prior-arrest-no" className="text-base">{tPage('priorArrest.no')}</Label>
+            <Label htmlFor="parole-violator" className="text-base font-medium">
+              {tPage('paroleViolatorLabel')}
+            </Label>
           </div>
-          {hasPriorArrest === null && (
-            <span className="text-sm text-muted-foreground">{tPage('priorArrest.required')}</span>
-          )}
         </div>
 
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2 rounded-lg border p-3">

@@ -13,7 +13,7 @@
       },
       "paroleViolatorLabel": "Şartlı Tahliye İhlali",
       "priorArrest": {
-        "label": "Bu kişi daha önce tutuklandı mı?",
+        "label": "Daha Önce Tutuklandı Mı?",
         "yes": "Evet",
         "no": "Hayır",
         "required": "Kefalet hesaplaması için bu soruyu cevapla."
@@ -237,7 +237,7 @@
       "priorArrest": {
         "yes": "Evet",
         "no": "Hayır",
-        "label": "Daha önce tutuklandı mı?",
+        "label": "Daha Önce Tutuklandı Mı?",
         "notEligibleReason": "Şüpheli daha önce tutuklandığı için kefaletten faydalanamaz.",
         "noAutoBailReason": "Suçlamalardan en az birinde kefalet imkanı yok. Bu yüzden kefaletten faydalanamaz."
       },
@@ -254,6 +254,10 @@
         "3": "Üçüncü Kez",
         "4": "Dördüncü Kez",
         "5": "Beşinci Kez"
+      },
+      "mandatoryCourt": {
+        "label": "Zorunlu Mahkeme",
+        "notice": "Şüpheli şartlı tahliye ihlalcisi olduğu için dava zorunlu olarak mahkemeye gider. Hapis süresi mahkeme tarafından belirlenir."
       }
     }
   },
@@ -433,7 +437,7 @@
       "priorArrest": {
         "yes": "Evet",
         "no": "Hayır",
-        "label": "Daha önce tutuklandı mı?",
+        "label": "Daha Önce Tutuklandı Mı?",
         "notEligibleReason": "Şüpheli daha önce tutuklandığı için kefaletten faydalanamaz.",
         "noAutoBailReason": "Suçlamalardan en az birinde kefalet imkanı yok. Bu yüzden kefaletten faydalanamaz."
       },
@@ -450,6 +454,10 @@
         "3": "Üçüncü Kez",
         "4": "Dördüncü Kez",
         "5": "Beşinci Kez"
+      },
+      "mandatoryCourt": {
+        "label": "Zorunlu Mahkeme",
+        "notice": "Şüpheli şartlı tahliye ihlalcisi olduğu için dava zorunlu olarak mahkemeye gider. Hapis süresi mahkeme tarafından belirlenir."
       }
     }
   },

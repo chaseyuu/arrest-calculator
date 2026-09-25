@@ -505,6 +505,10 @@ export function ArrestCalculatorResults({
     return <Badge variant="secondary">{getBailStatusLabel('N/A')}</Badge>;
   };
 
+  // Parole violation: the case goes to court, so no sentence is shown.
+  const isMandatoryCourt = effectiveParoleStatus === true;
+  const mandatoryCourtLabel = t('mandatoryCourt.label');
+
   // Summary tiles: each one copies its raw value when clicked.
   const summaryTiles: {
     key: string;
@@ -514,8 +518,18 @@ export function ArrestCalculatorResults({
     sub?: string;
     className?: string;
   }[] = [
-    { key: 'min', label: t('summary.table.minTime'), value: minTimeCappedDisplay.label, copy: Math.round(minTimeCapped) },
-    { key: 'max', label: t('summary.table.maxTime'), value: maxTimeCappedDisplay.label, copy: Math.round(maxTimeCapped) },
+    {
+      key: 'min',
+      label: t('summary.table.minTime'),
+      value: isMandatoryCourt ? mandatoryCourtLabel : minTimeCappedDisplay.label,
+      copy: isMandatoryCourt ? mandatoryCourtLabel : Math.round(minTimeCapped),
+    },
+    {
+      key: 'max',
+      label: t('summary.table.maxTime'),
+      value: isMandatoryCourt ? mandatoryCourtLabel : maxTimeCappedDisplay.label,
+      copy: isMandatoryCourt ? mandatoryCourtLabel : Math.round(maxTimeCapped),
+    },
     { key: 'points', label: t('criminalPoints.fromCharges'), value: chargePoints, copy: chargePoints },
     {
       key: 'newPoints',
@@ -634,7 +648,7 @@ export function ArrestCalculatorResults({
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center gap-1">
-                            {charge.minTime.label}
+                            {isMandatoryCourt ? mandatoryCourtLabel : charge.minTime.label}
                             {charge.isModified && (
                               <Tooltip>
                                 <TooltipTrigger>
@@ -650,7 +664,7 @@ export function ArrestCalculatorResults({
                         </TableCell>
                         <TableCell>
                           <div className="flex items-center gap-1">
-                            {charge.maxTime.label}
+                            {isMandatoryCourt ? mandatoryCourtLabel : charge.maxTime.label}
                             {charge.isModified && (
                               <Tooltip>
                                 <TooltipTrigger>
@@ -754,7 +768,7 @@ export function ArrestCalculatorResults({
                           {t('charges.table.minTime')}
                         </dt>
                         <dd className="mt-1 flex items-center justify-center gap-1 sm:justify-start">
-                          {charge.minTime.label}
+                          {isMandatoryCourt ? mandatoryCourtLabel : charge.minTime.label}
                           {charge.isModified && (
                             <Tooltip>
                               <TooltipTrigger>
@@ -773,7 +787,7 @@ export function ArrestCalculatorResults({
                           {t('charges.table.maxTime')}
                         </dt>
                         <dd className="mt-1 flex items-center justify-center gap-1 sm:justify-start">
-                          {charge.maxTime.label}
+                          {isMandatoryCourt ? mandatoryCourtLabel : charge.maxTime.label}
                           {charge.isModified && (
                             <Tooltip>
                               <TooltipTrigger>
@@ -879,7 +893,13 @@ export function ArrestCalculatorResults({
               </Tooltip>
             </CardHeader>
             <CardContent className="space-y-4">
-              {isCapped && (
+              {isMandatoryCourt && (
+                <div className="flex items-start gap-3 rounded-lg border border-red-300 bg-red-50 p-4 font-medium text-red-800 dark:border-red-900 dark:bg-red-950/60 dark:text-red-300">
+                  <AlertTriangle className="mt-0.5 h-5 w-5 shrink-0" />
+                  <p>{t('mandatoryCourt.notice')}</p>
+                </div>
+              )}
+              {isCapped && !isMandatoryCourt && (
                 <Alert variant="warning" className="mb-4">
                   <AlertTriangle className="h-4 w-4" />
                   <AlertTitle>{t('summary.alerts.sentence.title')}</AlertTitle>
