@@ -813,26 +813,6 @@ export function ArrestCalculatorPage() {
         {showStreetsActWarning && <StreetsAlert />}
 
 
-        {showDrugChargeWarning && depaData && (
-          <Card className="mt-4">
-            <CardHeader>
-              <CardTitle>{tPage('depaCategories.title')}</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              {depaData.categories.map((category, index) => (
-                <div key={index}>
-                  <h4 className="font-semibold text-lg">{category.title}</h4>
-                  <Separator className="my-2" />
-                  <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-4 gap-y-1 list-disc pl-5 text-muted-foreground">
-                    {category.substances.map((substance) => (
-                      <li key={substance}>{substance}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </CardContent>
-          </Card>
-        )}
 
         {loading && <p>{tPage('loadingPenalCode')}</p>}
       </div>

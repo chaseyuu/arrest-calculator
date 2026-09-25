@@ -121,7 +121,9 @@
         "basedOn": "({name})",
         "empty": "Bulunan madde türlerini seçin.",
         "gramStepNote": "Bulunan her {grams} gram için cezaya 12 saat eklenir.",
-        "totalGrams": "Toplam Gram"
+        "totalGrams": "Toplam Gram",
+        "search": "Madde ara...",
+        "noResult": "Madde bulunamadı."
       },
       "preview": {
         "title": "Önizleme",

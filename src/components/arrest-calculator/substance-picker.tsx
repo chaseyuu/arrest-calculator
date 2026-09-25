@@ -1,10 +1,14 @@
 'use client';
 
-import { Plus, Trash2 } from 'lucide-react';
+import { useState } from 'react';
+import { Check, ChevronsUpDown, Plus, Trash2 } from 'lucide-react';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { Command, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from '@/components/ui/command';
+import { normalizeTr } from '@/lib/turkish-search';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 export interface DepaCategory {
   letter?: string;
@@ -74,26 +78,15 @@ export function SubstancePicker({
 
       {rows.map((name, index) => (
         <div key={index} className="flex items-center gap-2">
-          <Select
+          <SubstanceCombobox
+            id={`substance-${id}-${index}`}
             value={name}
-            onValueChange={(value) => onChange(rows.map((r, i) => (i === index ? value : r)))}
-          >
-            <SelectTrigger id={`substance-${id}-${index}`} className="h-9 flex-1" aria-label={t('substances.substance')}>
-              <SelectValue placeholder={t('placeholders.selectOffense')} />
-            </SelectTrigger>
-            <SelectContent>
-              {categories.map((c) => (
-                <SelectGroup key={c.title}>
-                  <SelectLabel>{c.title}</SelectLabel>
-                  {c.substances.map((s) => (
-                    <SelectItem key={s} value={s}>
-                      {s}
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              ))}
-            </SelectContent>
-          </Select>
+            categories={categories}
+            placeholder={t('placeholders.selectOffense')}
+            searchPlaceholder={t('substances.search')}
+            emptyText={t('substances.noResult')}
+            onSelect={(value) => onChange(rows.map((r, i) => (i === index ? value : r)))}
+          />
           <Button
             type="button"
             variant="ghost"
@@ -149,5 +142,68 @@ export function SubstancePicker({
         </div>
       )}
     </div>
+  );
+}
+
+/** Searchable substance list (Turkish-insensitive), grouped by DEPA category. */
+function SubstanceCombobox({
+  id,
+  value,
+  categories,
+  placeholder,
+  searchPlaceholder,
+  emptyText,
+  onSelect,
+}: {
+  id: string;
+  value: string;
+  categories: DepaCategory[];
+  placeholder: string;
+  searchPlaceholder: string;
+  emptyText: string;
+  onSelect: (value: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+  return (
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button
+          id={id}
+          type="button"
+          variant="outline"
+          role="combobox"
+          aria-expanded={open}
+          className="h-9 flex-1 justify-between bg-background font-normal hover:bg-background hover:text-foreground data-[state=open]:bg-background"
+        >
+          <span className={cn('truncate', !value && 'text-muted-foreground')}>{value || placeholder}</span>
+          <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent className="w-[--radix-popover-trigger-width] p-0" align="start">
+        <Command filter={(itemValue, search) => (normalizeTr(itemValue).includes(normalizeTr(search)) ? 1 : 0)}>
+          <CommandInput placeholder={searchPlaceholder} />
+          <CommandList>
+            <CommandEmpty>{emptyText}</CommandEmpty>
+            {categories.map((c) => (
+              <CommandGroup key={c.title} heading={c.title}>
+                {c.substances.map((s) => (
+                  <CommandItem
+                    key={s}
+                    value={s}
+                    onSelect={() => {
+                      onSelect(s);
+                      setOpen(false);
+                    }}
+                  >
+                    <Check className={cn('mr-2 h-4 w-4', value === s ? 'opacity-100' : 'opacity-0')} />
+                    {s}
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            ))}
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
   );
 }
