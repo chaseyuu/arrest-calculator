@@ -15,7 +15,7 @@ export function AppHeader() {
         <Link href="/" className="flex items-center gap-2 font-semibold">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src={`${basePath}/img/lspd.webp`} alt="LSPD" width={36} height={34} className="h-9 w-auto" />
-          <span>Tutuklama Hesaplayıcı</span>
+          <span>LSPD Tools</span>
         </Link>
         <Button
           variant="ghost"
