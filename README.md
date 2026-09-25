@@ -55,10 +55,19 @@ python3 scripts/build-penal-code.py
 - Where the law gives only a lower or only an upper limit, min and max are both set to that value.
 - Drug tables (131, 601–606) use the category's amount; fines there are the legal maximum.
 - 430/431: jail time, points and fines depend on the offence count (3rd count = C (2) felony).
-- Party multipliers follow Başlık VIII (`data/additions.json`): Suç Ortağı 100%, Suça Yardım 50%,
-  Teşebbüs 50%, Suç için Anlaşma 75% (time and points), Suça Teşvik 75% time and 100% points.
+- *Suçun Tarafı* multipliers follow Başlık VIII (`data/additions.json`), applied to each charge on its own:
+
+  | | Süre | Suç puanı |
+  |---|---|---|
+  | Suçlu / 801. Suç Ortağı / 803. Nefret Suçu | 100% | 100% |
+  | 802. Suça Yardım Etme | 50% | 100% |
+  | 804. Suça Teşebbüs | 50% | 50% |
+  | 805. Suç İçin Anlaşma | 75% | 75% |
+  | 806. Suça Teşvik | 75% | 100% |
+
+  Fractional points are rounded per charge and never go below 1 (807).
 - *Şartlı Tahliye İhlali* keeps the MDC Panel+ default: time x1, points x2.
-- The total sentence (min and max) is capped at `MAX_SENTENCE_MINUTES` = 28880 minutes (`data/config.json`).
+- The total sentence (min and max) is capped at `MAX_SENTENCE_MINUTES` = 28800 minutes (20 days) (`data/config.json`).
 - *Mevcut Suç Puanı* (0–30) is entered on the calculator; the result shows *Yeni Suç Puanı* = current + charges and warns above `MAX_CRIMINAL_POINTS` (30).
 
 ## License

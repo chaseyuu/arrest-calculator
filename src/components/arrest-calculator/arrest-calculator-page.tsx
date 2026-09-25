@@ -534,19 +534,19 @@ export function ArrestCalculatorPage() {
                     </SelectTrigger>
                     <SelectContent>
                       <SelectItem value="1" disabled={!chargeDetails?.offence['1']}>
-                        {tPage('options.offense', { number: 1 })}
+                        {tPage('offenseOrdinals.1')}
                       </SelectItem>
                       <SelectItem value="2" disabled={!chargeDetails?.offence['2']}>
-                        {tPage('options.offense', { number: 2 })}
+                        {tPage('offenseOrdinals.2')}
                       </SelectItem>
                       <SelectItem value="3" disabled={!chargeDetails?.offence['3']}>
-                        {tPage('options.offense', { number: 3 })}
+                        {tPage('offenseOrdinals.3')}
                       </SelectItem>
                       <SelectItem value="4" disabled={!chargeDetails?.offence['4']}>
-                        {tPage('options.offense', { number: 4 })}
+                        {tPage('offenseOrdinals.4')}
                       </SelectItem>
                       <SelectItem value="5" disabled={!chargeDetails?.offence['5']}>
-                        {tPage('options.offense', { number: 5 })}
+                        {tPage('offenseOrdinals.5')}
                       </SelectItem>
                     </SelectContent>
                   </Select>

@@ -21,6 +21,7 @@ const additionMapping: { [key: string]: string } = {
   '5': 'Attempt',
   '6': 'Solicitation',
   '7': 'Parole Violation',
+  '8': 'Hate Crime',
 };
 
 const classMapping: { [key: string]: string } = {

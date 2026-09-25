@@ -21,16 +21,16 @@
       "fields": {
         "charge": "Suçlama",
         "class": "Sınıf",
-        "offense": "Tekerrür",
-        "addition": "Ek Durum",
+        "offense": "Suçun Tekrarlanma Durumu",
+        "addition": "Suçun Tarafı",
         "category": "Kategori"
       },
       "placeholders": {
         "selectCharge": "Suçlama seç...",
         "searchCharge": "Ad veya madde numarasıyla ara...",
         "selectClass": "Sınıf seç",
-        "selectOffense": "Tekerrür seç",
-        "selectAddition": "Ek durum seç",
+        "selectOffense": "Tekrarlanma durumunu seç",
+        "selectAddition": "Suçun tarafını seç",
         "selectCategory": "Kategori seç"
       },
       "options": {
@@ -62,8 +62,8 @@
           "title": "Eksik suçlama",
           "selectCharge": "Tüm satırlarda bir suçlama seç.",
           "selectClass": "\"{charge}\" için sınıf seç.",
-          "selectOffense": "\"{charge}\" için tekerrür seç.",
-          "selectAddition": "\"{charge}\" için ek durum seç.",
+          "selectOffense": "\"{charge}\" için suçun tekrarlanma durumunu seç.",
+          "selectAddition": "\"{charge}\" için suçun tarafını seç.",
           "selectCategory": "\"{charge}\" uyuşturucu suçlaması için kategori seç."
         },
         "currentPoints": {
@@ -75,16 +75,24 @@
         "label": "Mevcut Suç Puanı:",
         "placeholder": "0-30",
         "required": "0 ile 30 arasında bir değer gir."
+      },
+      "offenseOrdinals": {
+        "1": "İlk Kez",
+        "2": "İkinci Kez",
+        "3": "Üçüncü Kez",
+        "4": "Dördüncü Kez",
+        "5": "Beşinci Kez"
       }
     },
     "results": {
       "additionNames": {
-        "offender": "Fail",
-        "accomplice": "Suç Ortağı (801)",
-        "accessory": "Suça Yardım Etme (802)",
-        "attempt": "Suça Teşebbüs (804)",
-        "conspiracy": "Suç için Anlaşma (805)",
-        "solicitation": "Suça Teşvik (806)",
+        "offender": "Suçlu",
+        "accomplice": "801. Suç Ortağı",
+        "accessory": "802. Suça Yardım Etme",
+        "hateCrime": "803. Nefret Suçu",
+        "attempt": "804. Suça Teşebbüs",
+        "conspiracy": "805. Suç İçin Anlaşma",
+        "solicitation": "806. Suça Teşvik",
         "paroleViolation": "Şartlı Tahliye İhlali"
       },
       "types": {
@@ -134,14 +142,14 @@
         "modify": "Suçlamaları düzenle",
         "title": "{prefix} {id}. {charge}",
         "categorySuffix": "(Kategori: {category})",
-        "offenseSuffix": "({offense}. suç)",
+        "offenseSuffix": "({label})",
         "offenseNumber": "{offense}. suç",
         "copyTooltip": "{field} değerini kopyala",
         "copyAria": "{field} değerini kopyala",
         "table": {
           "title": "Suçlama",
-          "addition": "Ek Durum",
-          "offense": "Tekerrür",
+          "addition": "Suçun Tarafı",
+          "offense": "Suçun Tekrarlanma Durumu",
           "type": "Tür",
           "minTime": "Asgari Süre",
           "maxTime": "Azami Süre",
@@ -237,6 +245,13 @@
         "fromCharges": "Suçlamalardan Gelen Puan",
         "new": "Yeni Suç Puanı",
         "overLimit": "Tutuklayacağınız karakterin suç puanı otuzu aşıyor. Tutuklamayı hemen gerçekleştirmeyin ve ömür boyu hapis cezası için aşağıda listelenmiş olan adımları izleyin."
+      },
+      "offenseOrdinals": {
+        "1": "İlk Kez",
+        "2": "İkinci Kez",
+        "3": "Üçüncü Kez",
+        "4": "Dördüncü Kez",
+        "5": "Beşinci Kez"
       }
     }
   },
@@ -265,12 +280,13 @@
     },
     "results": {
       "additionNames": {
-        "offender": "Fail",
-        "accomplice": "Suç Ortağı (801)",
-        "accessory": "Suça Yardım Etme (802)",
-        "attempt": "Suça Teşebbüs (804)",
-        "conspiracy": "Suç için Anlaşma (805)",
-        "solicitation": "Suça Teşvik (806)",
+        "offender": "Suçlu",
+        "accomplice": "801. Suç Ortağı",
+        "accessory": "802. Suça Yardım Etme",
+        "hateCrime": "803. Nefret Suçu",
+        "attempt": "804. Suça Teşebbüs",
+        "conspiracy": "805. Suç İçin Anlaşma",
+        "solicitation": "806. Suça Teşvik",
         "paroleViolation": "Şartlı Tahliye İhlali"
       },
       "types": {
@@ -320,14 +336,14 @@
         "modify": "Suçlamaları düzenle",
         "title": "{prefix} {id}. {charge}",
         "categorySuffix": "(Kategori: {category})",
-        "offenseSuffix": "({offense}. suç)",
+        "offenseSuffix": "({label})",
         "offenseNumber": "{offense}. suç",
         "copyTooltip": "{field} değerini kopyala",
         "copyAria": "{field} değerini kopyala",
         "table": {
           "title": "Suçlama",
-          "addition": "Ek Durum",
-          "offense": "Tekerrür",
+          "addition": "Suçun Tarafı",
+          "offense": "Suçun Tekrarlanma Durumu",
           "type": "Tür",
           "minTime": "Asgari Süre",
           "maxTime": "Azami Süre",
@@ -423,6 +439,13 @@
         "fromCharges": "Suçlamalardan Gelen Puan",
         "new": "Yeni Suç Puanı",
         "overLimit": "Tutuklayacağınız karakterin suç puanı otuzu aşıyor. Tutuklamayı hemen gerçekleştirmeyin ve ömür boyu hapis cezası için aşağıda listelenmiş olan adımları izleyin."
+      },
+      "offenseOrdinals": {
+        "1": "İlk Kez",
+        "2": "İkinci Kez",
+        "3": "Üçüncü Kez",
+        "4": "Dördüncü Kez",
+        "5": "Beşinci Kez"
       }
     }
   },

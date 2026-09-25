@@ -159,6 +159,7 @@ export function ArrestCalculatorResults({
       ['accessory', t('additionNames.accessory')],
       ['conspiracy', t('additionNames.conspiracy')],
       ['solicitation', t('additionNames.solicitation')],
+      ['hate crime', t('additionNames.hateCrime')],
     ]);
     map.set(config.PAROLE_VIOLATION_DEFINITION.toLowerCase(), t('additionNames.paroleViolation'));
     return map;
@@ -411,7 +412,7 @@ export function ArrestCalculatorResults({
     if (chargeDetails.drugs && row.category) {
       title += ` ${t('charges.categorySuffix', { category: row.category })}`;
     } else if (row.offense && row.offense !== '1') {
-      title += ` ${t('charges.offenseSuffix', { offense: row.offense })}`;
+      title += ` ${t('charges.offenseSuffix', { label: t(`offenseOrdinals.${row.offense}`, undefined, row.offense) })}`;
     }
 
     const additions = appliedAdditions ?? [];
@@ -442,7 +443,7 @@ export function ArrestCalculatorResults({
       additions,
       isModified,
       offense: row.offense,
-      offenseLabel: row.offense ? t('charges.offenseNumber', { offense: row.offense }) : null,
+      offenseLabel: row.offense ? t(`offenseOrdinals.${row.offense}`, undefined, row.offense) : null,
       typeDisplay,
       typeColorClass,
       minTime,
@@ -578,7 +579,7 @@ export function ArrestCalculatorResults({
                             <span>{charge.additionDisplayNames}</span>
                           )}
                         </TableCell>
-                        <TableCell>{charge.offense}</TableCell>
+                        <TableCell>{charge.offenseLabel}</TableCell>
                         <TableCell>
                           <span className={cn('font-bold', charge.typeColorClass)}>{charge.typeDisplay}</span>
                         </TableCell>

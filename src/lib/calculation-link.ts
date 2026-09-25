@@ -10,6 +10,7 @@ const additionMapping: { [key: string]: number } = {
   Attempt: 5,
   Solicitation: 6,
   'Parole Violation': 7,
+  'Hate Crime': 8,
 };
 
 export function buildCalculationQuery(

@@ -71,7 +71,13 @@ export function calculateArrest(
         const typePrefix = `${chargeDetails.type}${row.class}`;
         let title = `${typePrefix} ${chargeDetails.id}. ${chargeDetails.charge}`;
         if (row.offense !== '1') {
-          title += ` (${row.offense}. suç)`;
+          const ordinals: Record<string, string> = {
+            '2': 'İkinci Kez',
+            '3': 'Üçüncü Kez',
+            '4': 'Dördüncü Kez',
+            '5': 'Beşinci Kez',
+          };
+          title += ` (${ordinals[row.offense ?? ''] ?? row.offense})`;
         }
         if (chargeDetails.drugs && row.category) {
           title += ` (Kategori ${row.category})`;
@@ -141,7 +147,10 @@ export function calculateArrest(
 
     const modifiedMinTime = originalMinTime * sentenceMultiplier;
     const modifiedMaxTime = originalMaxTime * sentenceMultiplier;
-    const modifiedPoints = originalPoints * pointsMultiplier;
+    // Each charge is calculated on its own (Başlık VIII, 807): fractional points are rounded
+    // to the nearest whole number per charge, and never go below 1.
+    const modifiedPoints =
+      originalPoints > 0 ? Math.max(1, Math.round(originalPoints * pointsMultiplier)) : 0;
 
     const fine = getFine(chargeDetails.fine);
     const impound = chargeDetails.impound?.[row.offense as keyof typeof chargeDetails.impound] || 0;

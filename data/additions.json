@@ -1,5 +1,5 @@
 {
-  "_source": "San Andreas Ceza Kanunu, Başlık VIII - Suçun Tarafları (801-806); Şartlı Tahliye İhlali: MDC Panel+ varsayılanı (süre x1, puan x2).",
+  "_source": "San Andreas Ceza Kanunu, Başlık VIII - Suçun Tarafları (801-806). Şartlı Tahliye İhlali: MDC Panel+ varsayılanı.",
   "additions": [
     {
       "name": "Offender",
@@ -14,7 +14,12 @@
     {
       "name": "Accessory",
       "sentence_multiplier": 0.5,
-      "points_multiplier": 0.5
+      "points_multiplier": 1.0
+    },
+    {
+      "name": "Hate Crime",
+      "sentence_multiplier": 1.0,
+      "points_multiplier": 1.0
     },
     {
       "name": "Attempt",
