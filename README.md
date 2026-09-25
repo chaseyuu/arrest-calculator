@@ -20,7 +20,7 @@ Tamamen statik bir sitedir: sunucu ya da API anahtarı gerekmez, **GitHub Pages*
 
 ## Hesaplama kuralları
 
-### Ceza kanunu verisi
+### Ceza Kanunu Verisi
 
 `data/gtaw-data/gtaw_penal_code.json` dosyası, kanun metnindeki değerlerin madde madde girildiği
 `scripts/build-penal-code.py` betiğiyle üretilir. Bir maddeyi değiştirmek için betiği düzenleyip çalıştırın:
@@ -42,7 +42,7 @@ python3 scripts/build-penal-code.py
 - *Şartlı Tahliye İhlali* seçilirse ya da suçlamalar arasında 001–004 varsa süreler ve kefalet
   *Zorunlu Mahkeme* olarak gösterilir.
 
-### Uyuşturucu suçlamaları (131, 601–606)
+### Uyuşturucu Suçlamaları (131, 601–606)
 
 - Bulunan madde türleri seçilir; kategori otomatik belirlenir.
 - Seçilen maddeler arasında cezası en ağır olan kategori uygulanır. Madde listesi:
@@ -63,7 +63,7 @@ Her suçlama kendi içinde hesaplanır:
 
 Küsuratlı puanlar her suçlamada ayrı yuvarlanır ve 1'in altına düşmez (807).
 
-### Suç puanı
+### Suç Puanı
 
 *Mevcut Suç Puanı* (0–30) girilir; sonuçta *Yeni Suç Puanı* = mevcut puan + suçlamalardan gelen puan gösterilir.
 30'un üzerinde uyarı çıkar.
@@ -85,19 +85,6 @@ Kefalet tutarları GTA World Türkiye kefalet şablonunun LEO sayfasındaki *Tam
   326–332; diğer kökenler için ilk liste.
 
 Hücre, *Hesapla*'ya basıldığında seçilir ve paylaşım linkine yazılır.
-
-## Yayınlama
-
-Depodaki *Deploy to GitHub Pages* iş akışı her güncellemede siteyi derleyip yayınlar. Depo ayarlarında
-**Settings → Pages → Source** değeri **GitHub Actions** olmalıdır.
-
-## Yerelde çalıştırma
-
-```sh
-npm install
-npm run dev          # http://localhost:9002
-npm run build        # statik site ./out klasörüne çıkar
-```
 
 ## Lisans
 
