@@ -71,10 +71,10 @@ export function calculateArrest(
         const typePrefix = `${chargeDetails.type}${row.class}`;
         let title = `${typePrefix} ${chargeDetails.id}. ${chargeDetails.charge}`;
         if (row.offense !== '1') {
-          title += ` (Offence #${row.offense})`;
+          title += ` (${row.offense}. suç)`;
         }
         if (chargeDetails.drugs && row.category) {
-          title += ` (Category ${row.category})`;
+          title += ` (Kategori ${row.category})`;
         }
         return { title, extra: chargeDetails.extra };
       }
@@ -116,6 +116,10 @@ export function calculateArrest(
       if (isDrugCharge && row.category) {
         return timeObj[row.category] || { days: 0, hours: 0, min: 0 };
       }
+      // e.g. 430/431: the sentence depends on how many times the offence was committed.
+      if (chargeDetails.time_by_offence && row.offense) {
+        return timeObj[row.offense] || { days: 0, hours: 0, min: 0 };
+      }
       return timeObj;
     };
 
@@ -130,7 +134,10 @@ export function calculateArrest(
     if (originalMaxTime < originalMinTime) {
       originalMaxTime = originalMinTime;
     }
-    const originalPoints = chargeDetails.points?.[row.class as keyof typeof chargeDetails.points] ?? 0;
+    const originalPoints =
+      chargeDetails.points_by_offence && row.offense
+        ? chargeDetails.points_by_offence[row.offense] ?? 0
+        : chargeDetails.points?.[row.class as keyof typeof chargeDetails.points] ?? 0;
 
     const modifiedMinTime = originalMinTime * sentenceMultiplier;
     const modifiedMaxTime = originalMaxTime * sentenceMultiplier;

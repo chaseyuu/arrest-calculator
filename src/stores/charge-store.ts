@@ -21,6 +21,9 @@ export interface Charge {
   extra?: string;
   drugs?: Record<string, string>;
   code_enhancement?: string;
+  /** time/maxtime are keyed by offence number ("1", "2", ...) instead of a single value. */
+  time_by_offence?: boolean;
+  points_by_offence?: Record<string, number>;
   code_enhancement_count?: number;
 }
 

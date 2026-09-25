@@ -242,7 +242,16 @@ export function ArrestCalculatorPage() {
     router.push(`/arrest-calculation/?${query}`);
   };
 
-  const penalCodeArray = useMemo(() => (penalCode ? Object.values(penalCode) : []), [penalCode]);
+  // Numeric order by article number (001 → 714); object key order can't be relied on.
+  const penalCodeArray = useMemo(
+    () =>
+      penalCode
+        ? Object.values(penalCode).sort((a, b) =>
+            a.id.localeCompare(b.id, 'tr', { numeric: true }),
+          )
+        : [],
+    [penalCode],
+  );
   const additionsWithoutParole = useMemo(
     () => additions.filter((a) => a.name !== configData.PAROLE_VIOLATION_DEFINITION),
     [additions],
@@ -307,17 +316,7 @@ export function ArrestCalculatorPage() {
           </Button>
         </div>
 
-        <div className="flex items-center space-x-2">
-          <Checkbox
-            id="parole-violator"
-            checked={isParoleViolator}
-            onCheckedChange={(value) => setParoleViolator(value === true)}
-          />
-          <Label htmlFor="parole-violator" className="text-base font-medium">
-            {tPage('paroleViolatorLabel')}
-          </Label>
-        </div>
-
+        {/* The Turkish penal code has no parole-violation modifier, so that checkbox was removed. */}
         <div className="flex flex-wrap items-center gap-x-6 gap-y-2 rounded-lg border p-3">
           <span className="text-base font-medium">{tPage('priorArrest.label')}</span>
           <div className="flex items-center space-x-2">

@@ -71,11 +71,11 @@
     "results": {
       "additionNames": {
         "offender": "Fail",
-        "attempt": "Teşebbüs",
-        "accomplice": "Suç Ortağı",
-        "accessory": "Yardım ve Yataklık",
-        "conspiracy": "Suç İçin Anlaşma",
-        "solicitation": "Azmettirme",
+        "accomplice": "Suç Ortağı (801)",
+        "accessory": "Suça Yardım Etme (802)",
+        "attempt": "Suça Teşebbüs (804)",
+        "conspiracy": "Suç için Anlaşma (805)",
+        "solicitation": "Suça Teşvik (806)",
         "paroleViolation": "Şartlı Tahliye İhlali"
       },
       "types": {
@@ -251,11 +251,11 @@
     "results": {
       "additionNames": {
         "offender": "Fail",
-        "attempt": "Teşebbüs",
-        "accomplice": "Suç Ortağı",
-        "accessory": "Yardım ve Yataklık",
-        "conspiracy": "Suç İçin Anlaşma",
-        "solicitation": "Azmettirme",
+        "accomplice": "Suç Ortağı (801)",
+        "accessory": "Suça Yardım Etme (802)",
+        "attempt": "Suça Teşebbüs (804)",
+        "conspiracy": "Suç için Anlaşma (805)",
+        "solicitation": "Suça Teşvik (806)",
         "paroleViolation": "Şartlı Tahliye İhlali"
       },
       "types": {

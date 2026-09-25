@@ -19,6 +19,7 @@ fully static site that runs on **GitHub Pages**: no server, no API keys.
 | Calculation ran on the server (`POST /api/arrest-calculator`) | Same code runs in the browser (`src/lib/arrest-calculator.ts`) |
 | Penal code fetched from the booskit CDN or `/api/gtaw-data` | Bundled JSON in `data/gtaw-data/`, served as a static file |
 | English, Spanish and Slovenian | Turkish only |
+| English GTA:W penal code | GTA World Türkiye *San Andreas Ceza Kanunu* |
 | Bail from the penal code data | Bail from the Turkish bail sheet, plus the prior-arrest question |
 | "Calculate" opened the Arrest Report | "Calculate" opens the shareable results page |
 
@@ -39,10 +40,25 @@ npm run dev          # http://localhost:9002
 npm run build        # static site in ./out
 ```
 
-## Updating the penal code
+## Penal code data
 
-Replace `data/gtaw-data/gtaw_penal_code.json` (and `gtaw_depa_categories.json` if needed), then push.
-Limits such as `MAX_SENTENCE_DAYS` are in `data/config.json`, and multipliers are in `data/additions.json`.
+`data/gtaw-data/gtaw_penal_code.json` is generated from the GTA World Türkiye
+*San Andreas Ceza Kanunu* by `scripts/build-penal-code.py`, which holds every article's
+values copied from the law text. To change an article, edit that script and run:
+
+```sh
+python3 scripts/build-penal-code.py
+```
+
+- Articles 001–714 in numeric order. Articles whose sub-clauses carry different penalties are
+  separate charges (e.g. `112a`, `112b`, `112c`; value tiers such as `123a`–`123e`).
+- Where the law gives only a lower or only an upper limit, min and max are both set to that value.
+- Drug tables (131, 601–606) use the category's amount; fines there are the legal maximum.
+- 430/431: jail time, points and fines depend on the offence count (3rd count = C (2) felony).
+- Party multipliers follow Başlık VIII (`data/additions.json`): Suç Ortağı 100%, Suça Yardım 50%,
+  Teşebbüs 50%, Suç için Anlaşma 75% (time and points), Suça Teşvik 75% time and 100% points.
+- There is no parole-violation modifier in the Turkish penal code, so that option was removed.
+- Limits such as `MAX_SENTENCE_DAYS` are in `data/config.json`.
 
 ## License
 
